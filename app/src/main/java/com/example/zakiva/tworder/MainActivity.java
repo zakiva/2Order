@@ -51,4 +51,9 @@ public class MainActivity extends AppCompatActivity {
         Parse.initialize(this, "JwL3fVDM1GoYSss63FFTwy7jyLt1abq7gYMfiDij", "MRKSsUUKU0AMGRYNTiEz48DXJ4KovXAaqHz0UAG5");
 >>>>>>> Add Parse Dependencies
     }
+
+    public void onNextClick(View view){
+        // go to next page
+    }
+
 }
