@@ -1,5 +1,6 @@
 package com.example.zakiva.tworder;
 
+<<<<<<< HEAD
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,10 +14,18 @@ public class MainActivity extends AppCompatActivity {
 
     private static boolean parse_init = true;
 
+=======
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+public class MainActivity extends AppCompatActivity {
+
+>>>>>>> initial commit
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+<<<<<<< HEAD
 
         if (parse_init){
             // Enable Local Datastore.
@@ -30,5 +39,7 @@ public class MainActivity extends AppCompatActivity {
     public void onNextClick(View view){
         Intent i = new Intent(this, first_screen.class);
         startActivity(i);
+=======
+>>>>>>> initial commit
     }
 }
