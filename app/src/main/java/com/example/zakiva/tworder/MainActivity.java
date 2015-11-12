@@ -18,6 +18,9 @@ public class MainActivity extends AppCompatActivity {
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.parse.Parse;
+import com.parse.ParseObject;
+
 public class MainActivity extends AppCompatActivity {
 
 >>>>>>> initial commit
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+<<<<<<< HEAD
 <<<<<<< HEAD
 
         if (parse_init){
@@ -41,5 +45,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
 =======
 >>>>>>> initial commit
+=======
+        // Enable Local Datastore & init Parse
+        Parse.enableLocalDatastore(this);
+        Parse.initialize(this, "JwL3fVDM1GoYSss63FFTwy7jyLt1abq7gYMfiDij", "MRKSsUUKU0AMGRYNTiEz48DXJ4KovXAaqHz0UAG5");
+>>>>>>> Add Parse Dependencies
     }
 }
