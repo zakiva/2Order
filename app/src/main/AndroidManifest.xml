@@ -15,6 +15,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".logIn_screen" >
+        </activity>
+        <activity android:name=".first_screen" >
+        </activity>
+        <activity android:name=".new_business_screen" >
+        </activity>
+        <activity android:name=".new_customer_screen" >
+        </activity>
     </application>
 
 </manifest>
