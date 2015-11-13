@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.parse.Parse;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
             // Enable Local Datastore.
             Parse.enableLocalDatastore(this);
             Parse.initialize(this, "JwL3fVDM1GoYSss63FFTwy7jyLt1abq7gYMfiDij", "MRKSsUUKU0AMGRYNTiEz48DXJ4KovXAaqHz0UAG5");
+            ParseInstallation.getCurrentInstallation().saveInBackground();
             parse_init = false;
         }
     }
