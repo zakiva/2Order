@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.zakiva.tworder" >
+<<<<<<< HEAD
+<<<<<<< HEAD
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
@@ -15,6 +17,13 @@
     <permission android:protectionLevel="signature"
         android:name="com.example.zakiva.tworder.permission.C2D_MESSAGE" />
     <uses-permission android:name="com.example.zakiva.tworder.permission.C2D_MESSAGE" />
+=======
+>>>>>>> initial commit
+=======
+    // Parse permissions
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+>>>>>>> Add Parse Dependencies
 
     <application
         android:allowBackup="true"
@@ -29,6 +38,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
+<<<<<<< HEAD
         <activity android:name=".logIn_screen" >
         </activity>
         <activity android:name=".first_screen" >
@@ -62,6 +73,16 @@
                 <category android:name="com.example.zakiva.tworder" />
             </intent-filter>
         </receiver>
+=======
+>>>>>>> initial commit
+=======
+        <activity android:name=".logIn_screen" >
+        </activity>
+        <activity android:name=".new_customer_screen" >
+        </activity>
+        <activity android:name=".new_business_screen" >
+        </activity>
+>>>>>>> new customer screen + priority
     </application>
 
 </manifest>
