@@ -8,16 +8,24 @@
     tools:context="com.example.zakiva.tworder.logIn_screen">
 
     <ImageView
+<<<<<<< HEAD
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/logo"
         android:layout_marginTop="25dp"
+=======
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/logo"
+>>>>>>> new customer screen + priority
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         />
 
     <TextView
+<<<<<<< HEAD
         android:id="@+id/usernameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,13 +33,28 @@
         android:text="User Name / Phone Number"
         android:textSize="20dp"
         android:layout_marginTop="25dp"
+=======
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/usernameText"
+        android:layout_below="@+id/imageView"
+        android:text="User Name / Phone Number"
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+>>>>>>> new customer screen + priority
         android:layout_marginLeft="10dp"
         />
 
     <EditText
+<<<<<<< HEAD
         android:id="@+id/usernameInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+=======
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/usernameInput"
+>>>>>>> new customer screen + priority
         android:layout_below="@+id/usernameText"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
@@ -66,10 +89,68 @@
         android:layout_below="@+id/passwordInput"
         android:text="Log In"
         android:layout_centerHorizontal="true"
+<<<<<<< HEAD
         android:layout_marginTop="25dp"
         android:textColor="#FFF"
         android:background="#00F"
         android:onClick="onLogInClick"
         />
 
+=======
+        android:layout_marginTop="15dp"
+        android:onClick="onLogInClick"
+        />
+
+    <Button
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/newCustomerButton"
+        android:text="New Cutomer"
+        android:layout_marginTop="38dp"
+        android:layout_below="@+id/logButton"
+        android:layout_alignLeft="@+id/passwordInput"
+        android:layout_alignStart="@+id/passwordInput"
+        android:onClick="onCustomerClick"
+        />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView1"
+        android:layout_below="@+id/newCustomerButton"
+        android:background="@drawable/customer"
+        android:layout_alignRight="@+id/newCustomerButton"
+        android:layout_alignEnd="@+id/newCustomerButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
+
+    <Button
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bewBusinessButton"
+        android:text="New Business"
+        android:layout_alignTop="@+id/newCustomerButton"
+        android:layout_alignRight="@+id/passwordInput"
+        android:layout_alignEnd="@+id/passwordInput"
+        android:onClick="onBusinessClick"
+        />
+
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView2"
+        android:layout_below="@+id/bewBusinessButton"
+        android:layout_alignLeft="@+id/bewBusinessButton"
+        android:layout_alignStart="@+id/bewBusinessButton"
+        android:background="@drawable/business"
+        android:layout_alignRight="@+id/passwordInput"
+        android:layout_alignEnd="@+id/passwordInput"
+        />
+
+>>>>>>> new customer screen + priority
 </RelativeLayout>

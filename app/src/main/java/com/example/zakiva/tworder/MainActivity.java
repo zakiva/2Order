@@ -1,6 +1,9 @@
 package com.example.zakiva.tworder;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> new customer screen + priority
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -53,7 +56,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onNextClick(View view){
-        // go to next page
+        Intent i = new Intent(this, logIn_screen.class);
+        startActivity(i);
     }
 
 }

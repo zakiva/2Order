@@ -126,4 +126,8 @@
         android:onClick="onBusinessLogClick"
         />
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> new customer screen + priority
 </RelativeLayout>

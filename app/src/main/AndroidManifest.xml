@@ -39,6 +39,7 @@
             </intent-filter>
         </activity>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <activity android:name=".logIn_screen" >
         </activity>
         <activity android:name=".first_screen" >
@@ -74,6 +75,14 @@
         </receiver>
 =======
 >>>>>>> initial commit
+=======
+        <activity android:name=".logIn_screen" >
+        </activity>
+        <activity android:name=".new_customer_screen" >
+        </activity>
+        <activity android:name=".new_business_screen" >
+        </activity>
+>>>>>>> new customer screen + priority
     </application>
 
 </manifest>

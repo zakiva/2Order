@@ -63,7 +63,7 @@
         android:id="@+id/imageView2"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/download" />
+        android:src="@drawable/customer" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
