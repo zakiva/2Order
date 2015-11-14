@@ -3,11 +3,19 @@ package com.example.zakiva.tworder;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.app.ExpandableListActivity;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class business_orders__screen extends AppCompatActivity {
 
@@ -18,7 +26,9 @@ public class business_orders__screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_orders__screen);
 
-        businessExpandableList = (ExpandableListView)findViewById(R.id.expandableList);
+        // get_all_user_orders();
+
+        businessExpandableList = (ExpandableListView) findViewById(R.id.expandableList);
 
         ArrayList<business_list_group> arrayParents = new ArrayList<business_list_group>();
         ArrayList<String> arrayChildren = new ArrayList<String>();
@@ -67,8 +77,36 @@ public class business_orders__screen extends AppCompatActivity {
 
     }
 
-    public void createNewOrderClick(View view){
+    protected void get_all_user_orders() {
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
+        query.whereEqualTo("business_user", ParseUser.getCurrentUser());// check if this is the right comparison
+        query.findInBackground(new FindCallback<ParseObject>() {
+
+                                   @Override
+                                   public void done(List<ParseObject> orders,
+                                                    ParseException e) {
+                                       if (e == null) {
+                                           draw_orders(orders);
+                                       } else {
+                                           Log.d("Post retrieval", "Error: " + e.getMessage());
+                                       }
+                                   }
+                               }
+        );
+    }
+
+
+    public void createNewOrderClick(View view) {
         Intent i = new Intent(this, new_order_screen.class);
         startActivity(i);
+    }
+
+    protected void draw_orders(List<ParseObject> orders){
+
+
+        //nir # implement
+
+
     }
 }

@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.parse.ParseObject;
+import com.parse.ParseUser;
+
 public class new_order_screen extends AppCompatActivity {
 
     @Override
@@ -23,6 +26,10 @@ public class new_order_screen extends AppCompatActivity {
         String customer_phone = customerPhone.getText().toString();
         String order_number = orderNumber.getText().toString();
         String order_details = orederDetails.getText().toString();
+        boolean prior = true; // nir # edit
+
+
+        create_new_order (customer_phone, order_number, order_details, prior);
 
         /*
         i.putExtra("customerPhone", customer_phone);
@@ -32,5 +39,15 @@ public class new_order_screen extends AppCompatActivity {
 
         startActivity(i);
 
+    }
+
+    public void create_new_order (String phone, String code, String details, boolean prior){
+        ParseObject order = new ParseObject("Order");
+        order.put("business_user", ParseUser.getCurrentUser());
+        order.put("customer_phone", phone);
+        order.put("code", code);
+        order.put("details", details);
+        order.put("prior", prior);
+        order.saveInBackground();
     }
 }
