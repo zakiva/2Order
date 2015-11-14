@@ -22,6 +22,11 @@ public class business_orders__screen extends AppCompatActivity {
     ExpandableListView businessExpandableList;
 
     @Override
+    public void onBackPressed(){
+        //do nothing
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_orders__screen);
