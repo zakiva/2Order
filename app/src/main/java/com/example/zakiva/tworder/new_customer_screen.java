@@ -13,28 +13,18 @@ import com.parse.SignUpCallback;
 
 public class new_customer_screen extends AppCompatActivity {
 
-    void sign_up(String username, String password, final String kind)
+    void sign_up(String username, String password)
     {
         ParseUser user = new ParseUser();
         user.setUsername(username);
         user.setPassword(password);
-        user.put("kind", kind);
+        user.put("kind", "customer");
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null)
                 {
-                    if (kind.equals("business"))
-                    {
-                        //what happens if sign up succeeded for business user
-                        Intent intent = new Intent(getBaseContext(), business_orders__screen.class);
-                        startActivity(intent);
-                    }
-                    else
-                    {
-                        //what happens if sign up succeeded for business user
-                        //Intent intent = new Intent(getBaseContext(), Main2Activity.class);
-                        //startActivity(intent);
-                    }
+                    //Intent intent = new Intent(getBaseContext(), business_orders__screen.class);
+                    //startActivity(intent);
                 }
                 else
                 {
@@ -51,18 +41,8 @@ public class new_customer_screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_customer_screen);
     }
+
     public void onCustomerLogClick(View view){
-        EditText editText = (EditText)findViewById(R.id.phoneInput);
-        String username = editText.getText().toString();
 
-        EditText editText2 = (EditText)findViewById(R.id.passwordInput);
-        String password = editText2.getText().toString();
-
-        EditText editText3 = (EditText)findViewById(R.id.repasswordInput);
-        String repassword = editText3.getText().toString();
-
-        if (repassword.equals(password)){
-            sign_up(username, password, "business");
-        }
     }
 }
