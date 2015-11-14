@@ -28,7 +28,7 @@
         />
 
     <EditText
-        android:id="@+id/phoneImput"
+        android:id="@+id/phoneInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/PhoneText"
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:text="Password"
         android:textSize="20dp"
-        android:layout_below="@+id/phoneImput"
+        android:layout_below="@+id/phoneInput"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         />
