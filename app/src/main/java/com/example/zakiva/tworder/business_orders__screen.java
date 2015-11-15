@@ -19,6 +19,9 @@ import java.util.List;
 
 public class business_orders__screen extends AppCompatActivity {
 
+    private static final String TAG = ">>>>debug";
+
+
     ExpandableListView businessExpandableList;
 
     @Override
@@ -86,6 +89,8 @@ public class business_orders__screen extends AppCompatActivity {
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
         query.whereEqualTo("business_user", ParseUser.getCurrentUser());// check if this is the right comparison
+        query.orderByAscending("prior");
+        query.addDescendingOrder("createdAt");
         query.findInBackground(new FindCallback<ParseObject>() {
 
                                    @Override
@@ -109,6 +114,9 @@ public class business_orders__screen extends AppCompatActivity {
 
     protected void draw_orders(List<ParseObject> orders){
 
+        for (ParseObject order: orders){
+            Log.i(TAG, String.format("order code = %s ", order.getString("code")));
+        }
 
         //nir # implement
 
