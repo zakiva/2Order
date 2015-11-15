@@ -34,6 +34,7 @@ public class business_orders__screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_orders__screen);
 
+        //Log.i(TAG, " on create .. ");
         get_all_user_orders();
 
     }
@@ -48,8 +49,8 @@ public class business_orders__screen extends AppCompatActivity {
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
         query.whereEqualTo("business_user", ParseUser.getCurrentUser());// check if this is the right comparison
-        query.orderByAscending("prior");
-        query.addDescendingOrder("createdAt");
+        query.orderByDescending("prior"); // true first
+        query.addAscendingOrder("createdAt"); // old first
         query.findInBackground(new FindCallback<ParseObject>() {
 
                                    @Override
