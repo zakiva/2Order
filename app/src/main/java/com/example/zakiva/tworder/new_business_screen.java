@@ -43,27 +43,24 @@ public class new_business_screen extends AppCompatActivity {
 
     public void onBusinessLogClick(View view){
 
-        // GO BACK TO THE SAME ACTIVITY
-
-        //Intent i = new Intent(this, business_orders__screen.class);
-        final EditText userNameInput = (EditText) findViewById(R.id.usernameInput);
+        // GET ALL THE INPUTS FROM THE USER
+        final EditText usernameInput = (EditText) findViewById(R.id.usernameInput);
         final EditText businessNameInput = (EditText) findViewById(R.id.businessNameInput);
-        final EditText passInput = (EditText) findViewById(R.id.passwordInput);
-        //final EditText businessAdressInput = (EditText) findViewById(R.id.businessAdressInput);
-        String name = userNameInput.getText().toString();
-        String pass = passInput.getText().toString();
-        String busiName = businessNameInput.getText().toString();
+        final EditText passwordInput = (EditText) findViewById(R.id.passwordInput);
+        final EditText repasswordInput = (EditText) findViewById(R.id.repasswordInput);
+        final EditText businessAddressInput = (EditText) findViewById(R.id.businessAddressInput);
 
-        sign_up(name, pass, busiName);
-        //String busiAdd =  businessAdressInput.getText().toString();
-        //i.putExtra("userName", name);
-        //i.putExtra("password", pass);
-        //i.putExtra("businessName", busiName);
-        //i.putExtra("businessAdress", busiAdd);
+        String name = usernameInput.getText().toString();
+        String password = passwordInput.getText().toString();
+        String rePassword = repasswordInput.getText().toString();
+        String businessName = businessNameInput.getText().toString();
+        String business_address =  businessAddressInput.getText().toString();
 
-        // need to check the validity of the password
+        // need to check the password and repassword
+            sign_up(name, password, businessName);
 
-        //startActivity(i);
+        Intent i = new Intent(this, business_orders__screen.class);
+        startActivity(i);
     }
 
 }

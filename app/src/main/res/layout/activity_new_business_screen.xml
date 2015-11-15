@@ -67,7 +67,7 @@
         />
 
     <EditText
-        android:id="@+id/businessAdressInput"
+        android:id="@+id/businessAddressInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/adressText"
@@ -81,7 +81,7 @@
         android:layout_height="wrap_content"
         android:text="Password"
         android:textSize="20dp"
-        android:layout_below="@+id/businessAdressInput"
+        android:layout_below="@+id/businessAddressInput"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         />

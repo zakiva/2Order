@@ -5,7 +5,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.zakiva.tworder.business_orders__screen">
+    tools:context="com.example.zakiva.tworder.customer_orders_screen">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -15,37 +15,22 @@
         android:layout_alignParentTop="true"
 
         />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/createNewOrder"
+        android:layout_above="@+id/customerListView"
         android:text="LOG OUT"
-        android:layout_alignRight="@+id/createNewOrder"
-        android:id="@+id/logOutBusinessButton"
+        android:layout_alignRight="@+id/customerListView"
+        android:id="@+id/logOutCustomerButton"
         android:onClick="OnLogOutClick"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/createNewOrder"
-        android:layout_below="@+id/imageView"
-        android:layout_marginTop="5dp"
-        android:text="Create New Order"
-        android:textColor="#FFF"
-        android:background="#00F"
-        android:onClick="createNewOrderClick"
-        />
 
-    <ExpandableListView
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/expandableList"
-        android:layout_below="@+id/createNewOrder"
-        android:layout_marginTop="10dp"
-        android:transcriptMode="disabled"
-        android:cacheColorHint="#00000000"
-        android:listSelector="@android:color/transparent"
-        />
-
-
+        android:id="@+id/customerListView"
+        android:layout_below="@+id/imageView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

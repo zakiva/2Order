@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.parse.LogInCallback;
@@ -44,5 +45,22 @@ public class logIn_screen extends AppCompatActivity {
 
     public void onLogInClick(View view){
 
+        final EditText usernameInput = (EditText) findViewById(R.id.usernameInput);
+        final EditText passwordInput = (EditText) findViewById(R.id.passwordInput);
+        String username = usernameInput.getText().toString();
+        String password = passwordInput.getText().toString();
+
+        // LOG IN BY USER
+        /*
+        boolean businees = log_in(username, password);
+        if(business == true){
+            Intent i = new Intent(this, business_orders__screen.class);
+            startActivity(i);
+        }
+        else{
+            Intent i = new Intent(this, customer_order_screen.class);
+            startActivity(i);
+        }
+        */
     }
 }

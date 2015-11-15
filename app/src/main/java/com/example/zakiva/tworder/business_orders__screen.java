@@ -34,55 +34,14 @@ public class business_orders__screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_orders__screen);
 
-        // get_all_user_orders();
+        get_all_user_orders();
 
-        businessExpandableList = (ExpandableListView) findViewById(R.id.expandableList);
-
-        ArrayList<business_list_group> arrayParents = new ArrayList<business_list_group>();
-        ArrayList<String> arrayChildren = new ArrayList<String>();
-
-        //sets the adapter that provides data to the list.
-        businessExpandableList.setAdapter(new businees_order_adapter(business_orders__screen.this, arrayParents));
-
-        //here we set the parents and the children
-        /*
-
-        // pulling the data from the last page
-
-        Bundle mainData = getIntent().getExtras();
-        if(mainData == null){
-            return;
-        }
-
-        String customer_phone = mainData.getString("customerPhone");
-        String order_number = mainData.getString("orderNumber");
-        String order_details = mainData.getString("orderDetails");
-
-        for (int i = 0; i < 3; i++){
-            //for each "i" create a new Parent object to set the title and the children
-            business_list_group parent = new business_list_group();
-            parent.setTitle("Parent " + i);
-            if(i == 1){
-                business_list_group parent1 = new business_list_group();
-                parent1.setTitle("ORDER NUMBER" + order_number );
-                ArrayList<String> arrayChildren1 = new ArrayList<String>();
-                arrayChildren1.add("CUSTOMER PHONE" + customer_phone);
-                arrayChildren1.add(order_details);
-                parent1.setArrayChildren(arrayChildren1);
-                arrayParents.add(parent1);
-            }
-            arrayChildren = new ArrayList<String>();
-            for (int j = 0; j < 4; j++) {
-                arrayChildren.add("Child " + j);
-            }
-            parent.setArrayChildren(arrayChildren);
-
-            //in this array we add the Parent object. We will use the arrayParents at the setAdapter
-            arrayParents.add(parent);
-        }
-        */
+    }
 
 
+    public void OnLogOutClick(View view){
+        Intent i = new Intent(this, first_screen.class);
+        startActivity(i);
     }
 
     protected void get_all_user_orders() {
@@ -113,13 +72,26 @@ public class business_orders__screen extends AppCompatActivity {
     }
 
     protected void draw_orders(List<ParseObject> orders){
+        businessExpandableList = (ExpandableListView)findViewById(R.id.expandableList);
+        ArrayList<business_list_group> arrayParents = new ArrayList<business_list_group>();
+        ArrayList<String> arrayChildren;
+        businessExpandableList.setAdapter(new businees_order_adapter(business_orders__screen.this, arrayParents));
 
         for (ParseObject order: orders){
-            Log.i(TAG, String.format("order code = %s ", order.getString("code")));
+            business_list_group parent = new business_list_group();
+            parent.setTitle("Order Number " + order.getString("code"));
+            arrayChildren = new ArrayList<String>();
+            arrayChildren.add(order.getString("customer_phone"));
+            arrayChildren.add(order.getString("details"));
+            if(order.getBoolean("prior") == true){
+                arrayChildren.add("Urgent");
+            } else {
+                arrayChildren.add("Not Urgent");
+            }
+            parent.setArrayChildren(arrayChildren);
+            arrayParents.add(parent);
+
         }
-
-        //nir # implement
-
-
     }
+
 }
