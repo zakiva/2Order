@@ -43,6 +43,15 @@ public class new_customer_screen extends AppCompatActivity {
     }
 
     public void onCustomerLogClick(View view){
+        final EditText phoneInput = (EditText) findViewById(R.id.phoneInput);
+        final EditText passwordInput = (EditText) findViewById(R.id.passwordInput);
+        String phone = phoneInput.getText().toString();
+        String password = passwordInput.getText().toString();
 
+        // Create new customer
+        //create_new_customer(phone, password);
+
+        Intent i = new Intent(this, customer_orders_screen.class);
+        startActivity(i);
     }
 }

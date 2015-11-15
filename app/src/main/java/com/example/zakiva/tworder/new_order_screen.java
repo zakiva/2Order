@@ -4,17 +4,37 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 public class new_order_screen extends AppCompatActivity {
 
+    private TextView switchStatus;
+    private Switch mySwitch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_order_screen);
+
+        switchStatus = (TextView) findViewById(R.id.switchStatus);
+        mySwitch = (Switch) findViewById(R.id.priorityswitch);
+        mySwitch.setChecked(false);
+        mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    switchStatus.setText("High Priority");
+                } else {
+                    switchStatus.setText("No Priority");
+                }
+            }
+        });
     }
 
     public void onCreateNewOrder(View view){
@@ -23,19 +43,12 @@ public class new_order_screen extends AppCompatActivity {
         final EditText orderNumber = (EditText) findViewById(R.id.orderNumberInput);
         final EditText orederDetails = (EditText) findViewById(R.id.orderDetailsInput);
 
+        boolean prior = mySwitch.isChecked();
         String customer_phone = customerPhone.getText().toString();
         String order_number = orderNumber.getText().toString();
         String order_details = orederDetails.getText().toString();
-        boolean prior = true; // nir # edit
-
 
         create_new_order (customer_phone, order_number, order_details, prior);
-
-        /*
-        i.putExtra("customerPhone", customer_phone);
-        i.putExtra("orderNumber", order_number);
-        i.putExtra("orderDetails", order_details);
-        */
 
         startActivity(i);
 
