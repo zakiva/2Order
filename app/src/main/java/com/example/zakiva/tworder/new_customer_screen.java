@@ -23,8 +23,8 @@ public class new_customer_screen extends AppCompatActivity {
             public void done(ParseException e) {
                 if (e == null)
                 {
-                    //Intent intent = new Intent(getBaseContext(), business_orders__screen.class);
-                    //startActivity(intent);
+                    Intent intent = new Intent(getBaseContext(), customer_orders_screen.class);
+                    startActivity(intent);
                 }
                 else
                 {
@@ -45,13 +45,18 @@ public class new_customer_screen extends AppCompatActivity {
     public void onCustomerLogClick(View view){
         final EditText phoneInput = (EditText) findViewById(R.id.phoneInput);
         final EditText passwordInput = (EditText) findViewById(R.id.passwordInput);
+        final EditText rePasswordInput = (EditText) findViewById(R.id.repasswordInput);
         String phone = phoneInput.getText().toString();
         String password = passwordInput.getText().toString();
+        String rePassword = rePasswordInput.getText().toString();
+        if (password.equals(rePassword)) {
+            sign_up(phone, password);
+        }
 
         // Create new customer
         //create_new_customer(phone, password);
 
-        Intent i = new Intent(this, customer_orders_screen.class);
-        startActivity(i);
+        //Intent i = new Intent(this, customer_orders_screen.class);
+        //startActivity(i);
     }
 }

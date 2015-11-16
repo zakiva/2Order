@@ -8,9 +8,12 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.app.ExpandableListActivity;
 
+import com.parse.CountCallback;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -18,6 +21,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class business_orders__screen extends AppCompatActivity {
+
+    void push_notification(final String username)
+    {
+        //is_user_exist = 0;
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereEqualTo("username", username);
+        query.countInBackground(new CountCallback() {
+            public void done(int count, ParseException e) {
+                if (e == null) {
+                    if (count > 0) {//The user exists!!
+                        ParseQuery pushQuery = ParseInstallation.getQuery();
+                        pushQuery.whereEqualTo("notification_id", username);
+                        ParsePush push = new ParsePush();
+                        push.setQuery(pushQuery);
+                        push.setMessage("Your order is ready!!");
+                        push.sendInBackground();
+                        //Log.d("success", "The number is " + count);
+                    } else{
+                        //The user does not exist. We need to connect him some other way
+                    }
+                } else {
+                    // The request failed
+                    Log.d("fail", "bummer");
+                }
+            }
+        });
+    }
 
     private static final String TAG = ">>>>debug";
 
@@ -27,6 +57,11 @@ public class business_orders__screen extends AppCompatActivity {
     @Override
     public void onBackPressed(){
         //do nothing
+    }
+
+    void log_out()
+    {
+        ParseUser.logOut();
     }
 
     @Override
@@ -41,6 +76,7 @@ public class business_orders__screen extends AppCompatActivity {
 
 
     public void OnLogOutClick(View view){
+        log_out();
         Intent i = new Intent(this, first_screen.class);
         startActivity(i);
     }
