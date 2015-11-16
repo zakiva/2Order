@@ -25,13 +25,11 @@ public class logIn_screen extends AppCompatActivity {
                         startActivity(intent);
                     } else {
                         //what happens if sign in succeeded for customer user
-                        //Intent intent = new Intent(getBaseContext(), Main22Activity.class);
-                        //startActivity(intent);
+                        Intent intent = new Intent(getBaseContext(), customer_orders_screen.class);
+                        startActivity(intent);
                     }
                 } else {
                     //what happens if sign in failed
-                    //TextView textView3 = (TextView) findViewById(R.id.textView3);
-                    //textView3.setText("Failed!!!");
                 }
             }
         });
@@ -49,6 +47,7 @@ public class logIn_screen extends AppCompatActivity {
         final EditText passwordInput = (EditText) findViewById(R.id.passwordInput);
         String username = usernameInput.getText().toString();
         String password = passwordInput.getText().toString();
+        sign_in(username, password);
 
         // LOG IN BY USER
         /*

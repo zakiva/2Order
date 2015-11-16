@@ -8,10 +8,27 @@ import android.widget.ListView;
 import android.view.View;
 import android.content.Intent;
 
+import com.parse.ParseInstallation;
+import com.parse.ParseUser;
+
 public class customer_orders_screen extends AppCompatActivity {
+
+    void log_out()
+    {
+        ParseUser.logOut();
+    }
+
+    @Override
+    public void onBackPressed(){
+        //do nothing
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+        installation.put("notification_id", ParseUser.getCurrentUser().getUsername());
+        installation.saveInBackground();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_orders_screen);
 
@@ -25,6 +42,10 @@ public class customer_orders_screen extends AppCompatActivity {
     }
 
     public void OnLogOutClick(View view){
+        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+        installation.put("notification_id", "user is logged out");
+        installation.saveInBackground();
+        log_out();
         Intent i = new Intent(this, first_screen.class);
         startActivity(i);
     }

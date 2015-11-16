@@ -12,13 +12,14 @@ import com.parse.SignUpCallback;
 
 public class new_business_screen extends AppCompatActivity {
 
-    void sign_up(String username, String password, String name)
+    void sign_up(String username, String password, String name, String address)
     {
         ParseUser user = new ParseUser();
         user.setUsername(username);
         user.setPassword(password);
         user.put("kind", "business");
         user.put("name", name);
+        user.put("address", address);
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null)
@@ -56,11 +57,12 @@ public class new_business_screen extends AppCompatActivity {
         String businessName = businessNameInput.getText().toString();
         String business_address =  businessAddressInput.getText().toString();
 
-        // need to check the password and repassword
-            sign_up(name, password, businessName);
+        if (password.equals(rePassword)) {
+            sign_up(name, password, businessName, business_address);
+        }
 
-        Intent i = new Intent(this, business_orders__screen.class);
-        startActivity(i);
+        //Intent i = new Intent(this, business_orders__screen.class);
+        //startActivity(i);
     }
 
 }
