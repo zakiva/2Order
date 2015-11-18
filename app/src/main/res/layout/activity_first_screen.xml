@@ -12,10 +12,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/logo"
-        android:layout_marginTop="25dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -23,30 +21,33 @@
         android:text="New customer"
         android:id="@+id/button2"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="115dp"
         android:onClick="newCustomerClick"
-        />
+        android:layout_alignLeft="@+id/button3"
+        android:layout_alignStart="@+id/button3"
+        android:layout_alignRight="@+id/imageView"
+        android:layout_alignEnd="@+id/imageView" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Business"
         android:id="@+id/button3"
-        android:layout_below="@+id/button2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="42dp"
         android:onClick="newBusinessClick"
-        />
+        android:layout_below="@+id/button2"
+        android:layout_alignLeft="@+id/button4"
+        android:layout_alignStart="@+id/button4"
+        android:layout_marginTop="24dp"
+        android:layout_alignRight="@+id/button4"
+        android:layout_alignEnd="@+id/button4" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="already have acount"
         android:id="@+id/button4"
+        android:onClick="allReadyHaveAcountClick"
         android:layout_below="@+id/button3"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="54dp"
-        android:onClick="allReadyHaveAcountClick"
-        />
+        android:layout_marginTop="23dp" />
 </RelativeLayout>

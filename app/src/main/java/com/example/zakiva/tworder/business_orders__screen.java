@@ -84,7 +84,7 @@ public class business_orders__screen extends AppCompatActivity {
     protected void get_all_user_orders() {
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
-        query.whereEqualTo("business_user", ParseUser.getCurrentUser());// check if this is the right comparison
+        query.whereEqualTo("business_user", ParseUser.getCurrentUser());
         query.orderByDescending("prior"); // true first
         query.addAscendingOrder("createdAt"); // old first
         query.findInBackground(new FindCallback<ParseObject>() {
