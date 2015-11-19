@@ -44,14 +44,6 @@ public class customer_orders_screen extends AppCompatActivity {
         setContentView(R.layout.activity_customer_orders_screen);
 
         get_all_user_orders();
-
-        // Here i need to get from the dta the list of orders
-        String[][] orders = {{"MyWorkshop", "benjamin 10 ta llllllloooododododo", "22", "NOT READY"}, {"steel factory 55", "beit lonatic", "203", "READY"}};
-        //orders = get_orders(name+/password+/key)
-
-        ListAdapter customerAdapter = new customer_order_adapter(this, orders);
-        ListView customerListView = (ListView) findViewById(R.id.customerListView);
-        customerListView.setAdapter(customerAdapter);
     }
 
     protected void get_all_user_orders() {
@@ -75,11 +67,18 @@ public class customer_orders_screen extends AppCompatActivity {
     }
 
     protected void draw_orders(List<ParseObject> orders){
-
+        ArrayList<String[]> items = new ArrayList<String[]>();
         for (ParseObject order: orders){
-
-            // nir sade # implement
+            String[] item = new String[4];
+            item[0] = order.getParseUser("business_user").getString("name");//"ElikBelikBOOM";//order.getString("name");
+            item[1] = order.getParseUser("business_user").getString("address"); //order.getString("address");
+            item[2] = order.getString("code");
+            item[3] = "READY"; //order.getString("status");
+            items.add(item);
         }
+        ListAdapter customerAdapter = new customer_order_adapter(this, items);
+        ListView customerListView = (ListView) findViewById(R.id.customerListView);
+        customerListView.setAdapter(customerAdapter);
     }
 
     public void OnLogOutClick(View view){

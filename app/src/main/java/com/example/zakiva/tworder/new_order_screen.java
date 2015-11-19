@@ -5,10 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RatingBar;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.parse.ParseObject;
@@ -28,13 +26,14 @@ public class new_order_screen extends AppCompatActivity {
         Intent i = new Intent(this, business_orders__screen.class);
         final EditText customerPhone = (EditText) findViewById(R.id.customerPhoneInput);
         final EditText orderNumber = (EditText) findViewById(R.id.orderNumberInput);
-        final EditText orederDetails = (EditText) findViewById(R.id.orderDetailsInput);
+        final EditText orderDetails = (EditText) findViewById(R.id.orderDetailsInput);
         final RatingBar orderUrgent = (RatingBar) findViewById(R.id.setUrgentBar);
 
         int prior = (int) orderUrgent.getRating();
+
         String customer_phone = customerPhone.getText().toString();
         String order_number = orderNumber.getText().toString();
-        String order_details = orederDetails.getText().toString();
+        String order_details = orderDetails.getText().toString();
 
         create_new_order (customer_phone, order_number, order_details, prior);
 

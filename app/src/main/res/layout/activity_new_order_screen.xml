@@ -85,7 +85,7 @@
         android:id="@+id/urgentText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Order Urgent (LOW/MID/HIGH)"
+        android:text="Order Urgent (NONE/LOW/MID/HIGH)"
         android:textSize="20dp"
         android:layout_below="@+id/orderDetailsInput"
         android:layout_marginTop="10dp"

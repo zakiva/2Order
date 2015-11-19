@@ -21,7 +21,7 @@
         android:text="Business Name"
         android:id="@+id/businessName"
         android:textSize="40dp"
-        android:background="#888"
+        android:background="#567"
         android:layout_row="0"
         android:layout_column="0"
         />
@@ -68,7 +68,7 @@
         android:paddingBottom="10dp"
         android:textStyle="bold"
         android:textColor="#FFF"
-        android:background="#F00"
+        android:background="#A00"
         android:layout_row="3"
         android:layout_column="0"
         />
