@@ -3,7 +3,10 @@ package com.example.zakiva.tworder;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 
 import com.parse.ParseException;
@@ -50,6 +53,15 @@ public class new_business_screen extends AppCompatActivity {
         final EditText passwordInput = (EditText) findViewById(R.id.passwordInput);
         final EditText repasswordInput = (EditText) findViewById(R.id.repasswordInput);
         final EditText businessAddressInput = (EditText) findViewById(R.id.businessAddressInput);
+
+       // usernameInput.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+      //  repasswordInput.setInputType(InputType.TYPE_CLASS_TEXT);
+       // repasswordInput.setImeActionLabel("Custom text", KeyEvent.KEYCODE_ENTER);
+       // repasswordInput.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+       // repasswordInput.setImeActionLabel("whatever", EditorInfo.IME_ACTION_DONE);
+
 
         String name = usernameInput.getText().toString();
         String password = passwordInput.getText().toString();

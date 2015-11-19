@@ -29,6 +29,8 @@
 
     <EditText
         android:id="@+id/usernameInput"
+        android:imeOptions ="actionSend"
+        android:singleLine="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/usernameText"
@@ -48,6 +50,8 @@
 
     <EditText
         android:id="@+id/businessNameInput"
+        android:imeOptions ="actionSend"
+        android:singleLine="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/businessText"
@@ -68,6 +72,8 @@
 
     <EditText
         android:id="@+id/businessAddressInput"
+        android:imeOptions ="actionSend"
+        android:singleLine="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/adressText"
@@ -88,6 +94,8 @@
 
     <EditText
         android:id="@+id/passwordInput"
+        android:imeOptions ="actionSend"
+        android:singleLine="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/passwordText"
@@ -108,6 +116,8 @@
 
     <EditText
         android:id="@+id/repasswordInput"
+        android:imeOptions ="actionSend"
+        android:singleLine="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/repasswordText"

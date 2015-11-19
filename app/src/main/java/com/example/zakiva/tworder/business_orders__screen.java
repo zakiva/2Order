@@ -121,7 +121,7 @@ public class business_orders__screen extends AppCompatActivity {
             arrayChildren.add(order.getString("customer_phone"));
             arrayChildren.add(order.getString("details"));
             if(order.getBoolean("prior") == true){
-                arrayChildren.add("Urgent");
+                arrayChildren.add("Urgent1");
             } else {
                 arrayChildren.add("Not Urgent");
             }
