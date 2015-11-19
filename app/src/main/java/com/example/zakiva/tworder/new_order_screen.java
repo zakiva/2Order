@@ -3,6 +3,7 @@ package com.example.zakiva.tworder;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -15,6 +16,7 @@ import com.parse.ParseUser;
 
 public class new_order_screen extends AppCompatActivity {
 
+    private static final String TAG = ">>>>debug";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,15 +31,7 @@ public class new_order_screen extends AppCompatActivity {
         final EditText orederDetails = (EditText) findViewById(R.id.orderDetailsInput);
         final RatingBar orderUrgent = (RatingBar) findViewById(R.id.setUrgentBar);
 
-        int n = orderUrgent.getNumStars();
-        //need to remove and set prior to int
-        boolean prior;
-        if(n==1){
-            prior = false;
-        }
-        else{
-            prior = true;
-        }
+        int prior = (int) orderUrgent.getRating();
         String customer_phone = customerPhone.getText().toString();
         String order_number = orderNumber.getText().toString();
         String order_details = orederDetails.getText().toString();
@@ -48,13 +42,14 @@ public class new_order_screen extends AppCompatActivity {
 
     }
 
-    public void create_new_order (String phone, String code, String details, boolean prior){
+    public void create_new_order (String phone, String code, String details, int prior){
         ParseObject order = new ParseObject("Order");
         order.put("business_user", ParseUser.getCurrentUser());
         order.put("customer_phone", phone);
         order.put("code", code);
         order.put("details", details);
         order.put("prior", prior);
+        order.put("status", "In Progress");
         order.saveInBackground();
     }
 }

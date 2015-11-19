@@ -29,6 +29,8 @@
 
     <EditText
         android:id="@+id/phoneInput"
+        android:imeOptions ="actionSend"
+        android:singleLine="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/PhoneText"
@@ -48,6 +50,8 @@
 
     <EditText
         android:id="@+id/passwordInput"
+        android:imeOptions ="actionSend"
+        android:singleLine="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/passwordText"
@@ -68,6 +72,8 @@
 
     <EditText
         android:id="@+id/repasswordInput"
+        android:imeOptions ="actionSend"
+        android:singleLine="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/repasswordText"

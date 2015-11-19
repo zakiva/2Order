@@ -117,11 +117,7 @@ public class business_orders__screen extends AppCompatActivity {
         for (ParseObject order: orders){
             business_list_group parent = new business_list_group();
             parent.setTitle("Order Number " + order.getString("code"));
-            if(order.getBoolean("prior") == true){
-                parent.setUrgent(3);
-            } else {
-                parent.setUrgent(1);
-            }
+            parent.setUrgent(order.getInt("prior"));
             arrayChildren = new ArrayList<String>();
             arrayChildren.add("Customer Phone: " + order.getString("customer_phone"));
             arrayChildren.add(order.getString("details"));
