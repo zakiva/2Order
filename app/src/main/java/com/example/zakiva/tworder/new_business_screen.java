@@ -32,18 +32,12 @@ public class new_business_screen extends AppCompatActivity {
         user.put("address", address);
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
-                if (e == null)
-                {
+                if (e == null) {
                     Intent intent = new Intent(getBaseContext(), business_orders__screen.class);
                     startActivity(intent);
-                }
-                else
-                {
-                    // Ariel !!!
-                    String a = "Write here your alert";
-                    alertToast(a);
-
-
+                } else {
+                    // Ariel !!! what???
+                    alertToast("Sign-up failed");
                     //what happens if sign up failed
                     //TextView textView3 = (TextView) findViewById(R.id.textView3);
                     //textView3.setText("Failed!!!");
@@ -58,10 +52,6 @@ public class new_business_screen extends AppCompatActivity {
     }
 
     public void onBusinessLogClick(View view){
-        boolean usernameInTheSystem;
-        boolean passwordOK;
-        String alertText = "";
-
         // GET ALL THE INPUTS FROM THE USER
         final EditText usernameInput = (EditText) findViewById(R.id.usernameInput);
         final EditText businessNameInput = (EditText) findViewById(R.id.businessNameInput);
@@ -84,30 +74,12 @@ public class new_business_screen extends AppCompatActivity {
         String businessName = businessNameInput.getText().toString();
         String business_address =  businessAddressInput.getText().toString();
 
-        // Set Rules to inputs
-
-
-        //usernameInTheSystem = check_username();
-        usernameInTheSystem = false;
-        passwordOK = password.equals(rePassword);
-        if(usernameInTheSystem){
-            usernameInput.setTextColor(Color.parseColor("RED"));
-            alertText+="Username Already In The System";
-        }
-        if(!passwordOK){
-            if(usernameInTheSystem){
-                alertText+=" AND ";
-            }
-            alertText+="Password and RePassword are not the same";
-            passwordInput.setTextColor(Color.parseColor("RED"));
-            repasswordInput.setTextColor(Color.parseColor("RED"));
-        }
-        if(!passwordOK || usernameInTheSystem){
-            alertToast(alertText);
-        }
-        else {
+        if (password.equals(rePassword)) {
             sign_up(name, password, businessName, business_address);
+        }else{
+            alertToast("Please retype your password");
         }
+
     }
 
     public void alertToast(String alert){

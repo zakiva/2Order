@@ -129,7 +129,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/login1"
-        android:text="  LOG IN  "
+        android:text="SIGN UP"
         android:textColor="#FFF"
         android:background="#00F"
         android:layout_below="@+id/repasswordInput"

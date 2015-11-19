@@ -26,14 +26,11 @@ public class new_customer_screen extends AppCompatActivity {
         user.put("kind", "customer");
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
-                if (e == null)
-                {
+                if (e == null) {
                     Intent intent = new Intent(getBaseContext(), customer_orders_screen.class);
                     startActivity(intent);
-                }
-                else
-                {
-                    //what happens if sign up failed
+                } else {
+                    alertToast("Sign-up failed");
                     //TextView textView3 = (TextView) findViewById(R.id.textView3);
                     //textView3.setText("Failed!!!");
                 }
@@ -48,9 +45,6 @@ public class new_customer_screen extends AppCompatActivity {
     }
 
     public void onCustomerLogClick(View view){
-        boolean usernameInTheSystem;
-        boolean passwordOK;
-        String alertText = "";
 
         final EditText phoneInput = (EditText) findViewById(R.id.phoneInput);
         final EditText passwordInput = (EditText) findViewById(R.id.passwordInput);
@@ -66,32 +60,25 @@ public class new_customer_screen extends AppCompatActivity {
         View layout = inflater.inflate(R.layout.my_custom_alert,
                 (ViewGroup) findViewById(R.id.my_custom_layout_id));
         TextView text = (TextView) layout.findViewById(R.id.alertText);
-
-        //usernameInTheSystem = check_username();
-        usernameInTheSystem = true;
-        passwordOK = password.equals(rePassword);
-        if(usernameInTheSystem){
-            phoneInput.setTextColor(Color.parseColor("RED"));
-            alertText+="Phone Number Already In The System";
-        }
-        if(passwordOK){
-            if(usernameInTheSystem){
-                alertText+=" AND ";
-            }
-            alertText+="Password and RePassword are not the same";
-            passwordInput.setTextColor(Color.parseColor("RED"));
-            rePasswordInput.setTextColor(Color.parseColor("RED"));
-        }
-        if(!passwordOK || usernameInTheSystem){
-            text.setText(alertText);
-            Toast toast2 = new Toast(getApplicationContext());
-            toast2.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
-            toast2.setDuration(Toast.LENGTH_LONG);
-            toast2.setView(layout);
-            toast2.show();
-        }
-        else {
+        if (password.equals(rePassword)) {
             sign_up(phone, password);
+        } else{
+            alertToast("Please retype your password");
         }
+
+    }
+
+    public void alertToast(String alert){
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.my_custom_alert,
+                (ViewGroup) findViewById(R.id.my_custom_layout_id));
+        TextView text = (TextView) layout.findViewById(R.id.alertText);
+
+        text.setText(alert);
+        Toast toast2 = new Toast(getApplicationContext());
+        toast2.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
+        toast2.setDuration(Toast.LENGTH_LONG);
+        toast2.setView(layout);
+        toast2.show();
     }
 }
