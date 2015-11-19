@@ -5,6 +5,7 @@ import java.util.ArrayList;
 class business_list_group {
     private String mTitle;
     private ArrayList<String> mArrayChildren;
+    private int rating;
 
     public String getTitle() {
         return mTitle;
@@ -12,6 +13,14 @@ class business_list_group {
 
     public void setTitle(String title) {
         mTitle = title;
+    }
+
+    public int getUrgent(){
+        return rating;
+    }
+
+    public void setUrgent(int n){
+        rating = n;
     }
 
     public ArrayList<String> getArrayChildren() {

@@ -117,18 +117,20 @@ public class business_orders__screen extends AppCompatActivity {
         for (ParseObject order: orders){
             business_list_group parent = new business_list_group();
             parent.setTitle("Order Number " + order.getString("code"));
-            arrayChildren = new ArrayList<String>();
-            arrayChildren.add(order.getString("customer_phone"));
-            arrayChildren.add(order.getString("details"));
             if(order.getBoolean("prior") == true){
-                arrayChildren.add("Urgent1");
+                parent.setUrgent(3);
             } else {
-                arrayChildren.add("Not Urgent");
+                parent.setUrgent(1);
             }
+            arrayChildren = new ArrayList<String>();
+            arrayChildren.add("Customer Phone: " + order.getString("customer_phone"));
+            arrayChildren.add(order.getString("details"));
+
             parent.setArrayChildren(arrayChildren);
             arrayParents.add(parent);
 
         }
     }
+
 
 }
