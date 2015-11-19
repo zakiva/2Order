@@ -12,7 +12,7 @@ import com.parse.ParseUser;
 
 public class  MainActivity extends AppCompatActivity {
 
-    private static boolean parse_init = true;
+    //private static boolean parse_init = true;
 
     boolean is_user_signed()
     {
@@ -37,8 +37,8 @@ public class  MainActivity extends AppCompatActivity {
             else
             {
                 //what happens if customer user is signed in
-                //Intent intent = new Intent(getBaseContext(), Main2Activity.class);
-                //startActivity(intent);
+                Intent intent = new Intent(getBaseContext(), customer_orders_screen.class);
+                startActivity(intent);
             }
         }
     }
@@ -47,15 +47,6 @@ public class  MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        if (parse_init){
-            // Enable Local Datastore.
-            Parse.enableLocalDatastore(this);
-            Parse.initialize(this, "JwL3fVDM1GoYSss63FFTwy7jyLt1abq7gYMfiDij", "MRKSsUUKU0AMGRYNTiEz48DXJ4KovXAaqHz0UAG5");
-            ParseInstallation.getCurrentInstallation().saveInBackground();
-            parse_init = false;
-        }
-
         do_if_user_singed();
     }
 
