@@ -16,15 +16,13 @@
         android:layout_weight="1"
         android:layout_marginLeft="35dp" />
 
-    <Button
-        android:layout_width="wrap_content"
+    <RatingBar
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="  READY  "
-        android:textColor="#FFF"
-        android:background="#0F0"
-        android:focusable="false"
-        android:layout_gravity="right"
-        android:focusableInTouchMode="false"
-        android:id="@+id/button"/>
+        android:id="@+id/urgentBar"
+        android:numStars="3"
+        android:isIndicator="true"
+        android:layout_weight="1" />
+
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.example.zakiva.tworder;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -8,10 +9,16 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-
+import android.view.ViewGroup;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+import android.view.LayoutInflater;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.view.Gravity;
+
+import org.w3c.dom.Text;
 
 public class new_business_screen extends AppCompatActivity {
 
@@ -32,6 +39,11 @@ public class new_business_screen extends AppCompatActivity {
                 }
                 else
                 {
+                    // Ariel !!!
+                    String a = "Write here your alert";
+                    alertToast(a);
+
+
                     //what happens if sign up failed
                     //TextView textView3 = (TextView) findViewById(R.id.textView3);
                     //textView3.setText("Failed!!!");
@@ -46,6 +58,9 @@ public class new_business_screen extends AppCompatActivity {
     }
 
     public void onBusinessLogClick(View view){
+        boolean usernameInTheSystem;
+        boolean passwordOK;
+        String alertText = "";
 
         // GET ALL THE INPUTS FROM THE USER
         final EditText usernameInput = (EditText) findViewById(R.id.usernameInput);
@@ -69,12 +84,44 @@ public class new_business_screen extends AppCompatActivity {
         String businessName = businessNameInput.getText().toString();
         String business_address =  businessAddressInput.getText().toString();
 
-        if (password.equals(rePassword)) {
+        // Set Rules to inputs
+
+
+        //usernameInTheSystem = check_username();
+        usernameInTheSystem = false;
+        passwordOK = password.equals(rePassword);
+        if(usernameInTheSystem){
+            usernameInput.setTextColor(Color.parseColor("RED"));
+            alertText+="Username Already In The System";
+        }
+        if(!passwordOK){
+            if(usernameInTheSystem){
+                alertText+=" AND ";
+            }
+            alertText+="Password and RePassword are not the same";
+            passwordInput.setTextColor(Color.parseColor("RED"));
+            repasswordInput.setTextColor(Color.parseColor("RED"));
+        }
+        if(!passwordOK || usernameInTheSystem){
+            alertToast(alertText);
+        }
+        else {
             sign_up(name, password, businessName, business_address);
         }
+    }
 
-        //Intent i = new Intent(this, business_orders__screen.class);
-        //startActivity(i);
+    public void alertToast(String alert){
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.my_custom_alert,
+                (ViewGroup) findViewById(R.id.my_custom_layout_id));
+        TextView text = (TextView) layout.findViewById(R.id.alertText);
+
+        text.setText(alert);
+        Toast toast2 = new Toast(getApplicationContext());
+        toast2.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
+        toast2.setDuration(Toast.LENGTH_LONG);
+        toast2.setView(layout);
+        toast2.show();
     }
 
 }

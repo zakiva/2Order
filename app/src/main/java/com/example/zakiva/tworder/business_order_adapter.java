@@ -2,12 +2,14 @@ package com.example.zakiva.tworder;
 
 import android.content.Context;
 import android.database.DataSetObserver;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.RatingBar;
 
 import java.util.ArrayList;
 
@@ -16,6 +18,7 @@ class businees_order_adapter extends BaseExpandableListAdapter {
 
     private LayoutInflater inflater;
     private ArrayList<business_list_group> mParent;
+    private RatingBar urgentBar;
 
     public businees_order_adapter(Context context, ArrayList<business_list_group> parent){
         mParent = parent;
@@ -75,6 +78,8 @@ class businees_order_adapter extends BaseExpandableListAdapter {
 
         TextView textView = (TextView) view.findViewById(R.id.list_item_text_view);
         textView.setText(getGroup(groupPosition).toString());
+        urgentBar = (RatingBar) view.findViewById(R.id.urgentBar);
+        urgentBar.setRating(mParent.get(groupPosition).getUrgent());
 
         view.setTag(holder);
 
@@ -96,6 +101,7 @@ class businees_order_adapter extends BaseExpandableListAdapter {
 
         TextView textView = (TextView) view.findViewById(R.id.list_item_text_child);
         textView.setText(mParent.get(groupPosition).getArrayChildren().get(childPosition));
+
 
         view.setTag(holder);
 

@@ -48,18 +48,5 @@ public class logIn_screen extends AppCompatActivity {
         String username = usernameInput.getText().toString();
         String password = passwordInput.getText().toString();
         sign_in(username, password);
-
-        // LOG IN BY USER
-        /*
-        boolean businees = log_in(username, password);
-        if(business == true){
-            Intent i = new Intent(this, business_orders__screen.class);
-            startActivity(i);
-        }
-        else{
-            Intent i = new Intent(this, customer_order_screen.class);
-            startActivity(i);
-        }
-        */
     }
 }
