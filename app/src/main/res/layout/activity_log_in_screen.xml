@@ -61,6 +61,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:width="330dp"
+        android:inputType="textPassword"
         />
 
     <Button
