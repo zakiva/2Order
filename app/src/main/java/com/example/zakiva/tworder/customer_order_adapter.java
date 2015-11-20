@@ -8,10 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 
 public class customer_order_adapter extends ArrayAdapter<String[]> {
 
-    public customer_order_adapter(Context context, String[] items[]) {
+    public customer_order_adapter(Context context, ArrayList<String[]> items) {
         super(context,R.layout.customer_orders_row ,items);
     }
 

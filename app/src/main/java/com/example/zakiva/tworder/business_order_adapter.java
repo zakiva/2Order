@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.RatingBar;
 
@@ -102,7 +103,14 @@ class businees_order_adapter extends BaseExpandableListAdapter {
         TextView textView = (TextView) view.findViewById(R.id.list_item_text_child);
         textView.setText(mParent.get(groupPosition).getArrayChildren().get(childPosition));
 
-
+        //NEW CODE
+        /*
+        Button b = new Button(viewGroup.getContext());
+        b.setText("im NEW");
+        LinearLayout ll = (LinearLayout)findViewById(R.id.buttonlayout);
+        LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        ll.addView(myButton, lp);
+*/
         view.setTag(holder);
 
         //return the entire view

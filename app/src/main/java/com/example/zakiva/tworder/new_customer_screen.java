@@ -18,8 +18,7 @@ import com.parse.SignUpCallback;
 
 public class new_customer_screen extends AppCompatActivity {
 
-    void sign_up(String username, String password)
-    {
+    void sign_up(String username, String password) {
         ParseUser user = new ParseUser();
         user.setUsername(username);
         user.setPassword(password);
@@ -31,9 +30,8 @@ public class new_customer_screen extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     alertToast("Sign-up failed");
-                    //TextView textView3 = (TextView) findViewById(R.id.textView3);
-                    //textView3.setText("Failed!!!");
                 }
+
             }
         });
     }
@@ -54,8 +52,6 @@ public class new_customer_screen extends AppCompatActivity {
         String password = passwordInput.getText().toString();
         String rePassword = rePasswordInput.getText().toString();
 
-
-        // Set Rules to inputs
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.my_custom_alert,
                 (ViewGroup) findViewById(R.id.my_custom_layout_id));
@@ -63,9 +59,10 @@ public class new_customer_screen extends AppCompatActivity {
         if (password.equals(rePassword)) {
             sign_up(phone, password);
         } else{
+            passwordInput.setTextColor(Color.parseColor("RED"));
+            rePasswordInput.setTextColor(Color.parseColor("RED"));
             alertToast("Please retype your password");
         }
-
     }
 
     public void alertToast(String alert){

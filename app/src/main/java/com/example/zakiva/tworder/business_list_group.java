@@ -6,6 +6,7 @@ class business_list_group {
     private String mTitle;
     private ArrayList<String> mArrayChildren;
     private int rating;
+    private String Phone;
 
     public String getTitle() {
         return mTitle;
