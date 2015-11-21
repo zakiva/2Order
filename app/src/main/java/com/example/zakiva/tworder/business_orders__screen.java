@@ -26,6 +26,7 @@ import java.util.List;
 
 import com.parse.CountCallback;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
@@ -135,7 +136,7 @@ public class business_orders__screen extends AppCompatActivity {
             business_list_group parent = new business_list_group();
             parent.setTitle("Order Number " + order.getString("code"));
             parent.setUrgent(order.getInt("prior"));
-            parent.setItemKey(order.getString("objectId")); //zahi change for ObjectId
+            parent.setItemKey(order.getObjectId());
             arrayChildren = new ArrayList<String>();
             arrayChildren.add("Customer Phone: " + order.getString("customer_phone"));
             arrayChildren.add("Order Detils : " + order.getString("details"));
@@ -150,16 +151,26 @@ public class business_orders__screen extends AppCompatActivity {
         LinearLayout r =(LinearLayout) view.getParent();
         TextView t = (TextView) r.findViewById(R.id.key);
         final Button button1 = (Button) r.findViewById(R.id.changeStatusButton);
-        String itemId = t.getText().toString();
+        final String itemId = t.getText().toString();
         //open a pop up window and select the string
         PopupMenu popup = new PopupMenu(business_orders__screen.this, button1);
         popup.getMenuInflater().inflate(R.menu.popup_change_status_menu, popup.getMenu());
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            public boolean onMenuItemClick(MenuItem item) {
-                Toast.makeText(business_orders__screen.this, "status change to : " + item.getTitle(), Toast.LENGTH_SHORT).show();
-                //zahi change for ObjectId
-                // get order by orderID
-                // change status to order
+            public boolean onMenuItemClick(final MenuItem item) {
+                Toast.makeText(business_orders__screen.this, "status changed to : " + item.getTitle(), Toast.LENGTH_SHORT).show();
+
+                ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
+                query.getInBackground(itemId, new GetCallback<ParseObject>() {
+                    public void done(ParseObject object, ParseException e) {
+                        if (e == null) {
+                            object.put("status", item.getTitle());
+                            object.saveInBackground();
+                        } else {
+
+                        }
+                    }
+                });
+
 
                 return true;
             }

@@ -12,18 +12,22 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
         android:src="@drawable/logo"
-        android:layout_alignParentTop="true"
 
-        />
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/logOutCustomerButton"
+        android:layout_toStartOf="@+id/logOutCustomerButton"
+        android:layout_marginRight="119dp"
+        android:layout_marginEnd="119dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/customerListView"
         android:text="LOG OUT"
-        android:layout_alignRight="@+id/customerListView"
         android:id="@+id/logOutCustomerButton"
-        android:onClick="OnLogOutClick"/>
+        android:onClick="OnLogOutClick"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 
     <ListView
@@ -35,4 +39,5 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:layout_alignParentEnd="true" />
+
 </RelativeLayout>
