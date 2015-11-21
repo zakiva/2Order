@@ -37,8 +37,8 @@
         />
 
     <ExpandableListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
         android:id="@+id/expandableList"
         android:layout_below="@+id/createNewOrder"
         android:layout_marginTop="10dp"

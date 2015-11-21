@@ -70,10 +70,10 @@ public class customer_orders_screen extends AppCompatActivity {
         ArrayList<String[]> items = new ArrayList<String[]>();
         for (ParseObject order: orders){
             String[] item = new String[4];
-            item[0] = order.getParseUser("business_user").getString("name");//"ElikBelikBOOM";//order.getString("name");
-            item[1] = order.getParseUser("business_user").getString("address"); //order.getString("address");
+            item[0] = order.getParseUser("business_user").getString("name");
+            item[1] = order.getParseUser("business_user").getString("address");
             item[2] = order.getString("code");
-            item[3] = "READY"; //order.getString("status");
+            item[3] = order.getString("status");
             items.add(item);
         }
         ListAdapter customerAdapter = new customer_order_adapter(this, items);

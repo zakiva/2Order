@@ -27,10 +27,12 @@
 
 
     <ListView
+        android:id="@+id/customerListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/customerListView"
         android:layout_below="@+id/imageView"
         android:layout_alignParentRight="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:layout_alignParentEnd="true" />
 </RelativeLayout>
