@@ -4,9 +4,25 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.app.ExpandableListActivity;
+import android.widget.LinearLayout;
+import android.widget.PopupMenu;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.app.Activity;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.parse.CountCallback;
 import com.parse.FindCallback;
@@ -21,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class business_orders__screen extends AppCompatActivity {
+
 
     void push_notification(final String username)
     {
@@ -118,15 +135,35 @@ public class business_orders__screen extends AppCompatActivity {
             business_list_group parent = new business_list_group();
             parent.setTitle("Order Number " + order.getString("code"));
             parent.setUrgent(order.getInt("prior"));
+            parent.setItemKey(order.getString("objectId")); //zahi change for ObjectId
             arrayChildren = new ArrayList<String>();
             arrayChildren.add("Customer Phone: " + order.getString("customer_phone"));
-            arrayChildren.add(order.getString("details"));
-
+            arrayChildren.add("Order Detils : " + order.getString("details"));
+            arrayChildren.add("STATUS : " + order.getString("status"));
             parent.setArrayChildren(arrayChildren);
             arrayParents.add(parent);
 
         }
     }
 
+    public void changeStatus(View view){
+        LinearLayout r =(LinearLayout) view.getParent();
+        TextView t = (TextView) r.findViewById(R.id.key);
+        final Button button1 = (Button) r.findViewById(R.id.changeStatusButton);
+        String itemId = t.getText().toString();
+        //open a pop up window and select the string
+        PopupMenu popup = new PopupMenu(business_orders__screen.this, button1);
+        popup.getMenuInflater().inflate(R.menu.popup_change_status_menu, popup.getMenu());
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+                Toast.makeText(business_orders__screen.this, "status change to : " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                //zahi change for ObjectId
+                // get order by orderID
+                // change status to order
 
+                return true;
+            }
+        });
+        popup.show();//showing popup menu
+    }
 }

@@ -1,12 +1,20 @@
 package com.example.zakiva.tworder;
 
-import java.util.ArrayList;
+import android.app.Activity;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
-class business_list_group {
+import java.util.ArrayList;
+import java.util.List;
+
+class business_list_group  {
     private String mTitle;
     private ArrayList<String> mArrayChildren;
     private int rating;
+    private String itemKey;
     private String Phone;
+
 
     public String getTitle() {
         return mTitle;
@@ -14,6 +22,14 @@ class business_list_group {
 
     public void setTitle(String title) {
         mTitle = title;
+    }
+
+    public String getItemKey(){
+        return itemKey;
+    }
+
+    public void setItemKey(String key){
+        itemKey = key;
     }
 
     public int getUrgent(){
