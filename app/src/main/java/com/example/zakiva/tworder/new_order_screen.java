@@ -44,6 +44,9 @@ public class new_order_screen extends AppCompatActivity {
     public void create_new_order (String phone, String code, String details, int prior){
         ParseObject order = new ParseObject("Order");
         order.put("business_user", ParseUser.getCurrentUser());
+        order.put("business_id", ParseUser.getCurrentUser().getObjectId());
+        order.put("business_name", ParseUser.getCurrentUser().getString("name"));
+        order.put("business_address", ParseUser.getCurrentUser().getString("address"));
         order.put("customer_phone", phone);
         order.put("code", code);
         order.put("details", details);

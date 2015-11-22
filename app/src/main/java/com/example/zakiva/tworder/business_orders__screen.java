@@ -138,9 +138,9 @@ public class business_orders__screen extends AppCompatActivity {
             parent.setUrgent(order.getInt("prior"));
             parent.setItemKey(order.getObjectId());
             arrayChildren = new ArrayList<String>();
-            arrayChildren.add("Customer Phone: " + order.getString("customer_phone"));
-            arrayChildren.add("Order Detils : " + order.getString("details"));
-            arrayChildren.add("STATUS : " + order.getString("status"));
+            arrayChildren.add("Customer phone: " + order.getString("customer_phone"));
+            arrayChildren.add("Details : " + order.getString("details"));
+            arrayChildren.add("Status : " + order.getString("status"));
             parent.setArrayChildren(arrayChildren);
             arrayParents.add(parent);
 

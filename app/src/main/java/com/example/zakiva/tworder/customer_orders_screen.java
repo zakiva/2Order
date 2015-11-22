@@ -11,6 +11,8 @@ import android.view.View;
 import android.content.Intent;
 
 import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
@@ -47,7 +49,6 @@ public class customer_orders_screen extends AppCompatActivity {
     }
 
     protected void get_all_user_orders() {
-
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
         query.whereEqualTo("customer_phone", ParseUser.getCurrentUser().getString("username"));
         query.addAscendingOrder("createdAt"); // old first
@@ -66,17 +67,19 @@ public class customer_orders_screen extends AppCompatActivity {
         );
     }
 
-    protected void draw_orders(List<ParseObject> orders){
+    protected void draw_orders(List<ParseObject> orders) {
         ArrayList<String[]> items = new ArrayList<String[]>();
-        for (ParseObject order: orders){
-            String[] item = new String[4];
-            item[0] = order.getParseUser("business_user").getString("name");
-            item[1] = order.getParseUser("business_user").getString("address");
+        for (ParseObject order : orders) {
+            String[] item = new String[5];
+            item[0] = order.getString("business_name");
+            item[1] = order.getString("business_address");
             item[2] = order.getString("code");
             item[3] = order.getString("status");
+            item[4] = order.getString("details");
             items.add(item);
         }
-        ListAdapter customerAdapter = new customer_order_adapter(this, items);
+
+        ListAdapter customerAdapter = new customer_order_adapter(getBaseContext(), items);
         ListView customerListView = (ListView) findViewById(R.id.customerListView);
         customerListView.setAdapter(customerAdapter);
     }

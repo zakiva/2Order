@@ -1,45 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text=""
-        android:textSize="30dp"
-        android:id="@+id/spaceTop"
-        android:background="#FFF"
-
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Business Name"
-        android:id="@+id/businessName"
-        android:textSize="24dp"
-        android:background="#567"
-        android:layout_row="0"
-        android:layout_column="0"
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Business Address"
-        android:id="@+id/businessAddress"
-        android:textSize="15dp"
-        android:layout_marginTop="5dp"
-        android:paddingLeft="10dp"
-        android:textColor="#00F"
-        android:background="#FFF"
-        android:layout_row="1"
-        android:layout_column="0"
-        />
+    android:layout_height="match_parent"
+    android:weightSum="1"
+    android:background="#03b9e2">
 
     <TextView
         android:layout_width="match_parent"
@@ -47,31 +11,74 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Order Number"
         android:id="@+id/orderNumber"
-        android:textSize="15dp"
+        android:textSize="17dp"
         android:layout_marginTop="5dp"
         android:paddingLeft="10dp"
-        android:textColor="#00F"
-        android:background="#FFF"
+        android:textColor="#030303"
+        android:background="#03b9e2"
         android:layout_row="2"
-        android:layout_column="0" />
+        android:layout_column="0"
+        android:layout_weight="0.07" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="order details"
+        android:id="@+id/orderDetails"
+        android:textSize="17dp"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="10dp"
+        android:textColor="#030303"
+        android:background="#03b9e2"
+        android:layout_row="2"
+        android:layout_column="0"
+        android:layout_weight="0.07" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Business Name"
+        android:id="@+id/businessName"
+        android:textSize="17dp"
+        android:background="#03b9e2"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:textColor="#030303"
+        android:layout_weight="0.08" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Business Address"
+        android:id="@+id/businessAddress"
+        android:textSize="17dp"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="10dp"
+        android:textColor="#030303"
+        android:background="#03b9e2"
+        android:layout_row="1"
+        android:layout_column="0"
+        android:layout_weight="0.07" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="STATUS"
-        android:textAlignment="center"
         android:id="@+id/orderStatus"
-        android:textSize="20dp"
+        android:textSize="17dp"
         android:layout_marginTop="10dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:textStyle="bold"
-        android:textColor="#FFF"
-        android:background="#A00"
+        android:textColor="#030303"
+        android:background="#03b9e2"
         android:layout_row="3"
         android:layout_column="0"
-        />
+        android:layout_weight="0.03"
+        android:textStyle="italic" />
 
     <TextView
         android:layout_width="match_parent"
@@ -79,8 +86,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text=""
         android:textSize="30dp"
-        android:id="@+id/spaceBottom"
+        android:id="@+id/textView"
         android:background="#FFF"
-        />
+        android:layout_weight="0.12" />
 
 </LinearLayout>
