@@ -1,6 +1,7 @@
 package com.example.zakiva.tworder;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -41,6 +42,16 @@ public class  MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         }
+        else{
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    final Intent mainIntent = new Intent(MainActivity.this, first_screen.class);
+                    MainActivity.this.startActivity(mainIntent);
+                    MainActivity.this.finish();
+                }
+            }, 2200);
+        }
     }
 
     @Override
@@ -50,8 +61,4 @@ public class  MainActivity extends AppCompatActivity {
         do_if_user_singed();
     }
 
-    public void onNextClick(View view){
-        Intent i = new Intent(this, first_screen.class);
-        startActivity(i);
-    }
 }
