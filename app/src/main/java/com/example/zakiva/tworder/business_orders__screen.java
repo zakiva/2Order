@@ -68,6 +68,7 @@ public class business_orders__screen extends AppCompatActivity {
     }
 
     private static final String TAG = ">>>>debug";
+    //Log.i(TAG, " on create .. ");
 
 
     ExpandableListView businessExpandableList;
@@ -184,5 +185,15 @@ public class business_orders__screen extends AppCompatActivity {
             }
         });
         popup.show();//showing popup menu
+    }
+
+    public void history_clicked(View view) {
+        Intent i = new Intent(this, business_orders_history.class);
+        startActivity(i);
+    }
+
+    public void customers_clicked(View view) {
+        Intent i = new Intent(this, business_customers.class);
+        startActivity(i);
     }
 }
