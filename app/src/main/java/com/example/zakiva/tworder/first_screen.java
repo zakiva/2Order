@@ -7,6 +7,11 @@ import android.view.View;
 
 public class first_screen extends AppCompatActivity {
     @Override
+    public void onBackPressed(){
+        //do nothing
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_screen);

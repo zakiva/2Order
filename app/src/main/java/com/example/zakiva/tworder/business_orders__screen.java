@@ -40,7 +40,7 @@ import java.util.List;
 public class business_orders__screen extends AppCompatActivity {
 
 
-    void push_notification(final String username)
+    void push_notification(final String username, final String message)
     {
         //is_user_exist = 0;
         ParseQuery<ParseUser> query = ParseUser.getQuery();
@@ -53,7 +53,7 @@ public class business_orders__screen extends AppCompatActivity {
                         pushQuery.whereEqualTo("notification_id", username);
                         ParsePush push = new ParsePush();
                         push.setQuery(pushQuery);
-                        push.setMessage("Your order is ready!!");
+                        push.setMessage(message);
                         push.sendInBackground();
                         //Log.d("success", "The number is " + count);
                     } else{
@@ -163,8 +163,16 @@ public class business_orders__screen extends AppCompatActivity {
                 query.getInBackground(itemId, new GetCallback<ParseObject>() {
                     public void done(ParseObject object, ParseException e) {
                         if (e == null) {
-                            object.put("status", item.getTitle());
-                            object.saveInBackground();
+                            if (item.getTitle().equals("READY")) {
+                                String message = "Your order from " + object.getString("business_name") + " is ready!";
+                                push_notification(object.getString("customer_phone"), message);
+                                object.deleteInBackground();
+                                //Log.d("kkk: ", object.getString("customer_phone"));
+                            } else {
+                                object.put("status", item.getTitle());
+                                object.saveInBackground();
+                            }
+                            get_all_user_orders();
                         } else {
 
                         }
