@@ -103,6 +103,7 @@ public class business_orders__screen extends AppCompatActivity {
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
         query.whereEqualTo("business_user", ParseUser.getCurrentUser());
+        query.whereNotEqualTo("status", "history");
         query.orderByDescending("prior"); // true first
         query.addAscendingOrder("createdAt"); // old first
         query.findInBackground(new FindCallback<ParseObject>() {
@@ -164,14 +165,13 @@ public class business_orders__screen extends AppCompatActivity {
                     public void done(ParseObject object, ParseException e) {
                         if (e == null) {
                             if (item.getTitle().equals("READY")) {
+                                object.put("status", "history");
                                 String message = "Your order from " + object.getString("business_name") + " is ready!";
                                 push_notification(object.getString("customer_phone"), message);
-                                object.deleteInBackground();
-                                //Log.d("kkk: ", object.getString("customer_phone"));
                             } else {
                                 object.put("status", item.getTitle());
-                                object.saveInBackground();
                             }
+                            object.saveInBackground();
                             get_all_user_orders();
                         } else {
 

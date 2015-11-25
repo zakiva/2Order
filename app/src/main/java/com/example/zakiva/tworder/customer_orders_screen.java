@@ -48,6 +48,12 @@ public class customer_orders_screen extends AppCompatActivity {
         get_all_user_orders();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        get_all_user_orders();
+    }
+
     protected void get_all_user_orders() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
         query.whereEqualTo("customer_phone", ParseUser.getCurrentUser().getString("username"));
