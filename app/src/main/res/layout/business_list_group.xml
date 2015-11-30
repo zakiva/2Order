@@ -17,15 +17,6 @@
         android:layout_weight="1"
         android:layout_marginLeft="35dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/key"
-        android:textSize="0dp"
-        android:text="the first one"
-
-
-        />
 
     <RatingBar
         android:layout_width="wrap_content"
@@ -35,17 +26,5 @@
         style="?android:attr/ratingBarStyleSmall"
         android:isIndicator="true"
         android:layout_weight="1" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Change Status"
-        android:textSize="10dp"
-        android:id="@+id/changeStatusButton"
-        android:onClick="changeStatus"
-        />
-
-
 
 </LinearLayout>
