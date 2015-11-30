@@ -2,33 +2,18 @@ package com.example.zakiva.tworder;
 
 import android.content.Context;
 import android.database.DataSetObserver;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.RatingBar;
-import android.widget.Toast;
-import java.util.List;
-import android.widget.ArrayAdapter;
-import java.util.ArrayList;
-import java.util.List;
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 import java.util.ArrayList;
+
 
 class businees_order_adapter extends BaseExpandableListAdapter {
 
@@ -36,7 +21,6 @@ class businees_order_adapter extends BaseExpandableListAdapter {
     private LayoutInflater inflater;
     private ArrayList<business_list_group> mParent;
     private RatingBar urgentBar;
-    //private Spinner statusSpinner;
 
     public businees_order_adapter(Context context, ArrayList<business_list_group> parent){
         mParent = parent;
@@ -98,10 +82,6 @@ class businees_order_adapter extends BaseExpandableListAdapter {
         textView.setText(getGroup(groupPosition).toString());
         urgentBar = (RatingBar) view.findViewById(R.id.urgentBar);
         urgentBar.setRating(mParent.get(groupPosition).getUrgent());
-        TextView key = (TextView) view.findViewById(R.id.key);
-        key.setText(mParent.get(groupPosition).getItemKey());
-
-
 
         view.setTag(holder);
 
@@ -117,13 +97,44 @@ class businees_order_adapter extends BaseExpandableListAdapter {
         holder.childPosition = childPosition;
         holder.groupPosition = groupPosition;
 
-        if (view == null) {
-            view = inflater.inflate(R.layout.business_list_item, viewGroup,false);
-        }
+        view = inflater.inflate(R.layout.business_list_item, viewGroup,false);
 
         TextView textView = (TextView) view.findViewById(R.id.list_item_text_child);
         textView.setText(mParent.get(groupPosition).getArrayChildren().get(childPosition));
+        TextView key = (TextView) view.findViewById(R.id.key);
+        key.setText(mParent.get(groupPosition).getItemKey());
 
+        if(!isLastChild){
+            Button b1 = (Button) view.findViewById(R.id.statusButton);
+            ((ViewGroup) b1.getParent()).removeView(b1);
+            TextView textSwitcher = (TextView) view.findViewById(R.id.list_item_text_child);
+            textSwitcher.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    ViewGroup vp = (ViewGroup) view.getParent();
+                    ViewSwitcher switcher = (ViewSwitcher) vp.findViewById(R.id.businessTextSwitcher);
+                    switcher.showNext();
+                    TextView t = (TextView) vp.findViewById(R.id.list_item_text_child);
+                    EditText e = (EditText) vp.findViewById(R.id.businessEditText);
+                    e.setText(t.getText().toString());
+                    e.requestFocus();
+                    return true;
+                }
+            });
+            EditText myEdit = (EditText) view.findViewById(R.id.businessEditText);
+            myEdit.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    ViewGroup vp = (ViewGroup) view.getParent();
+                    ViewSwitcher switcher = (ViewSwitcher) vp.findViewById(R.id.businessTextSwitcher);
+                    TextView t = (TextView) vp.findViewById(R.id.list_item_text_child);
+                    EditText e = (EditText) vp.findViewById(R.id.businessEditText);
+                    t.setText(e.getText().toString());
+                    switcher.showPrevious();
+                    return true;
+                }
+            });
+        }
 
         view.setTag(holder);
 
@@ -141,16 +152,6 @@ class businees_order_adapter extends BaseExpandableListAdapter {
         /* used to make the notifyDataSetChanged() method work */
         super.registerDataSetObserver(observer);
     }
-
-// Intentionally put on comment, if you need on click deactivate it
-/*  @Override
-    public void onClick(View view) {
-        ViewHolder holder = (ViewHolder)view.getTag();
-        if (view.getId() == holder.button.getId()){
-
-           // DO YOUR ACTION
-        }
-    }*/
 
 
 

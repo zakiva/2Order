@@ -1,19 +1,13 @@
 package com.example.zakiva.tworder;
 
-import android.app.Activity;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-
 import java.util.ArrayList;
-import java.util.List;
+
 
 class business_list_group  {
     private String mTitle;
     private ArrayList<String> mArrayChildren;
     private int rating;
     private String itemKey;
-    private String Phone;
 
 
     public String getTitle() {

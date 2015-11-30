@@ -8,13 +8,53 @@
     android:id="@+id/list_item_child"
     android:gravity="center_vertical">
 
-
-    <TextView android:layout_width="wrap_content"
+    <ViewSwitcher
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/list_item_text_child"
-        android:textSize="20dp"
-        android:padding="10dp"
-        android:layout_marginLeft="5dp"/>
+        android:id="@+id/businessTextSwitcher"
+        >
+
+        <TextView android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_item_text_child"
+            android:textSize="20dp"
+            android:padding="10dp"
+            android:layout_marginLeft="5dp"
+            android:clickable="true"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:id="@+id/businessEditText"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:padding="10dp"
+            android:layout_marginLeft="5dp"
+            android:imeOptions ="actionSend"
+            />
+
+    </ViewSwitcher>
+
+
+    <Button
+        android:id="@+id/statusButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="Update Status"
+        style="@style/Widget.AppCompat.Button.Small"
+        android:onClick="changeStatus"
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/key"
+        android:textSize="0dp"
+        android:text=""
+        />
+
 
 
 </LinearLayout>
