@@ -8,15 +8,27 @@
     android:focusable="true" android:focusableInTouchMode="true"
     tools:context="com.example.zakiva.tworder.business_orders__screen">
 
-    <Button
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="LOG OUT"
-        android:id="@+id/logOutBusinessButton"
-        android:onClick="OnLogOutClick"
+        android:id="@+id/imageView"
+        android:src="@drawable/logo"
         android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/logOutCustomerButton"
+        android:layout_toStartOf="@+id/logOutCustomerButton"
+        android:layout_marginRight="119dp"
+        android:layout_marginEnd="119dp" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/businessSpinner"
+        android:layout_marginTop="22dp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        />
+    
+
 
     <Button
         android:layout_width="match_parent"
@@ -26,7 +38,8 @@
         android:textColor="#FFF"
         android:background="#00F"
         android:onClick="createNewOrderClick"
-        android:layout_below="@+id/logOutBusinessButton"
+        android:layout_below="@+id/imageView"
+        android:layout_marginTop="10dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -41,27 +54,7 @@
         android:listSelector="@android:color/transparent"
         />
 
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="history"
-        android:id="@+id/button5"
-        android:nestedScrollingEnabled="true"
-        android:onClick="history_clicked"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_above="@+id/createNewOrder" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="customers"
-        android:id="@+id/button6"
-        android:layout_above="@+id/createNewOrder"
-        android:layout_centerHorizontal="true"
-        android:onClick="customers_clicked" />
 
     <EditText
         android:layout_width="wrap_content"
