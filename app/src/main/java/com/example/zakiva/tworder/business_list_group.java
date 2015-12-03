@@ -8,6 +8,7 @@ class business_list_group  {
     private ArrayList<String> mArrayChildren;
     private int rating;
     private String itemKey;
+    private boolean editFlag;
 
 
     public String getTitle() {
@@ -16,6 +17,14 @@ class business_list_group  {
 
     public void setTitle(String title) {
         mTitle = title;
+    }
+
+    public void setEditFlag(boolean flag){
+        editFlag = flag;
+    }
+
+    public boolean getEditFlag(){
+        return editFlag;
     }
 
     public String getItemKey(){

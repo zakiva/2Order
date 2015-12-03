@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/list_item_text_child"
             android:textSize="20dp"
+            android:text=""
             android:padding="10dp"
             android:layout_marginLeft="5dp"
             android:clickable="true"
@@ -38,12 +39,15 @@
 
     <Button
         android:id="@+id/statusButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
+        android:background="@drawable/updatebutton"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:textColor="#050"
+        android:textStyle="bold"
+        android:layout_gravity="left"
         android:text="Update Status"
-        style="@style/Widget.AppCompat.Button.Small"
-        android:onClick="changeStatus"
+        android:textSize="20dp"
+
 
         />
 

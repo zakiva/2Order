@@ -1,6 +1,8 @@
 package com.example.zakiva.tworder;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.support.v7.app.AppCompatActivity;
@@ -14,11 +16,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +43,7 @@ public class business_orders__screen extends AppCompatActivity {
 
     private static final String TAG = ">>>>debug";
     ExpandableListView businessExpandableList;
+    private Spinner businessSpinner;
 
 
     @Override
@@ -61,8 +67,36 @@ public class business_orders__screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_orders__screen);
-        //Log.i(TAG, " on create .. ");
+
+        businessSpinner = (Spinner) findViewById(R.id.businessSpinner);
+        List<String> list = new ArrayList<String>();
+        list.add("ORDERS");
+        list.add("HISTORY");
+        list.add("CUSTOMERS");
+        list.add("LOG OUT");
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        businessSpinner.setAdapter(dataAdapter);
+        businessSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (businessSpinner.getItemAtPosition(position).toString().equals("HISTORY")) {
+                    history_clicked(businessSpinner);
+                } else if (businessSpinner.getItemAtPosition(position).toString().equals("CUSTOMERS")) {
+                    customers_clicked(businessSpinner);
+                } else if (businessSpinner.getItemAtPosition(position).toString().equals("LOG OUT")) {
+                    OnLogOutClick(businessSpinner);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         get_all_user_orders();
+
 
         EditText sv = (EditText) findViewById(R.id.editText);
         sv.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -118,14 +152,12 @@ public class business_orders__screen extends AppCompatActivity {
         });
     }
 
-    void send_sms(String number, String content)
-    {
+    void send_sms(String number, String content) {
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(number, null, content, null, null);
     }
 
-    void push_notification(final String username, final String message)
-    {
+    void push_notification(final String username, final String message) {
         //is_user_exist = 0;
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("username", username);
@@ -156,11 +188,9 @@ public class business_orders__screen extends AppCompatActivity {
         //do nothing
     }
 
-    void log_out()
-    {
+    void log_out() {
         ParseUser.logOut();
     }
-
 
     public void OnLogOutClick(View view){
         log_out();
@@ -190,7 +220,6 @@ public class business_orders__screen extends AppCompatActivity {
         );
     }
 
-
     public void createNewOrderClick(View view) {
         Intent i = new Intent(this, new_order_screen.class);
         startActivity(i);
@@ -208,7 +237,7 @@ public class business_orders__screen extends AppCompatActivity {
             parent.setUrgent(order.getInt("prior"));
             parent.setItemKey(order.getObjectId());
             arrayChildren = new ArrayList<String>();
-            arrayChildren.add("Customer phone: " + order.getString("customer_phone"));
+            arrayChildren.add("Phone : " + order.getString("customer_phone"));
             arrayChildren.add("Details : " + order.getString("details"));
             arrayChildren.add("Status : " + order.getString("status"));
             parent.setArrayChildren(arrayChildren);
@@ -217,44 +246,36 @@ public class business_orders__screen extends AppCompatActivity {
         }
     }
 
+    public void onDeleteClick(View view){
+        //ariel
+        Context context = this;
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                context);
 
-    public void changeStatus(View view){
-        final Context context = this;
-        LinearLayout r =(LinearLayout) view.getParent();
-        TextView t = (TextView) r.findViewById(R.id.key);
-        final TextView status = (TextView) r.findViewById(R.id.list_item_text_child);
-        final Button button1 = (Button) r.findViewById(R.id.statusButton);
-        final String itemId = t.getText().toString();
-        //open a pop up window and select the string
-        PopupMenu popup = new PopupMenu(business_orders__screen.this, button1);
-        popup.getMenuInflater().inflate(R.menu.popup_change_status_menu, popup.getMenu());
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            public boolean onMenuItemClick(final MenuItem item) {
-                Toast.makeText(business_orders__screen.this, "status changed to : " + item.getTitle(), Toast.LENGTH_SHORT).show();
-                ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
-                query.getInBackground(itemId, new GetCallback<ParseObject>() {
-                    public void done(ParseObject object, ParseException e) {
-                        if (e == null) {
-                            if (item.getTitle().equals("READY")) {
-                                object.put("status", "READY");
-                                String message = "Your order from " + object.getString("business_name") + " is ready!";
-                                push_notification(object.getString("customer_phone"), message);
-                            } else {
-                                object.put("status", item.getTitle());
-                            }
-                            object.saveInBackground();
-                            get_all_user_orders();
-                        } else {
+        // set title
+        alertDialogBuilder.setTitle("Are you sure you want to delete this order");
 
-                        }
+        // set dialog message
+        alertDialogBuilder
+                .setMessage("Click yes to Delete!")
+                .setCancelable(false)
+                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        dialog.cancel();
                     }
                 });
 
-                return true;
-            }
-        });
-            popup.show();
-        }
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
+    }
 
     public void history_clicked(View view) {
         Intent i = new Intent(this, business_orders_history.class);
@@ -265,6 +286,7 @@ public class business_orders__screen extends AppCompatActivity {
         Intent i = new Intent(this, business_customers.class);
         startActivity(i);
     }
+
 }
 
 
