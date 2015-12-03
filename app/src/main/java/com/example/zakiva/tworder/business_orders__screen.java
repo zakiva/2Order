@@ -2,12 +2,20 @@ package com.example.zakiva.tworder;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -33,15 +41,88 @@ public class business_orders__screen extends AppCompatActivity {
 
 
     @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            View v = getCurrentFocus();
+            if (v instanceof EditText) {
+                Rect outRect = new Rect();
+                v.getGlobalVisibleRect(outRect);
+                if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
+                    v.clearFocus();
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+            }
+        }
+        return super.dispatchTouchEvent( event );
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_orders__screen);
-
         //Log.i(TAG, " on create .. ");
         get_all_user_orders();
 
+        EditText sv = (EditText) findViewById(R.id.editText);
+        sv.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
+                    query.whereEqualTo("business_user", ParseUser.getCurrentUser());
+                    query.whereNotEqualTo("status", "READY");
+                    query.orderByDescending("prior"); // true first
+                    query.addAscendingOrder("createdAt"); // old first
+                    query.findInBackground(new FindCallback<ParseObject>() {
+                        public void done(final List<ParseObject> objects, ParseException e) {
+                            if (e == null) {
+                                EditText sv = (EditText) findViewById(R.id.editText);
+                                sv.addTextChangedListener(new TextWatcher() {
+                                    @Override
+                                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                        if (s.toString().equals("")) {
+                                            draw_orders(objects);
+                                        } else {
+                                            //Log.d("a: ", s.toString());
+                                            List<ParseObject> list2 = new ArrayList<ParseObject>();
+                                            for (ParseObject po : objects) {
+                                                if (po.getString("code").contains(s.toString()) || po.getString("details").contains(s.toString()) || po.getString("customer_phone").contains(s.toString())) {
+                                                    list2.add(po);
+                                                }
+                                            }
+                                            draw_orders(list2);
+                                        }
+                                    }
+
+                                    @Override
+                                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                                        // TODO Auto-generated method stub
+                                    }
+
+                                    @Override
+                                    public void afterTextChanged(Editable s) {
+
+                                        // TODO Auto-generated method stub
+                                    }
+                                });
+
+                            } else {
+                                Log.d("score", "Error: " + e.getMessage());
+                            }
+                        }
+                    });
+                }
+            }
+        });
     }
 
+    void send_sms(String number, String content)
+    {
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(number, null, content, null, null);
+    }
 
     void push_notification(final String username, final String message)
     {
@@ -60,7 +141,7 @@ public class business_orders__screen extends AppCompatActivity {
                         push.sendInBackground();
                         //Log.d("success", "The number is " + count);
                     } else {
-                        //The user does not exist. We need to connect him some other way
+                        send_sms(username, message);
                     }
                 } else {
                     // The request failed
