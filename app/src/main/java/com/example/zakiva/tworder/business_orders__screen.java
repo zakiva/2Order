@@ -72,8 +72,6 @@ public class business_orders__screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_orders__screen);
-
-
         get_all_user_orders();
 
 
@@ -178,15 +176,13 @@ public class business_orders__screen extends AppCompatActivity {
         }
     }
 
-    void send_sms(String number, String content)
-    {
+    void send_sms(String number, String content) {
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(number, null, content, null, null);
     }
 
 
-    void push_notification(final String username, final String message)
-    {
+    void push_notification(final String username, final String message) {
         //is_user_exist = 0;
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("username", username);
@@ -268,7 +264,6 @@ public class business_orders__screen extends AppCompatActivity {
             arrayChildren.add("Status : " + order.getString("status"));
             parent.setArrayChildren(arrayChildren);
             arrayParents.add(parent);
-
         }
     }
 

@@ -7,42 +7,38 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:focusable="true" android:focusableInTouchMode="true"
     tools:context="com.example.zakiva.tworder.business_orders__screen">
-    
+
 
     <Button
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/createNewOrder"
-        android:text="+"
-        android:textColor="#FFF"
-        android:background="#00F"
         android:onClick="createNewOrderClick"
-        android:layout_below="@+id/imageView"
-        android:layout_marginTop="10dp"
         android:textSize="40dp"
+        android:gravity="center|fill_vertical|center_horizontal"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:text="+"
+        android:background="#1854d4" />
 
     <ExpandableListView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/expandableList"
-        android:layout_below="@+id/createNewOrder"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="26dp"
         android:transcriptMode="disabled"
         android:cacheColorHint="#00000000"
         android:listSelector="@android:color/transparent"
-        />
+        android:layout_below="@+id/createNewOrder"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
     <EditText
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:id="@+id/editText"
-        android:layout_alignTop="@+id/createNewOrder"
-        android:layout_toRightOf="@+id/createNewOrder"
-        android:layout_toEndOf="@+id/createNewOrder"
         android:layout_marginLeft="63dp"
         android:layout_marginStart="63dp" />
 
