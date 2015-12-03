@@ -130,6 +130,9 @@ public class business_orders__screen extends AppCompatActivity {
             }
         });
 
+        //Log.i(TAG, " on create .. ");
+        get_all_user_orders();
+
         slidingMenu = new SlidingMenu(this);
         slidingMenu.setMode(SlidingMenu.LEFT);
         slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
@@ -141,6 +144,7 @@ public class business_orders__screen extends AppCompatActivity {
         slidingMenu.setMenu(R.layout.slidingmenu);
 
        // getActionBar().setDisplayHomeAsUpEnabled(true);
+
 
     }
 
@@ -174,10 +178,12 @@ public class business_orders__screen extends AppCompatActivity {
         }
     }
 
-    void send_sms(String number, String content) {
+    void send_sms(String number, String content)
+    {
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(number, null, content, null, null);
     }
+
 
     void push_notification(final String username, final String message)
     {
