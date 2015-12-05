@@ -10,3 +10,7 @@
 .idea
 app/.idea
 /app/app.iml
+app/app.iml
+libraries/slidingmenu
+/app/app.iml
+/libraries/slidingmenu
