@@ -46,8 +46,8 @@ public class business_orders__screen extends AppCompatActivity {
 
     private static final String TAG = ">>>>debug";
     ExpandableListView businessExpandableList;
-
     public SlidingMenu slidingMenu ;
+    protected String mode;
 
 
 
@@ -72,6 +72,7 @@ public class business_orders__screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_orders__screen);
+        mode = "orders";
         get_all_user_orders();
 
 
@@ -308,6 +309,9 @@ public class business_orders__screen extends AppCompatActivity {
         startActivity(i);
     }
 
+    public void open_sliding_menu(View view) {
+        slidingMenu.toggle();
+    }
 }
 
 

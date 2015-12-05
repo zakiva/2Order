@@ -39,13 +39,12 @@
 
     <Button
         android:id="@+id/statusButton"
-        android:background="@drawable/updatebutton"
-        android:layout_width="200dp"
+        android:background="@drawable/update"
+        android:layout_width="50dp"
         android:layout_height="50dp"
         android:textColor="#050"
         android:textStyle="bold"
         android:layout_gravity="left"
-        android:text="Update Status"
         android:textSize="20dp"
 
 
