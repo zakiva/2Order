@@ -210,6 +210,28 @@ public class business_orders__screen extends AppCompatActivity {
         );
     }
 
+    protected void get_all_user_history() {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
+        query.whereEqualTo("business_user", ParseUser.getCurrentUser());
+        query.whereEqualTo("status", "READY");
+        query.addDescendingOrder("createdAt"); // new first
+        query.findInBackground(new FindCallback<ParseObject>() {
+
+                                   @Override
+                                   public void done(List<ParseObject> orders,
+                                                    ParseException e) {
+                                       if (e == null) {
+                                           draw_history(orders);
+                                       } else {
+                                           Log.d("Post retrieval", "Error: " + e.getMessage());
+                                       }
+                                   }
+                               }
+        );
+    }
+
+
+
     public void createNewOrderClick(View view) {
         Intent i = new Intent(this, new_order_screen.class);
         startActivity(i);
@@ -223,7 +245,27 @@ public class business_orders__screen extends AppCompatActivity {
 
         for (ParseObject order: orders){
             business_list_group parent = new business_list_group();
-            parent.setTitle("Order Number " + order.getString("code"));
+            parent.setTitle("Order " + order.getString("code"));
+            parent.setUrgent(order.getInt("prior"));
+            parent.setItemKey(order.getObjectId());
+            arrayChildren = new ArrayList<String>();
+            arrayChildren.add("Phone : " + order.getString("customer_phone"));
+            arrayChildren.add("Details : " + order.getString("details"));
+            arrayChildren.add("Status : " + order.getString("status"));
+            parent.setArrayChildren(arrayChildren);
+            arrayParents.add(parent);
+        }
+    }
+
+    protected void draw_history(List<ParseObject> orders){
+        businessExpandableList = (ExpandableListView)findViewById(R.id.expandableList);
+        ArrayList<business_list_group> arrayParents = new ArrayList<business_list_group>();
+        ArrayList<String> arrayChildren;
+        businessExpandableList.setAdapter(new history_adapter(business_orders__screen.this, arrayParents));
+
+        for (ParseObject order: orders){
+            business_list_group parent = new business_list_group();
+            parent.setTitle("Order " + order.getString("code"));
             parent.setUrgent(order.getInt("prior"));
             parent.setItemKey(order.getObjectId());
             arrayChildren = new ArrayList<String>();

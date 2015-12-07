@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.RatingBar;
 import android.widget.ViewSwitcher;
@@ -126,10 +127,19 @@ class businees_order_adapter extends BaseExpandableListAdapter {
         TextView key = (TextView) view.findViewById(R.id.key);
         key.setText(mParent.get(groupPosition).getItemKey());
         Button changeStatusButton = (Button) view.findViewById(R.id.statusButton);
+        if(!isLastChild) {
+            ((ViewGroup) changeStatusButton.getParent()).removeView(changeStatusButton);
+        }
+        else
+        {
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) changeStatusButton.getLayoutParams();
+            params.addRule(RelativeLayout.RIGHT_OF, R.id.list_item_text_child);
+        }
+
         changeStatusButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LinearLayout r = (LinearLayout) view.getParent();
+                RelativeLayout r = (RelativeLayout) view.getParent();
                 TextView t = (TextView) r.findViewById(R.id.key);
                 final TextView status = (TextView) r.findViewById(R.id.list_item_text_child);
                 final Button button1 = (Button) r.findViewById(R.id.statusButton);
@@ -167,9 +177,7 @@ class businees_order_adapter extends BaseExpandableListAdapter {
             }
         });
 
-        if(!isLastChild) {
-            ((ViewGroup) changeStatusButton.getParent()).removeView(changeStatusButton);
-        }
+
 
         view.setTag(holder);
 

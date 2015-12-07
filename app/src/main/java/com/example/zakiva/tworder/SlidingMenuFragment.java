@@ -84,15 +84,23 @@ public class SlidingMenuFragment extends Fragment implements ExpandableListView.
                                 int groupPosition, int childPosition, long id) {
         switch ((int)id) {
             case 101:
-                //TODO
+                ((business_orders__screen)getActivity()).get_all_user_orders();
+                ((business_orders__screen)getActivity()).mode = "orders";
+                ((business_orders__screen)getActivity()).slidingMenu.toggle();
+
                 break;
             case 102:
-                ((business_orders__screen)getActivity()).history_clicked();
+                ((business_orders__screen)getActivity()).get_all_user_history();
+                ((business_orders__screen)getActivity()).mode = "history";
+                ((business_orders__screen)getActivity()).slidingMenu.toggle();
+
                 //Intent i = new Intent(mActivity, business_orders_history.class);
                 //startActivity(i);
                 break;
             case 103:
-                ((business_orders__screen)getActivity()).customers_clicked();
+                //((business_orders__screen)getActivity()).get_all_user_customers();
+                ((business_orders__screen)getActivity()).mode = "customers";
+                ((business_orders__screen)getActivity()).slidingMenu.toggle();
                 break;
             case 201:
                 //TODO

@@ -62,7 +62,7 @@ public class business_orders_history extends AppCompatActivity {
 
         for (ParseObject order: orders) {
             business_list_group parent = new business_list_group();
-            parent.setTitle("Order Number " + order.getString("code"));
+            parent.setTitle("Order " + order.getString("code"));
             parent.setUrgent(order.getInt("prior"));
             parent.setItemKey(order.getObjectId());
             arrayChildren = new ArrayList<String>();
