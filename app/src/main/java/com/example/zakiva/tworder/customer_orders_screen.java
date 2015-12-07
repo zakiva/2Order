@@ -42,6 +42,10 @@ public class customer_orders_screen extends AppCompatActivity {
         installation.put("notification_id", ParseUser.getCurrentUser().getUsername());
         installation.saveInBackground();
 
+        ParseUser user = ParseUser.getCurrentUser();
+        user.put("is_signed_in", "yes");
+        user.saveInBackground();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_orders_screen);
 
@@ -94,6 +98,10 @@ public class customer_orders_screen extends AppCompatActivity {
         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
         installation.put("notification_id", "user is logged out");
         installation.saveInBackground();
+
+        ParseUser user = ParseUser.getCurrentUser();
+        user.put("is_signed_in", "no");
+        user.saveInBackground();
         log_out();
         Intent i = new Intent(this, first_screen.class);
         startActivity(i);

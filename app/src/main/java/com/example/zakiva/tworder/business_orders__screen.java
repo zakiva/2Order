@@ -177,39 +177,6 @@ public class business_orders__screen extends AppCompatActivity {
         }
     }
 
-    void send_sms(String number, String content) {
-        SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(number, null, content, null, null);
-    }
-
-
-    void push_notification(final String username, final String message) {
-        //is_user_exist = 0;
-        ParseQuery<ParseUser> query = ParseUser.getQuery();
-        query.whereEqualTo("username", username);
-        query.countInBackground(new CountCallback() {
-            public void done(int count, ParseException e) {
-                if (e == null) {
-                    if (count > 0) {//The user exists!!
-                        ParseQuery pushQuery = ParseInstallation.getQuery();
-                        pushQuery.whereEqualTo("notification_id", username);
-                        ParsePush push = new ParsePush();
-                        push.setQuery(pushQuery);
-                        push.setMessage(message);
-                        push.sendInBackground();
-                        //Log.d("success", "The number is " + count);
-                    } else {
-                        send_sms(username, message);
-                    }
-                } else {
-                    // The request failed
-                    Log.d("fail", "bummer");
-                }
-            }
-        });
-    }
-
-
     void log_out() {
         ParseUser.logOut();
     }
