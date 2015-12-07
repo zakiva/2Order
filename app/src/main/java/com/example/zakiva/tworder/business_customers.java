@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class business_customers extends AppCompatActivity {
+    /*
 
     private static final String TAG = ">>>>debug";
 
@@ -84,4 +85,7 @@ public class business_customers extends AppCompatActivity {
         Intent i = new Intent(this, first_screen.class);
         startActivity(i);
     }
+
+
+    */
 }

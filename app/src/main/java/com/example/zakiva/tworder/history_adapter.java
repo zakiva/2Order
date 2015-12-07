@@ -133,20 +133,7 @@ class history_adapter extends BaseExpandableListAdapter {
         return view;
     }
 
-    public void changeParseStatus(final String field, final String updateValue, String itemKey){
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
-        query.getInBackground(itemKey, new GetCallback<ParseObject>() {
-            public void done(ParseObject object, ParseException e) {
-                if (e == null) {
-                    object.put(field, updateValue);
 
-                    object.saveInBackground();
-                } else {
-
-                }
-            }
-        });
-    }
 
 
 

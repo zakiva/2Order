@@ -40,15 +40,17 @@ import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
+import com.parse.ParseRelation;
 import com.parse.ParseUser;
 
 public class business_orders__screen extends AppCompatActivity {
 
     private static final String TAG = ">>>>debug";
     ExpandableListView businessExpandableList;
-    public SlidingMenu slidingMenu ;
+    public SlidingMenu slidingMenu;
     protected String mode;
-
+    private Button create_button;
+    private TextView screen_title;
 
 
     @Override
@@ -58,14 +60,14 @@ public class business_orders__screen extends AppCompatActivity {
             if (v instanceof EditText) {
                 Rect outRect = new Rect();
                 v.getGlobalVisibleRect(outRect);
-                if (!outRect.contains((int)event.getRawX(), (int)event.getRawY())) {
+                if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
                     v.clearFocus();
                     InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 }
             }
         }
-        return super.dispatchTouchEvent( event );
+        return super.dispatchTouchEvent(event);
     }
 
     @Override
@@ -73,8 +75,10 @@ public class business_orders__screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_orders__screen);
         mode = "orders";
-        get_all_user_orders();
+        create_button = (Button)findViewById(R.id.createNewOrder);
+        screen_title = (TextView)findViewById(R.id.screen_title);
 
+        get_all_user_orders();
 
         EditText sv = (EditText) findViewById(R.id.editText);
         sv.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -142,24 +146,23 @@ public class business_orders__screen extends AppCompatActivity {
         slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
         slidingMenu.setMenu(R.layout.slidingmenu);
 
-       // getActionBar().setDisplayHomeAsUpEnabled(true);
+        // getActionBar().setDisplayHomeAsUpEnabled(true);
 
 
     }
 
     @Override
     public void onBackPressed() {
-        if ( slidingMenu.isMenuShowing()) {
+        if (slidingMenu.isMenuShowing()) {
             slidingMenu.toggle();
-        }
-        else {
+        } else {
             //super.onBackPressed();
         }
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ( keyCode == KeyEvent.KEYCODE_MENU ) {
+        if (keyCode == KeyEvent.KEYCODE_MENU) {
             this.slidingMenu.toggle();
             return true;
         }
@@ -182,14 +185,15 @@ public class business_orders__screen extends AppCompatActivity {
     }
 
 
-    public void OnLogOutClick(){
+    public void OnLogOutClick() {
         log_out();
         Intent i = new Intent(this, first_screen.class);
         startActivity(i);
     }
 
     protected void get_all_user_orders() {
-
+        screen_title.setText("My Orders");
+        create_button.setVisibility(View.VISIBLE);
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
         query.whereEqualTo("business_user", ParseUser.getCurrentUser());
         query.whereNotEqualTo("status", "READY");
@@ -211,6 +215,8 @@ public class business_orders__screen extends AppCompatActivity {
     }
 
     protected void get_all_user_history() {
+        screen_title.setText("Orders History");
+        create_button.setVisibility(View.GONE);
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
         query.whereEqualTo("business_user", ParseUser.getCurrentUser());
         query.whereEqualTo("status", "READY");
@@ -231,19 +237,18 @@ public class business_orders__screen extends AppCompatActivity {
     }
 
 
-
     public void createNewOrderClick(View view) {
         Intent i = new Intent(this, new_order_screen.class);
         startActivity(i);
     }
 
-    protected void draw_orders(List<ParseObject> orders){
-        businessExpandableList = (ExpandableListView)findViewById(R.id.expandableList);
+    protected void draw_orders(List<ParseObject> orders) {
+        businessExpandableList = (ExpandableListView) findViewById(R.id.expandableList);
         ArrayList<business_list_group> arrayParents = new ArrayList<business_list_group>();
         ArrayList<String> arrayChildren;
         businessExpandableList.setAdapter(new businees_order_adapter(business_orders__screen.this, arrayParents));
 
-        for (ParseObject order: orders){
+        for (ParseObject order : orders) {
             business_list_group parent = new business_list_group();
             parent.setTitle("Order " + order.getString("code"));
             parent.setUrgent(order.getInt("prior"));
@@ -257,13 +262,13 @@ public class business_orders__screen extends AppCompatActivity {
         }
     }
 
-    protected void draw_history(List<ParseObject> orders){
-        businessExpandableList = (ExpandableListView)findViewById(R.id.expandableList);
+    protected void draw_history(List<ParseObject> orders) {
+        businessExpandableList = (ExpandableListView) findViewById(R.id.expandableList);
         ArrayList<business_list_group> arrayParents = new ArrayList<business_list_group>();
         ArrayList<String> arrayChildren;
         businessExpandableList.setAdapter(new history_adapter(business_orders__screen.this, arrayParents));
 
-        for (ParseObject order: orders){
+        for (ParseObject order : orders) {
             business_list_group parent = new business_list_group();
             parent.setTitle("Order " + order.getString("code"));
             parent.setUrgent(order.getInt("prior"));
@@ -277,7 +282,7 @@ public class business_orders__screen extends AppCompatActivity {
         }
     }
 
-    public void onDeleteClick(View view){
+    public void onDeleteClick(View view) {
         //ariel
         Context context = this;
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
@@ -290,13 +295,13 @@ public class business_orders__screen extends AppCompatActivity {
         alertDialogBuilder
                 .setMessage("Click yes to Delete!")
                 .setCancelable(false)
-                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
                 })
-                .setNegativeButton("No",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
                 });
@@ -321,6 +326,42 @@ public class business_orders__screen extends AppCompatActivity {
     public void open_sliding_menu(View view) {
         slidingMenu.toggle();
     }
+
+    public void get_all_user_customers() {
+        screen_title.setText("My Customers");
+        create_button.setVisibility(View.GONE);
+        ParseRelation relation = ParseUser.getCurrentUser().getRelation("customers");
+        ParseQuery query = relation.getQuery();
+        query.findInBackground(new FindCallback<ParseObject>() {
+
+                                   @Override
+                                   public void done(List<ParseObject> customers,
+                                                    ParseException e) {
+                                       if (e == null) {
+                                           draw_customers(customers);
+                                       } else {
+                                           Log.d("Post retrieval", "Error: " + e.getMessage());
+                                       }
+                                   }
+                               }
+        );
+    }
+
+    private void draw_customers(List<ParseObject> customers) {
+        businessExpandableList = (ExpandableListView) findViewById(R.id.expandableList);
+        ArrayList<business_customer_group> arrayParents = new ArrayList<business_customer_group>();
+        ArrayList<String> arrayChildren;
+        businessExpandableList.setAdapter(new business_customers_adapter(business_orders__screen.this, arrayParents));
+
+        for (ParseObject customer : customers) {
+            business_customer_group parent = new business_customer_group();
+            parent.setTitle("Customer: " + customer.getString("name"));
+            parent.setItemKey(customer.getObjectId());
+            arrayChildren = new ArrayList<String>();
+            arrayChildren.add("Phone: " + customer.getString("phone"));
+            arrayChildren.add("Total orders: " + customer.getInt("orders_counter"));
+            parent.setArrayChildren(arrayChildren);
+            arrayParents.add(parent);
+        }
+    }
 }
-
-

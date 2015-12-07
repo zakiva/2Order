@@ -10,17 +10,17 @@
 
 
     <Button
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:id="@+id/createNewOrder"
         android:onClick="createNewOrderClick"
         android:textSize="40dp"
         android:gravity="center|fill_vertical|center_horizontal"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:text="+"
-        android:background="#1854d4" />
+        android:background="#1854d4"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/expandableList"
+        android:layout_alignEnd="@+id/expandableList" />
 
     <ExpandableListView
         android:layout_width="fill_parent"
@@ -30,16 +30,16 @@
         android:transcriptMode="disabled"
         android:cacheColorHint="#00000000"
         android:listSelector="@android:color/transparent"
-        android:layout_below="@+id/createNewOrder"
+        android:layout_below="@+id/editText"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
 
     <EditText
-        android:layout_width="240dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:id="@+id/editText"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/screen_title"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -48,9 +48,19 @@
         android:text=""
         android:background="@drawable/list"
         android:id="@+id/list_button"
+        android:onClick="open_sliding_menu"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:onClick="open_sliding_menu" />
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="My Orders"
+        android:id="@+id/screen_title"
+        android:layout_alignBottom="@+id/list_button"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

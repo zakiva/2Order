@@ -60,6 +60,7 @@ public class new_order_screen extends AppCompatActivity {
         order.put("prior", prior);
         order.put("status", "In Progress");
         order.saveInBackground();
+        Log.i(TAG, "handle_customer(phone);");
         handle_customer(phone);
     }
 
@@ -78,7 +79,7 @@ public class new_order_screen extends AppCompatActivity {
                                                customer.put("phone", phone);
                                                customer.put("name", name);
                                                customer.put("orders_counter", 1);
-                                               customer.saveInBackground();
+                                               Log.i(TAG, " customer.saveInBackground() .. ");
 
                                                customer.saveInBackground(new SaveCallback() {
                                                    public void done(ParseException e) {

@@ -98,7 +98,7 @@ public class SlidingMenuFragment extends Fragment implements ExpandableListView.
                 //startActivity(i);
                 break;
             case 103:
-                //((business_orders__screen)getActivity()).get_all_user_customers();
+                ((business_orders__screen)getActivity()).get_all_user_customers();
                 ((business_orders__screen)getActivity()).mode = "customers";
                 ((business_orders__screen)getActivity()).slidingMenu.toggle();
                 break;
