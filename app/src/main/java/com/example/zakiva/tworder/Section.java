@@ -18,9 +18,7 @@ public class Section {
         this.sectionItems.add( new SectionItem(id, title, icon));
     }
 
-    public String getTitle() {
-        return title;
-    }
+    public String getTitle() { return title; }
 
     public void setTitle(String title) {
         this.title = title;
