@@ -93,41 +93,11 @@ class businees_order_adapter extends BaseExpandableListAdapter {
 
         if (view == null) {
             view = inflater.inflate(R.layout.business_list_group, viewGroup,false);
-            mParent.get(groupPosition).setEditFlag(true);
         }
         TextView textView = (TextView) view.findViewById(R.id.list_item_text_view);
         textView.setText(getGroup(groupPosition).toString());
         final RatingBar urgentBar = (RatingBar) view.findViewById(R.id.urgentBar);
         urgentBar.setRating(mParent.get(groupPosition).getUrgent());
-
-        textView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                boolean flag = mParent.get(groupPosition).getEditFlag();
-                ViewGroup vp = (ViewGroup) view.getParent();
-                Button b = (Button) vp.findViewById(R.id.myDeleteButton);
-                if (flag) {
-                    b.setVisibility(View.VISIBLE);
-                    urgentBar.setIsIndicator(false);
-                } else {
-                    b.setVisibility(View.GONE);
-                    urgentBar.setIsIndicator(true);
-                    mParent.get(groupPosition).setUrgent((int) urgentBar.getRating());
-                    ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
-                    query.getInBackground(mParent.get(groupPosition).getItemKey(), new GetCallback<ParseObject>() {
-                        public void done(ParseObject object, ParseException e) {
-                            if (e == null) {
-                                object.put("prior", (int) urgentBar.getRating());
-                                object.saveInBackground();
-                            } else {
-                            }
-                        }
-                    });
-                }
-                mParent.get(groupPosition).setEditFlag(!flag);
-                return true;
-            }
-        });
 
 
         view.setTag(holder);
@@ -195,59 +165,8 @@ class businees_order_adapter extends BaseExpandableListAdapter {
             }
         });
 
-        if(!isLastChild){
+        if(!isLastChild) {
             ((ViewGroup) changeStatusButton.getParent()).removeView(changeStatusButton);
-            TextView textSwitcher = (TextView) view.findViewById(R.id.list_item_text_child);
-            textSwitcher.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    ViewGroup vp = (ViewGroup) view.getParent();
-                    ViewSwitcher switcher = (ViewSwitcher) vp.findViewById(R.id.businessTextSwitcher);
-                    switcher.showNext();
-                    TextView t = (TextView) vp.findViewById(R.id.list_item_text_child);
-                    EditText e = (EditText) vp.findViewById(R.id.businessEditText);
-                    String str = t.getText().toString();
-                    String s = str.substring(0,1);
-                    if(s.equals("D")){
-                        s = str.substring(0,10);
-                        str = str.substring(10);
-                    } else {
-                        s = str.substring(0,8);
-                        str = str.substring(8);
-                    }
-                    t.setText(s);
-                    e.setText(str);
-                    e.requestFocus();
-                    return true;
-                }
-            });
-            EditText myEdit = (EditText) view.findViewById(R.id.businessEditText);
-            myEdit.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    ViewGroup vp = (ViewGroup) view.getParent();
-                    LinearLayout r =(LinearLayout) view.getParent().getParent();
-                    TextView k = (TextView) r.findViewById(R.id.key);
-                    final String itemKey = k.getText().toString();
-                    ViewSwitcher switcher = (ViewSwitcher) vp.findViewById(R.id.businessTextSwitcher);
-                    TextView t = (TextView) vp.findViewById(R.id.list_item_text_child);
-                    EditText e = (EditText) vp.findViewById(R.id.businessEditText);
-                    t.setText(t.getText().toString() + e.getText().toString());
-                    switcher.showPrevious();
-                    if(t.getText().toString().substring(0,1).equals("D")){
-                        mParent.get(groupPosition).getArrayChildren().set(childPosition,
-                                "Details : " + e.getText().toString());
-                        changeParseStatus("Details", e.getText().toString(), itemKey);
-                    } else {
-                        mParent.get(groupPosition).getArrayChildren().set(childPosition,
-                                "Phone : " + e.getText().toString());
-                        changeParseStatus("customer_phone", e.getText().toString(), itemKey);
-                    }
-
-
-                    return true;
-                }
-            });
         }
 
         view.setTag(holder);
