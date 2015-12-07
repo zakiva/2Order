@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -29,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
@@ -51,6 +53,31 @@ public class business_orders__screen extends AppCompatActivity {
     protected String mode;
     private Button create_button;
     private TextView screen_title;
+
+    //this function get a phone number and makes a call to that number
+    void call(String number)
+    {
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:" + number));
+        try
+        {
+            startActivity(callIntent);
+        }
+        catch (android.content.ActivityNotFoundException ex)
+        {
+            Log.d("problem:", "can't make phone call");
+        }
+    }
+
+    //this function get a parse object and returns the number of days since it was created
+    float time_since_order_created(ParseObject order)
+    {
+        Date start_date = order.getCreatedAt();
+        Date cur_date = new Date();
+        long interval = cur_date.getTime() - start_date.getTime();
+        float days = (float) interval / (1000*60*60*24);
+        return days;
+    }
 
 
     @Override
