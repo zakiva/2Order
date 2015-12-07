@@ -23,6 +23,7 @@ public class new_customer_screen extends AppCompatActivity {
         user.setUsername(username);
         user.setPassword(password);
         user.put("kind", "customer");
+        user.put("wants_notification", "yes");
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null) {
