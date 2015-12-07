@@ -24,41 +24,12 @@ import java.util.List;
 public class business_orders_history extends AppCompatActivity {
 
     private static final String TAG = ">>>>debug";
-    private Spinner businessSpinner;
     ExpandableListView businessExpandableList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_orders_history);
-
-        businessSpinner = (Spinner) findViewById(R.id.businessSpinner);
-        List<String> list = new ArrayList<String>();
-        list.add("HISTORY");
-        list.add("ORDERS");
-        list.add("CUSTOMERS");
-        list.add("LOG OUT");
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, list);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        businessSpinner.setAdapter(dataAdapter);
-        businessSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (businessSpinner.getItemAtPosition(position).toString().equals("ORDERS")) {
-                    orders_clicked(businessSpinner);
-                } else if (businessSpinner.getItemAtPosition(position).toString().equals("CUSTOMERS")) {
-                    customers_clicked(businessSpinner);
-                } else if (businessSpinner.getItemAtPosition(position).toString().equals("LOG OUT")) {
-                    OnLogOutClick(businessSpinner);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         get_all_user_orders();
     }
