@@ -222,13 +222,18 @@ class businees_order_adapter extends BaseExpandableListAdapter {
 
                                 } else {
                                     if (user.getString("is_signed_in").equals("yes")) {
-                                        Log.d("send:", "push");
-                                        ParseQuery pushQuery = ParseInstallation.getQuery();
-                                        pushQuery.whereEqualTo("notification_id", username);
-                                        ParsePush push = new ParsePush();
-                                        push.setQuery(pushQuery);
-                                        push.setMessage(message);
-                                        push.sendInBackground();
+                                        if (user.getString("wants_notification").equals("yes")) {
+                                            Log.d("send:", "push");
+                                            ParseQuery pushQuery = ParseInstallation.getQuery();
+                                            pushQuery.whereEqualTo("notification_id", username);
+                                            ParsePush push = new ParsePush();
+                                            push.setQuery(pushQuery);
+                                            push.setMessage(message);
+                                            push.sendInBackground();
+                                        } else{
+                                            Log.d("send:", "sms- user exist and signed but does not want notification");
+                                            send_sms(username, message);
+                                        }
                                     } else {
                                         Log.d("send:", "sms- user exist but not signed");
                                         send_sms(username, message);

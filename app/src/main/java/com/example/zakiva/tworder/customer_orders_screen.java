@@ -31,6 +31,18 @@ public class customer_orders_screen extends AppCompatActivity {
         ParseUser.logOut();
     }
 
+    void notification_off(){
+        ParseUser user = ParseUser.getCurrentUser();
+        user.put("wants_notification", "no");
+        user.saveInBackground();
+    }
+
+    void notification_on(){
+        ParseUser user = ParseUser.getCurrentUser();
+        user.put("wants_notification", "yes");
+        user.saveInBackground();
+    }
+
     @Override
     public void onBackPressed(){
         //do nothing
