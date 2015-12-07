@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.database.DataSetObserver;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -191,32 +192,55 @@ class businees_order_adapter extends BaseExpandableListAdapter {
         });
     }
 
-    void push_notification(final String username, final String message)
-    {
+    void send_sms(String number, String content) {
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(number, null, content, null, null);
+    }
+
+    void push_notification(final String username, final String message) {
         //is_user_exist = 0;
-        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        final ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("username", username);
         query.countInBackground(new CountCallback() {
             public void done(int count, ParseException e) {
                 if (e == null) {
                     if (count > 0) {//The user exists!!
-                        ParseQuery pushQuery = ParseInstallation.getQuery();
-                        pushQuery.whereEqualTo("notification_id", username);
-                        ParsePush push = new ParsePush();
-                        push.setQuery(pushQuery);
-                        push.setMessage(message);
-                        push.sendInBackground();
-                        //Log.d("success", "The number is " + count);
+                        ParseQuery<ParseUser> query = ParseUser.getQuery();
+                        query.whereEqualTo("username", username);
+                        query.getFirstInBackground(new GetCallback<ParseUser>() {
+                            public void done(ParseUser user, ParseException e) {
+                                if (user == null) {
+                                    Log.d("problem: ", "can't push");
+
+                                } else {
+                                    if (user.getString("is_signed_in").equals("yes")) {
+                                        Log.d("send:", "push");
+                                        ParseQuery pushQuery = ParseInstallation.getQuery();
+                                        pushQuery.whereEqualTo("notification_id", username);
+                                        ParsePush push = new ParsePush();
+                                        push.setQuery(pushQuery);
+                                        push.setMessage(message);
+                                        push.sendInBackground();
+                                    } else {
+                                        Log.d("send:", "sms- user exist but not signed");
+                                        send_sms(username, message);
+                                    }
+                                }
+                            }
+                        });
+
                     } else {
-                        //The user does not exist. We need to connect him some other way
+                        Log.d("send:", "sms- user does not exist");
+                        send_sms(username, message);
                     }
                 } else {
                     // The request failed
-                    Log.d("fail", "bummer");
+                    Log.d("fail: ", "bummer");
                 }
             }
         });
     }
+
 
     @Override
     public boolean isChildSelectable(int i, int i1) {
