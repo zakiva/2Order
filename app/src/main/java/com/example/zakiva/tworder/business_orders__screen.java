@@ -153,7 +153,7 @@ public class business_orders__screen extends AppCompatActivity {
             slidingMenu.toggle();
         }
         else {
-            super.onBackPressed();
+            //super.onBackPressed();
         }
     }
 
