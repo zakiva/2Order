@@ -14,3 +14,5 @@ app/app.iml
 libraries/slidingmenu
 /app/app.iml
 /libraries/slidingmenu
+libraries/slidingmenu/*
+/libraries/slidingmenu/*
