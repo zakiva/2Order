@@ -19,14 +19,6 @@ class business_list_group  {
         mTitle = title;
     }
 
-    public void setEditFlag(boolean flag){
-        editFlag = flag;
-    }
-
-    public boolean getEditFlag(){
-        return editFlag;
-    }
-
     public String getItemKey(){
         return itemKey;
     }

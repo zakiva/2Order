@@ -13,9 +13,4 @@
         android:id="@+id/three"
         android:title="READY"/>
 
-    <item
-        android:id="@+id/four"
-        android:title="CANCELED"
-        />
-
 </menu>

@@ -38,7 +38,7 @@ class history_adapter extends BaseExpandableListAdapter {
 
     private LayoutInflater inflater;
     private ArrayList<business_list_group> mParent;
-    //private RatingBar urgentBar;
+
 
     public history_adapter(Context context, ArrayList<business_list_group> parent){
         mParent = parent;
@@ -94,14 +94,12 @@ class history_adapter extends BaseExpandableListAdapter {
 
         if (view == null) {
             view = inflater.inflate(R.layout.business_list_group, viewGroup,false);
-            mParent.get(groupPosition).setEditFlag(true);
         }
         TextView textView = (TextView) view.findViewById(R.id.list_item_text_view);
         textView.setText(getGroup(groupPosition).toString());
         final RatingBar urgentBar = (RatingBar) view.findViewById(R.id.urgentBar);
         urgentBar.setRating(mParent.get(groupPosition).getUrgent());
-
-
+        
         view.setTag(holder);
 
         //return the entire view
