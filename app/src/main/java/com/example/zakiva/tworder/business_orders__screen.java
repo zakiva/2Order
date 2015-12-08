@@ -112,50 +112,106 @@ public class business_orders__screen extends AppCompatActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
-                    query.whereEqualTo("business_user", ParseUser.getCurrentUser());
-                    query.whereNotEqualTo("status", "READY");
-                    query.orderByDescending("prior"); // true first
-                    query.addAscendingOrder("createdAt"); // old first
-                    query.findInBackground(new FindCallback<ParseObject>() {
-                        public void done(final List<ParseObject> objects, ParseException e) {
-                            if (e == null) {
-                                EditText sv = (EditText) findViewById(R.id.editText);
-                                sv.addTextChangedListener(new TextWatcher() {
-                                    @Override
-                                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-                                        if (s.toString().equals("")) {
-                                            draw_orders(objects);
-                                        } else {
-                                            //Log.d("a: ", s.toString());
-                                            List<ParseObject> list2 = new ArrayList<ParseObject>();
-                                            for (ParseObject po : objects) {
-                                                if (po.getString("code").contains(s.toString()) || po.getString("details").contains(s.toString()) || po.getString("customer_phone").contains(s.toString())) {
-                                                    list2.add(po);
-                                                }
-                                            }
-                                            draw_orders(list2);
-                                        }
-                                    }
+                    if (mode.equals("customers")) {
+                        //Log.d("mode: ", mode);
+                        ParseRelation relation = ParseUser.getCurrentUser().getRelation("customers");
+                        ParseQuery query2 = relation.getQuery();
+                        query2.findInBackground(new FindCallback<ParseObject>() {
+                                                   @Override
+                                                   public void done(final List<ParseObject> customers, ParseException e) {
+                                                       if (e == null) {
+                                                           EditText sv = (EditText) findViewById(R.id.editText);
+                                                           sv.addTextChangedListener(new TextWatcher() {
+                                                               @Override
+                                                               public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                                                   if (s.toString().equals("")) {
+                                                                       draw_customers(customers);
+                                                                   } else {
+                                                                       //Log.d("a: ", s.toString());
+                                                                       List<ParseObject> list2 = new ArrayList<ParseObject>();
+                                                                       for (ParseObject po : customers) {
+                                                                           if (po.getString("name").contains(s.toString()) || po.getString("phone").contains(s.toString()) || Integer.toString(po.getInt("orders_counter")).contains(s.toString())) {
+                                                                               list2.add(po);
+                                                                           }
+                                                                       }
+                                                                       draw_customers(list2);
+                                                                   }
+                                                               }
 
-                                    @Override
-                                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                                                               @Override
+                                                               public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                                        // TODO Auto-generated method stub
-                                    }
+                                                                   // TODO Auto-generated method stub
+                                                               }
 
-                                    @Override
-                                    public void afterTextChanged(Editable s) {
+                                                               @Override
+                                                               public void afterTextChanged(Editable s) {
 
-                                        // TODO Auto-generated method stub
-                                    }
-                                });
+                                                                   // TODO Auto-generated method stub
+                                                               }
+                                                           });
 
-                            } else {
-                                Log.d("score", "Error: " + e.getMessage());
-                            }
+                                                       } else {
+                                                           Log.d("Post retrieval", "Error: " + e.getMessage());
+                                                       }
+                                                   }
+                                               }
+                        );
+
+                    } else {
+                        ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
+                        if (mode.equals("orders")) {
+                            //Log.d("mode: ", mode);
+                            query.whereEqualTo("business_user", ParseUser.getCurrentUser());
+                            query.whereNotEqualTo("status", "READY");
+                            query.orderByDescending("prior"); // true first
+                            query.addAscendingOrder("createdAt"); // old first
+                        } else if (mode.equals("history")) {
+                            //Log.d("mode: ", mode);
+                            query.whereEqualTo("business_user", ParseUser.getCurrentUser());
+                            query.whereEqualTo("status", "READY");
+                            query.addDescendingOrder("createdAt"); // new first
                         }
-                    });
+                        query.findInBackground(new FindCallback<ParseObject>() {
+                            public void done(final List<ParseObject> objects, ParseException e) {
+                                if (e == null) {
+                                    EditText sv = (EditText) findViewById(R.id.editText);
+                                    sv.addTextChangedListener(new TextWatcher() {
+                                        @Override
+                                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                            if (s.toString().equals("")) {
+                                                draw_orders(objects);
+                                            } else {
+                                                //Log.d("a: ", s.toString());
+                                                List<ParseObject> list2 = new ArrayList<ParseObject>();
+                                                for (ParseObject po : objects) {
+                                                    if (po.getString("code").contains(s.toString()) || po.getString("details").contains(s.toString()) || po.getString("customer_phone").contains(s.toString())) {
+                                                        list2.add(po);
+                                                    }
+                                                }
+                                                draw_orders(list2);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                                            // TODO Auto-generated method stub
+                                        }
+
+                                        @Override
+                                        public void afterTextChanged(Editable s) {
+
+                                            // TODO Auto-generated method stub
+                                        }
+                                    });
+
+                                } else {
+                                    Log.d("problem: ", "Error: " + e.getMessage());
+                                }
+                            }
+                        });
+                    }
                 }
             }
         });
@@ -193,7 +249,7 @@ public class business_orders__screen extends AppCompatActivity {
             this.slidingMenu.toggle();
             return true;
         }
-        return super.onKeyDown(keyCode, event);
+            return super.onKeyDown(keyCode, event);
     }
 
     @Override
