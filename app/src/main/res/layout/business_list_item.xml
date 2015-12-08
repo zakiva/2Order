@@ -26,15 +26,25 @@
         <Button
             android:id="@+id/statusButton"
             android:background="@drawable/update"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:textColor="#050"
+            android:layout_alignParentRight="true"
             android:textStyle="bold"
             android:layout_gravity="left"
-            android:textSize="20dp"
+            android:textSize="20dp" />
 
-
-            />
+        <Button
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/information_button"
+            android:onClick="information_order_clicked"
+            android:background="@drawable/info_blue"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="visible"
+            android:layout_gravity="center"
+            android:gravity="center" />
 
         <TextView
             android:layout_width="wrap_content"

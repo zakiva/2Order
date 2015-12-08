@@ -32,7 +32,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+import android.widget.ExpandableListView.OnGroupClickListener;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.parse.CountCallback;
 import com.parse.FindCallback;
@@ -284,6 +284,7 @@ public class business_orders__screen extends AppCompatActivity {
             arrayChildren.add("Phone : " + order.getString("customer_phone"));
             arrayChildren.add("Details : " + order.getString("details"));
             arrayChildren.add("Status : " + order.getString("status"));
+            arrayChildren.add("");
             parent.setArrayChildren(arrayChildren);
             arrayParents.add(parent);
         }
@@ -304,6 +305,7 @@ public class business_orders__screen extends AppCompatActivity {
             arrayChildren.add("Phone : " + order.getString("customer_phone"));
             arrayChildren.add("Details : " + order.getString("details"));
             arrayChildren.add("Status : " + order.getString("status"));
+            arrayChildren.add("");
             parent.setArrayChildren(arrayChildren);
             arrayParents.add(parent);
         }
@@ -387,6 +389,7 @@ public class business_orders__screen extends AppCompatActivity {
             arrayChildren = new ArrayList<String>();
             arrayChildren.add("Phone: " + customer.getString("phone"));
             arrayChildren.add("Total orders: " + customer.getInt("orders_counter"));
+            arrayChildren.add("");
             parent.setArrayChildren(arrayChildren);
             arrayParents.add(parent);
         }

@@ -119,14 +119,16 @@ class history_adapter extends BaseExpandableListAdapter {
         view = inflater.inflate(R.layout.business_list_item, viewGroup,false);
 
         TextView textView = (TextView) view.findViewById(R.id.list_item_text_child);
-        if(textView.getText().toString().equals("first")){
 
-        }
         textView.setText(mParent.get(groupPosition).getArrayChildren().get(childPosition));
         TextView key = (TextView) view.findViewById(R.id.key);
         key.setText(mParent.get(groupPosition).getItemKey());
         Button changeStatusButton = (Button) view.findViewById(R.id.statusButton);
         ((ViewGroup) changeStatusButton.getParent()).removeView(changeStatusButton);
+        Button information_button = (Button) view.findViewById(R.id.information_button);
+        if(childPosition!=3) {
+            ((ViewGroup) information_button.getParent()).removeView(information_button);
+        }
         view.setTag(holder);
 
         //return the entire view

@@ -116,6 +116,10 @@ public class business_customers_adapter extends BaseExpandableListAdapter {
         key.setText(mParent.get(groupPosition).getItemKey());
         Button changeStatusButton = (Button) view.findViewById(R.id.statusButton);
         ((ViewGroup) changeStatusButton.getParent()).removeView(changeStatusButton);
+        Button information_button = (Button) view.findViewById(R.id.information_button);
+        if(childPosition!=2) {
+            ((ViewGroup) information_button.getParent()).removeView(information_button);
+        }
         view.setTag(holder);
 
         //return the entire view

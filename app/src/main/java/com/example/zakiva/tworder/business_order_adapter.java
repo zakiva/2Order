@@ -14,6 +14,7 @@ import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -127,13 +128,13 @@ class businees_order_adapter extends BaseExpandableListAdapter {
         TextView key = (TextView) view.findViewById(R.id.key);
         key.setText(mParent.get(groupPosition).getItemKey());
         Button changeStatusButton = (Button) view.findViewById(R.id.statusButton);
-        if(!isLastChild) {
+        Button information_button = (Button) view.findViewById(R.id.information_button);
+
+        if(childPosition!=2) {
             ((ViewGroup) changeStatusButton.getParent()).removeView(changeStatusButton);
         }
-        else
-        {
-            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) changeStatusButton.getLayoutParams();
-            params.addRule(RelativeLayout.RIGHT_OF, R.id.list_item_text_child);
+        if(childPosition!=3) {
+            ((ViewGroup) information_button.getParent()).removeView(information_button);
         }
 
         changeStatusButton.setOnClickListener(new View.OnClickListener() {
