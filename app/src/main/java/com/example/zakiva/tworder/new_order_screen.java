@@ -3,6 +3,8 @@ package com.example.zakiva.tworder;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -17,6 +19,7 @@ import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class new_order_screen extends AppCompatActivity {
@@ -27,7 +30,57 @@ public class new_order_screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_order_screen);
+        ParseRelation relation = ParseUser.getCurrentUser().getRelation("customers");
+        ParseQuery query2 = relation.getQuery();
+        query2.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(final List<ParseObject> customers, ParseException e) {
+                if (e == null) {
+                    EditText sv = (EditText) findViewById(R.id.customerPhoneInput);
+                    sv.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count)
+                        {
+                            int cnt = 0;
+                            for (ParseObject po : customers) {
+                                if (po.getString("phone").equals(s.toString())) {
+                                    EditText name = (EditText) findViewById(R.id.customerNameInput);
+                                    name.setText(po.getString("name"));
+                                    name.setEnabled(false);
+                                    cnt = 1;
+                                }
+                            }
+                            if (cnt == 0)
+                            {
+                                EditText name = (EditText) findViewById(R.id.customerNameInput);
+                                name.setEnabled(true);
+                                name.setText("");
+                            }
+                        }
+
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                            // TODO Auto-generated method stub
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable s) {
+
+                            // TODO Auto-generated method stub
+                        }
+                    });
+
+                } else {
+                    Log.d("Post retrieval", "Error: " + e.getMessage());
+                }
+            }
+        });
     }
+
+
+
+
 
     public void onCreateNewOrder(View view){
         Intent i = new Intent(this, business_orders__screen.class);

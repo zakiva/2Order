@@ -22,6 +22,7 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class customer_orders_screen extends AppCompatActivity {
 
     private static final String TAG = ">>>>debug";
@@ -36,6 +37,31 @@ public class customer_orders_screen extends AppCompatActivity {
         user.put("wants_notification", "no");
         user.saveInBackground();
     }
+
+    void add_feedback(String business, String feedback_content, int stars)
+    {
+        ParseObject feedback = new ParseObject("Business_notifications");
+        feedback.put("from", ParseUser.getCurrentUser().getUsername());
+        feedback.put("to", business);
+        feedback.put("kind", "feedback");
+        feedback.put("content", feedback_content);
+        feedback.put("stars", stars);
+        feedback.put("switch", "on");
+        feedback.saveInBackground();
+    }
+
+    void poke(ParseObject order)
+    {
+        //posibly: order.put("poked", "yes");
+        ParseObject poke = new ParseObject("Business_notifications");
+        //poke.put("from", ParseUser.getCurrentUser().getUsername());
+        //poke.put("to", order.getString("business_user"));
+        poke.put("kind", "poke");
+        poke.put("order", order);
+        poke.put("switch", "on");
+        poke.saveInBackground();
+    }
+
 
     void notification_on(){
         ParseUser user = ParseUser.getCurrentUser();
