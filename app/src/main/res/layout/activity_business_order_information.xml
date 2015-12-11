@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:isScrollContainer="true"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.zakiva.tworder.business_order_information">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/logo"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/logOutCustomerButton"
+        android:layout_toStartOf="@+id/logOutCustomerButton"
+        android:layout_marginRight="119dp"
+        android:layout_marginEnd="119dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/goBackButton"
+        android:text="GO BACK"
+        android:onClick="onBackClick"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="EDIT"
+        android:id="@+id/EditButton"
+        android:layout_below="@+id/goBackButton"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="onEditClick"
+        />
+
+    <ViewSwitcher
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/orderNumberSwitcher"
+        android:layout_below="@+id/goBackButton"
+        android:layout_marginTop="30dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/orderNumberText"
+            android:textSize="20dp"
+            android:text="order status"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:id="@+id/orderNumberEditText"
+            />
+
+    </ViewSwitcher>
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ratingBar"
+        android:layout_below="@+id/orderNumberSwitcher"
+        android:numStars="3"
+        android:isIndicator="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ratingText"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="180dp"
+        android:layout_below="@+id/orderNumberSwitcher"
+        android:text="you can change :-)"
+        android:visibility="gone"
+        />
+
+    <ViewSwitcher
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/phoneSwitcher"
+        android:layout_below="@+id/ratingBar"
+        android:layout_marginTop="10dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/phoneText"
+            android:textSize="20dp"
+            android:text="phone number"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:id="@+id/phoneEditText"
+            />
+
+    </ViewSwitcher>
+
+    <ViewSwitcher
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/statusSwitcher"
+        android:layout_below="@+id/phoneSwitcher"
+        android:layout_marginTop="10dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/statusText"
+            android:textSize="20dp"
+            android:text="order status"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:id="@+id/statusEditText"
+            />
+
+    </ViewSwitcher>
+
+    <ViewSwitcher
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/detailsSwitcher"
+        android:layout_below="@+id/statusSwitcher"
+        android:layout_marginTop="10dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/orderDetailsText"
+            android:textSize="20dp"
+            android:text="business name"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:id="@+id/orderDetailsEditText"
+            />
+
+    </ViewSwitcher>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/deleteButton"
+        android:layout_below="@+id/statusSwitcher"
+        android:text="DELETE ORDER"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:background="#A00"
+        android:onClick="deleteOrderClick"
+        android:layout_marginTop="30dp"
+        android:visibility="gone"
+        />
+
+
+
+</RelativeLayout>

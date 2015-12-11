@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.zakiva.tworder.customer_order_information">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:src="@drawable/logo"
+
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/logOutCustomerButton"
+        android:layout_toStartOf="@+id/logOutCustomerButton"
+        android:layout_marginRight="119dp"
+        android:layout_marginEnd="119dp" />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/goBackButton"
+        android:text="GO BACK"
+        android:onClick="onBackClick"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/statusText"
+        android:textSize="20dp"
+        android:layout_below="@+id/goBackButton"
+        android:layout_marginTop="40dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/businessNameText"
+        android:layout_below="@+id/statusText"
+        android:layout_marginTop="30dp"
+        android:textSize="20dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/businessAddressText"
+        android:layout_below="@+id/businessNameText"
+        android:layout_marginTop="30dp"
+        android:textSize="20dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/orderDetailsText"
+        android:layout_below="@+id/businessAddressText"
+        android:layout_marginTop="30dp"
+        android:textSize="20dp"
+        />
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/orderImage"
+        android:layout_below="@+id/orderDetailsText"
+        android:background="@drawable/customer"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/gotItemButton"
+        android:layout_below="@+id/orderImage"
+        android:text="GOT ITEM !"
+        android:textAlignment="center"
+        android:background="#0A0"
+        android:onClick="gotItemClick"
+        android:layout_marginTop="30dp"
+        />
+
+
+</RelativeLayout>
