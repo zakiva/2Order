@@ -128,7 +128,7 @@ public class new_order_screen extends AppCompatActivity {
         });
     }
 
-    public void handle_customer(final String phone, final String name){
+    public static void handle_customer(final String phone, final String name){
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Customer");
         query.whereEqualTo("phone", phone);

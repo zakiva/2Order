@@ -145,6 +145,8 @@ class businees_order_adapter extends BaseExpandableListAdapter {
                             intent.putExtra("status", object.getString("status"));
                             intent.putExtra("phone", object.getString("customer_phone"));
                             intent.putExtra("name", object.getString("customer_name"));
+                            intent.putExtra("priority", object.getInt("prior"));
+                            intent.putExtra("order_id", itemId);
 
                             DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
                             Date date = object.getCreatedAt();

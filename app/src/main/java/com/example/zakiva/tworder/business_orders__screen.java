@@ -236,6 +236,12 @@ public class business_orders__screen extends AppCompatActivity {
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        get_all_user_orders();
+    }
+
+    @Override
     public void onBackPressed() {
         if (slidingMenu.isMenuShowing()) {
             slidingMenu.toggle();
