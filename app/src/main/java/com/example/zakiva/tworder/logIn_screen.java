@@ -29,7 +29,7 @@ public class logIn_screen extends AppCompatActivity {
                         startActivity(intent);
                     } else {
                         //what happens if sign in succeeded for customer user
-                        Intent intent = new Intent(getBaseContext(), customer_orders_screen.class);
+                        Intent intent = new Intent(getBaseContext(), customer_orders.class);
                         startActivity(intent);
                     }
                 } else {

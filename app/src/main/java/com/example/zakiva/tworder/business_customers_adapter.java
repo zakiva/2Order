@@ -120,6 +120,8 @@ public class business_customers_adapter extends BaseExpandableListAdapter {
         if(childPosition!=2) {
             ((ViewGroup) information_button.getParent()).removeView(information_button);
         }
+        else
+            information_button.setBackgroundResource(R.drawable.contact_info);
         view.setTag(holder);
 
         //return the entire view

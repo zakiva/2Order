@@ -38,7 +38,7 @@ public class  MainActivity extends AppCompatActivity {
             else
             {
                 //what happens if customer user is signed in
-                Intent intent = new Intent(getBaseContext(), customer_orders_screen.class);
+                Intent intent = new Intent(getBaseContext(), customer_orders.class);
                 startActivity(intent);
             }
         }

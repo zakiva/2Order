@@ -84,6 +84,8 @@
         </activity>
         <activity android:name=".customer_order_information" >
         </activity>
+        <activity android:name=".single_business_order" >
+        </activity>
     </application>
 
 </manifest>
