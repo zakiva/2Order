@@ -41,7 +41,7 @@
         android:id="@+id/orderNumberText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/customerPhoneInput"
+        android:layout_below="@+id/customerNameInput"
         android:text="Order Number"
         android:textSize="20dp"
         android:layout_marginTop="5dp"
@@ -87,19 +87,19 @@
         android:layout_height="wrap_content"
         android:text="Order Priority"
         android:textSize="20dp"
-        android:layout_above="@+id/setUrgentBar"
-        android:layout_alignLeft="@+id/orderDetailsInput"
-        android:layout_alignStart="@+id/orderDetailsInput" />
-
+        android:layout_below="@+id/orderDetailsInput"
+        android:layout_alignLeft="@+id/customerNameInput"
+        android:layout_alignStart="@+id/customerNameInput" />
+`
     <RatingBar
         android:id="@+id/setUrgentBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numStars="3"
         android:stepSize="1"
-        android:layout_above="@+id/createButton"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_below="@+id/urgentText"
+        android:layout_alignLeft="@+id/orderDetailsInput"
+        android:layout_alignStart="@+id/orderDetailsInput" />
 
     <Button
         android:layout_width="match_parent"
@@ -110,28 +110,43 @@
         android:background="#00F"
         android:onClick="onCreateNewOrder"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:id="@+id/customerNameInput"
-        android:imeOptions="actionSend"
-        android:singleLine="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:width="330dp"
-        android:layout_below="@+id/orderDetailsInput"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp" />
+        android:layout_alignLeft="@+id/setUrgentBar"
+        android:layout_alignStart="@+id/setUrgentBar"
+        android:layout_marginBottom="40dp" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Customer Name"
+        android:text="Customer name"
         android:textSize="20dp"
-        android:layout_below="@+id/orderDetailsInput"
-        android:layout_alignLeft="@+id/customerNameInput"
-        android:layout_alignStart="@+id/customerNameInput" />
+        android:layout_below="@+id/customerPhoneInput"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        />
+
+    <EditText
+        android:id="@+id/customerNameInput"
+        android:imeOptions ="actionSend"
+        android:singleLine="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_marginLeft="10dp"
+        android:width="330dp"
+        />
+
+    <Button
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:text=""
+        android:background="@drawable/search_contact"
+        android:id="@+id/button_search_contact"
+        android:layout_toRightOf="@+id/customerPhoneText"
+        android:layout_above="@+id/customerPhoneInput"
+        android:layout_marginLeft="110dp"
+        android:layout_marginBottom="-30dp"
+        android:onClick="search_contact_clicked"/>
+
 
 </RelativeLayout>

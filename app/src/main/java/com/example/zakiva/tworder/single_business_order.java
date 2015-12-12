@@ -1,6 +1,8 @@
 package com.example.zakiva.tworder;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -50,7 +52,7 @@ public class single_business_order extends AppCompatActivity {
         order_number.setText(extras.getString("code"));
         order_details.setText(extras.getString("details"));
         phone.setText(extras.getString("phone"));
-        //name.setText(extras.getString("name"));
+        name.setText(extras.getString("name"));
         time_past.setText(String.format("                     %s", extras.getString("time_past")));
         time_create.setText(String.format("Created at: %s", extras.getString("time")));
         status.setText(String.format("Status: %s", extras.getString("status")));
@@ -64,7 +66,7 @@ public class single_business_order extends AppCompatActivity {
         edit_order_number.setText(extras.getString("code"));
         edit_order_details.setText(extras.getString("details"));
         edit_phone.setText(extras.getString("phone"));
-        //edit_name.setText(extras.getString("name"));
+        edit_name.setText(extras.getString("name"));
 
     }
 
@@ -110,7 +112,7 @@ public class single_business_order extends AppCompatActivity {
         order_number.setText(edit_order_number.getText());
         order_details.setText(edit_order_details.getText());
         phone.setText(edit_phone.getText());
-        //name.setText(edit_name.getText());
+        name.setText(edit_name.getText());
 
 
         Button edit = (Button) findViewById(R.id.button_edit);
@@ -125,5 +127,35 @@ public class single_business_order extends AppCompatActivity {
         delete.setVisibility(View.GONE);
 
         make_switch();
+    }
+
+    public void deleteOrderClick(View view) {
+        Context context = this;
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+
+        alertDialogBuilder.setTitle("Remove Order");
+
+        // set dialog message
+        alertDialogBuilder
+                .setMessage("Do you want to remove this order? (order will be available on Orders History)")
+                .setCancelable(false)
+                .setPositiveButton("Remove", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        //zahi: remove order and go back to my orders
+                        //order.put("history", "yes");
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
     }
 }

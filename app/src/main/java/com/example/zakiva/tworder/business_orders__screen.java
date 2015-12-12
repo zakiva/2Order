@@ -303,7 +303,7 @@ public class business_orders__screen extends AppCompatActivity {
         create_button.setVisibility(View.GONE);
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
         query.whereEqualTo("business_user", ParseUser.getCurrentUser());
-        query.whereEqualTo("status", "READY");
+        query.whereEqualTo("history", "yes");
         query.addDescendingOrder("createdAt"); // new first
         query.findInBackground(new FindCallback<ParseObject>() {
 

@@ -21,7 +21,7 @@
         android:layout_alignLeft="@+id/order_summary_label"
         android:layout_alignStart="@+id/order_summary_label"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="8dp">
+        android:layout_marginLeft="15dp">
 
         <TextView
             android:layout_width="match_parent"
@@ -33,6 +33,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:singleLine="true"
             android:id="@+id/edittext_order_number"
             android:text="number"
             android:layout_above="@+id/textview_phone"
@@ -63,6 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/edittext_details"
+            android:singleLine="true"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/ratingBar"
             android:layout_toLeftOf="@+id/button_edit"
@@ -73,6 +75,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/switcher_phone"
+        android:layout_alignRight="@+id/button_call"
+        android:layout_marginRight="40dp"
         android:layout_below="@+id/SplitLine_hor2"
         android:layout_alignLeft="@+id/switcher_details"
         android:layout_alignStart="@+id/switcher_details"
@@ -93,6 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/edittext_phone"
+            android:singleLine="true"
             android:layout_below="@+id/textview_phone"
             android:layout_alignRight="@+id/switcher_name"
             android:layout_alignEnd="@+id/switcher_name" />
@@ -103,6 +108,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/switcher_name"
         android:layout_below="@+id/SplitLine_hor3"
+        android:layout_alignRight="@+id/button_contact_info"
+        android:layout_marginRight="40dp"
         android:layout_alignLeft="@+id/switcher_phone"
         android:layout_alignStart="@+id/switcher_phone"
         android:layout_marginTop="5dp">
@@ -122,6 +129,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/edittext_name"
+            android:singleLine="true"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/switcher_number"
             android:layout_toEndOf="@+id/switcher_number" />
@@ -148,7 +156,9 @@
         android:visibility="invisible"
         android:layout_above="@+id/SplitLine_hor0"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="-5dp"
+        android:onClick="deleteOrderClick" />
 
     <Button
         android:layout_width="45dp"
@@ -200,7 +210,6 @@
         android:text=""
         android:background="@drawable/contact_info"
         android:id="@+id/button_contact_info"
-        android:layout_alignRight="@+id/switcher_name"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/SplitLine_hor3"/>
 
@@ -210,7 +219,6 @@
         android:text=""
         android:background="@drawable/call"
         android:id="@+id/button_call"
-        android:layout_alignRight="@+id/switcher_phone"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/SplitLine_hor2"
         android:layout_marginTop="5dp"/>

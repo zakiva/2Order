@@ -144,8 +144,7 @@ class businees_order_adapter extends BaseExpandableListAdapter {
                             intent.putExtra("details", object.getString("details"));
                             intent.putExtra("status", object.getString("status"));
                             intent.putExtra("phone", object.getString("customer_phone"));
-
-                           // intent.putExtra("name", object.getString("customer_name"));
+                            intent.putExtra("name", object.getString("customer_name"));
 
                             DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
                             Date date = object.getCreatedAt();
@@ -184,6 +183,7 @@ class businees_order_adapter extends BaseExpandableListAdapter {
                                 if (e == null) {
                                     if (item.getTitle().equals("READY")) {
                                         object.put("status", "READY");
+                                        object.put("history", "yes");
                                         String message = "Your order from " + object.getString("business_name") + " is ready!";
                                         push_notification(object.getString("customer_phone"), message);
                                         mParent.get(groupPosition).getArrayChildren().set(childPosition, "Status : " + item.getTitle().toString());
