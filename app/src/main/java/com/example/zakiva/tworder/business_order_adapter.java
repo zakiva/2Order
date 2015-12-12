@@ -40,7 +40,6 @@ class businees_order_adapter extends BaseExpandableListAdapter {
 
     private LayoutInflater inflater;
     private ArrayList<business_list_group> mParent;
-    //private RatingBar urgentBar;
 
     public businees_order_adapter(Context context, ArrayList<business_list_group> parent){
         mParent = parent;
@@ -96,13 +95,11 @@ class businees_order_adapter extends BaseExpandableListAdapter {
 
         if (view == null) {
             view = inflater.inflate(R.layout.business_list_group, viewGroup,false);
-            mParent.get(groupPosition).setEditFlag(true);
         }
         TextView textView = (TextView) view.findViewById(R.id.list_item_text_view);
         textView.setText(getGroup(groupPosition).toString());
-        final RatingBar urgentBar = (RatingBar) view.findViewById(R.id.urgentBar);
+        RatingBar urgentBar = (RatingBar) view.findViewById(R.id.urgentBar);
         urgentBar.setRating(mParent.get(groupPosition).getUrgent());
-
 
         view.setTag(holder);
 
@@ -121,9 +118,7 @@ class businees_order_adapter extends BaseExpandableListAdapter {
         view = inflater.inflate(R.layout.business_list_item, viewGroup,false);
 
         TextView textView = (TextView) view.findViewById(R.id.list_item_text_child);
-        if(textView.getText().toString().equals("first")){
 
-        }
         textView.setText(mParent.get(groupPosition).getArrayChildren().get(childPosition));
         TextView key = (TextView) view.findViewById(R.id.key);
         key.setText(mParent.get(groupPosition).getItemKey());
@@ -186,27 +181,16 @@ class businees_order_adapter extends BaseExpandableListAdapter {
         return view;
     }
 
-    public void changeParseStatus(final String field, final String updateValue, String itemKey){
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
-        query.getInBackground(itemKey, new GetCallback<ParseObject>() {
-            public void done(ParseObject object, ParseException e) {
-                if (e == null) {
-                    object.put(field, updateValue);
-
-                    object.saveInBackground();
-                } else {
-
-                }
-            }
-        });
-    }
 
     void send_sms(String number, String content) {
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(number, null, content, null, null);
     }
 
-    void push_notification(final String username, final String message) {
+
+    void push_notification(final String username, final String message)
+    {
+
         //is_user_exist = 0;
         final ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.whereEqualTo("username", username);

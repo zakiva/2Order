@@ -16,6 +16,7 @@ import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -398,15 +399,6 @@ public class business_orders__screen extends AppCompatActivity {
         alertDialog.show();
     }
 
-    public void history_clicked() {
-        Intent i = new Intent(this, business_orders_history.class);
-        startActivity(i);
-    }
-
-    public void customers_clicked() {
-        Intent i = new Intent(this, business_customers.class);
-        startActivity(i);
-    }
 
     public void open_sliding_menu(View view) {
         slidingMenu.toggle();
@@ -449,5 +441,14 @@ public class business_orders__screen extends AppCompatActivity {
             parent.setArrayChildren(arrayChildren);
             arrayParents.add(parent);
         }
+    }
+
+    public void information_order_clicked(View view){
+        Intent i = new Intent(this, business_order_information.class);
+        ViewGroup vp = (ViewGroup) view.getParent();
+        TextView k = (TextView) vp.findViewById(R.id.key);
+        String key = k.getText().toString();
+        i.putExtra("orderKey", key);
+        startActivity(i);
     }
 }

@@ -2,11 +2,12 @@ package com.example.zakiva.tworder;
 
 import java.util.ArrayList;
 
-
-class business_list_group  {
+/**
+ * Created by Nir Sade on 12/10/2015.
+ */
+public class customer_list_group {
     private String mTitle;
     private ArrayList<String> mArrayChildren;
-    private int rating;
     private String itemKey;
     private boolean editFlag;
 
@@ -27,14 +28,6 @@ class business_list_group  {
         itemKey = key;
     }
 
-    public int getUrgent(){
-        return rating;
-    }
-
-    public void setUrgent(int n){
-        rating = n;
-    }
-
     public ArrayList<String> getArrayChildren() {
         return mArrayChildren;
     }
@@ -43,4 +36,3 @@ class business_list_group  {
         mArrayChildren = arrayChildren;
     }
 }
-

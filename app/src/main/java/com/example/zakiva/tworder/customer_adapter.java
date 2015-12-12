@@ -1,25 +1,19 @@
 package com.example.zakiva.tworder;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.database.DataSetObserver;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.RatingBar;
-import android.widget.ViewSwitcher;
 
 import com.parse.CountCallback;
 import com.parse.GetCallback;
@@ -32,15 +26,14 @@ import com.parse.ParseUser;
 
 import java.util.ArrayList;
 
-
-class history_adapter extends BaseExpandableListAdapter {
-
-
+/**
+ * Created by Nir Sade on 12/10/2015.
+ */
+public class customer_adapter extends BaseExpandableListAdapter {
     private LayoutInflater inflater;
-    private ArrayList<business_list_group> mParent;
+    private ArrayList<customer_list_group> mParent;
 
-
-    public history_adapter(Context context, ArrayList<business_list_group> parent){
+    public customer_adapter(Context context, ArrayList<customer_list_group> parent){
         mParent = parent;
         inflater = LayoutInflater.from(context);
     }
@@ -93,12 +86,12 @@ class history_adapter extends BaseExpandableListAdapter {
         holder.groupPosition = groupPosition;
 
         if (view == null) {
-            view = inflater.inflate(R.layout.business_list_group, viewGroup,false);
+            view = inflater.inflate(R.layout.customer_list_group, viewGroup,false);
         }
-        TextView textView = (TextView) view.findViewById(R.id.list_item_text_view);
+        TextView textView = (TextView) view.findViewById(R.id.list_item_head);
         textView.setText(getGroup(groupPosition).toString());
-        final RatingBar urgentBar = (RatingBar) view.findViewById(R.id.urgentBar);
-        urgentBar.setRating(mParent.get(groupPosition).getUrgent());
+        TextView key = (TextView) view.findViewById(R.id.key);
+        key.setText(mParent.get(groupPosition).getItemKey());
 
         view.setTag(holder);
 
@@ -114,27 +107,20 @@ class history_adapter extends BaseExpandableListAdapter {
         holder.childPosition = childPosition;
         holder.groupPosition = groupPosition;
 
-        view = inflater.inflate(R.layout.business_list_item, viewGroup,false);
+        if(view == null){
+            view = inflater.inflate(R.layout.customer_list_item, viewGroup,false);
+        }
 
         TextView textView = (TextView) view.findViewById(R.id.list_item_text_child);
 
         textView.setText(mParent.get(groupPosition).getArrayChildren().get(childPosition));
-        TextView key = (TextView) view.findViewById(R.id.key);
-        key.setText(mParent.get(groupPosition).getItemKey());
-        Button changeStatusButton = (Button) view.findViewById(R.id.statusButton);
-        ((ViewGroup) changeStatusButton.getParent()).removeView(changeStatusButton);
-        Button information_button = (Button) view.findViewById(R.id.information_button);
-        if(childPosition!=3) {
-            ((ViewGroup) information_button.getParent()).removeView(information_button);
-        }
+
+
         view.setTag(holder);
 
         //return the entire view
         return view;
     }
-
-
-
 
 
     @Override
