@@ -113,7 +113,7 @@ public class customer_orders extends AppCompatActivity {
             arrayChildren = new ArrayList<String>();
             arrayChildren.add(order.getString("business_name"));
             //arrayChildren.add("Address : " + order.getString("business_address"));
-            arrayChildren.add("Status : " + order.getString("status"));
+            arrayChildren.add("Status: " + order.getString("status"));
             //arrayChildren.add("Details : " + order.getString("details"));
             parent.setArrayChildren(arrayChildren);
             arrayParents.add(parent);

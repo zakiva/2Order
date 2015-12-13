@@ -188,14 +188,14 @@ class businees_order_adapter extends BaseExpandableListAdapter {
                                         object.put("history", "yes");
                                         String message = "Your order from " + object.getString("business_name") + " is ready!";
                                         push_notification(object.getString("customer_phone"), message);
-                                        mParent.get(groupPosition).getArrayChildren().set(childPosition, "Status : " + item.getTitle().toString());
+                                        mParent.get(groupPosition).getArrayChildren().set(childPosition, "Status: " + item.getTitle().toString());
                                     } else {
-                                        mParent.get(groupPosition).getArrayChildren().set(childPosition, "Status : " + item.getTitle().toString());
+                                        mParent.get(groupPosition).getArrayChildren().set(childPosition, "Status: " + item.getTitle().toString());
                                         object.put("status", item.getTitle());
                                     }
                                     object.saveInBackground();
                                     //get_all_user_orders();
-                                    status.setText("Status : " + item.getTitle().toString());
+                                    status.setText("Status: " + item.getTitle().toString());
                                 } else {
 
                                 }
@@ -240,13 +240,13 @@ class businees_order_adapter extends BaseExpandableListAdapter {
         return String.format("%d days %d hours ago", days, hours);
     }
 
-    void send_sms(String number, String content) {
+    static void send_sms(String number, String content) {
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(number, null, content, null, null);
     }
 
 
-    void push_notification(final String username, final String message)
+    static void push_notification(final String username, final String message)
     {
 
         //is_user_exist = 0;

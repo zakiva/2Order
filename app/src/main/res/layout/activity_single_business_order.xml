@@ -200,6 +200,7 @@
         android:layout_below="@+id/SplitLine_hor6"
         android:id="@+id/button_update_status"
         android:background="@drawable/update"
+        android:onClick="change_status_clicked"
         android:layout_alignParentRight="true"
         android:layout_marginTop="3dp"/>
 
@@ -397,6 +398,19 @@
         android:text="Priority:"
         android:layout_below="@+id/SplitLine_hor4"
         android:id="@+id/priority_label" />
+
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text=""
+        android:background="@drawable/back_arrow"
+        android:id="@+id/button_back"
+        android:onClick="back_clicked"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="-1dp"
+        android:layout_marginTop="-5dp"/>
 
 
 </RelativeLayout>

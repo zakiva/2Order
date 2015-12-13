@@ -286,7 +286,8 @@ public class business_orders__screen extends AppCompatActivity {
         create_button.setVisibility(View.VISIBLE);
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
         query.whereEqualTo("business_user", ParseUser.getCurrentUser());
-        query.whereNotEqualTo("status", "READY");
+        query.whereEqualTo("history", "no");
+        query.whereNotEqualTo("status", "READY"); // can be removed
         query.orderByDescending("prior"); // true first
         query.addAscendingOrder("createdAt"); // old first
         query.findInBackground(new FindCallback<ParseObject>() {
@@ -344,9 +345,9 @@ public class business_orders__screen extends AppCompatActivity {
             parent.setUrgent(order.getInt("prior"));
             parent.setItemKey(order.getObjectId());
             arrayChildren = new ArrayList<String>();
-            arrayChildren.add("Phone : " + order.getString("customer_phone"));
-            arrayChildren.add("Details : " + order.getString("details"));
-            arrayChildren.add("Status : " + order.getString("status"));
+            arrayChildren.add("Phone: " + order.getString("customer_phone"));
+            arrayChildren.add("Details: " + order.getString("details"));
+            arrayChildren.add("Status: " + order.getString("status"));
             arrayChildren.add("");
             parent.setArrayChildren(arrayChildren);
             arrayParents.add(parent);
@@ -365,9 +366,9 @@ public class business_orders__screen extends AppCompatActivity {
             parent.setUrgent(order.getInt("prior"));
             parent.setItemKey(order.getObjectId());
             arrayChildren = new ArrayList<String>();
-            arrayChildren.add("Phone : " + order.getString("customer_phone"));
-            arrayChildren.add("Details : " + order.getString("details"));
-            arrayChildren.add("Status : " + order.getString("status"));
+            arrayChildren.add("Phone: " + order.getString("customer_phone"));
+            arrayChildren.add("Details: " + order.getString("details"));
+            arrayChildren.add("Status: " + order.getString("status"));
             arrayChildren.add("");
             parent.setArrayChildren(arrayChildren);
             arrayParents.add(parent);

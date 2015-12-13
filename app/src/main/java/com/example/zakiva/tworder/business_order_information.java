@@ -42,7 +42,7 @@ public class business_order_information extends AppCompatActivity {
                     orderNumberText.setText("Order Number : " + object.getString("code"));
                     ratingBar.setRating(object.getInt("prior"));
                     phoneText.setText("Phone Number : " + object.getString("customer_phone"));
-                    statusText.setText("Status : " + object.getString("status"));
+                    statusText.setText("Status: " + object.getString("status"));
                     orderDetailsText.setText("Details order : " + object.getString("details"));
                 } else {
 
@@ -118,7 +118,7 @@ public class business_order_information extends AppCompatActivity {
             phoneText.setText("Phone Number : " + phoneEditText.getText().toString());
 
             statusSwitcher.showPrevious();
-            statusText.setText("Status : " + statusEditText.getText().toString());
+            statusText.setText("Status: " + statusEditText.getText().toString());
 
             detailsSwitcher.showPrevious();
             orderDetailsText.setText("order Details : " + orderDetailsEditText.getText().toString());

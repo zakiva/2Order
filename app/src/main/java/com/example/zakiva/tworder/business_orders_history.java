@@ -68,7 +68,7 @@ public class business_orders_history extends AppCompatActivity {
             arrayChildren = new ArrayList<String>();
             arrayChildren.add("Phone : " + order.getString("customer_phone"));
             arrayChildren.add("Details : " + order.getString("details"));
-            arrayChildren.add("Status : " + order.getString("status"));
+            arrayChildren.add("Status: " + order.getString("status"));
             parent.setArrayChildren(arrayChildren);
             arrayParents.add(parent);
         }
