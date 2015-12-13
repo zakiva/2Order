@@ -38,7 +38,6 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/information_button"
-            android:onClick="information_order_clicked"
             android:background="@drawable/info_blue"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"

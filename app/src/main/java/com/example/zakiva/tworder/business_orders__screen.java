@@ -51,7 +51,7 @@ public class business_orders__screen extends AppCompatActivity {
     private static final String TAG = ">>>>debug";
     ExpandableListView businessExpandableList;
     public SlidingMenu slidingMenu;
-    protected String mode;
+    protected static String mode = "orders";
     private Button create_button;
     private TextView screen_title;
 
@@ -101,12 +101,18 @@ public class business_orders__screen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(TAG, " on create .. ");
         setContentView(R.layout.activity_business_orders__screen);
-        mode = "orders";
         create_button = (Button)findViewById(R.id.createNewOrder);
         screen_title = (TextView)findViewById(R.id.screen_title);
 
-        get_all_user_orders();
+        if (mode.equals("orders"))
+            get_all_user_orders();
+        else if (mode.equals("history"))
+            get_all_user_history();
+        else if (mode.equals("customers"))
+            get_all_user_customers();
+
 
         EditText sv = (EditText) findViewById(R.id.editText);
         sv.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -118,45 +124,45 @@ public class business_orders__screen extends AppCompatActivity {
                         ParseRelation relation = ParseUser.getCurrentUser().getRelation("customers");
                         ParseQuery query2 = relation.getQuery();
                         query2.findInBackground(new FindCallback<ParseObject>() {
-                                                   @Override
-                                                   public void done(final List<ParseObject> customers, ParseException e) {
-                                                       if (e == null) {
-                                                           EditText sv = (EditText) findViewById(R.id.editText);
-                                                           sv.addTextChangedListener(new TextWatcher() {
-                                                               @Override
-                                                               public void onTextChanged(CharSequence s, int start, int before, int count) {
-                                                                   if (s.toString().equals("")) {
-                                                                       draw_customers(customers);
-                                                                   } else {
-                                                                       //Log.d("a: ", s.toString());
-                                                                       List<ParseObject> list2 = new ArrayList<ParseObject>();
-                                                                       for (ParseObject po : customers) {
-                                                                           if (po.getString("name").contains(s.toString()) || po.getString("phone").contains(s.toString()) || Integer.toString(po.getInt("orders_counter")).contains(s.toString())) {
-                                                                               list2.add(po);
-                                                                           }
-                                                                       }
-                                                                       draw_customers(list2);
-                                                                   }
-                                                               }
+                                                    @Override
+                                                    public void done(final List<ParseObject> customers, ParseException e) {
+                                                        if (e == null) {
+                                                            EditText sv = (EditText) findViewById(R.id.editText);
+                                                            sv.addTextChangedListener(new TextWatcher() {
+                                                                @Override
+                                                                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                                                                    if (s.toString().equals("")) {
+                                                                        draw_customers(customers);
+                                                                    } else {
+                                                                        //Log.d("a: ", s.toString());
+                                                                        List<ParseObject> list2 = new ArrayList<ParseObject>();
+                                                                        for (ParseObject po : customers) {
+                                                                            if (po.getString("name").contains(s.toString()) || po.getString("phone").contains(s.toString()) || Integer.toString(po.getInt("orders_counter")).contains(s.toString())) {
+                                                                                list2.add(po);
+                                                                            }
+                                                                        }
+                                                                        draw_customers(list2);
+                                                                    }
+                                                                }
 
-                                                               @Override
-                                                               public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                                                                @Override
+                                                                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                                                                   // TODO Auto-generated method stub
-                                                               }
+                                                                    // TODO Auto-generated method stub
+                                                                }
 
-                                                               @Override
-                                                               public void afterTextChanged(Editable s) {
+                                                                @Override
+                                                                public void afterTextChanged(Editable s) {
 
-                                                                   // TODO Auto-generated method stub
-                                                               }
-                                                           });
+                                                                    // TODO Auto-generated method stub
+                                                                }
+                                                            });
 
-                                                       } else {
-                                                           Log.d("Post retrieval", "Error: " + e.getMessage());
-                                                       }
-                                                   }
-                                               }
+                                                        } else {
+                                                            Log.d("Post retrieval", "Error: " + e.getMessage());
+                                                        }
+                                                    }
+                                                }
                         );
 
                     } else {
@@ -218,7 +224,6 @@ public class business_orders__screen extends AppCompatActivity {
         });
 
         //Log.i(TAG, " on create .. ");
-        get_all_user_orders();
 
         slidingMenu = new SlidingMenu(this);
         slidingMenu.setMode(SlidingMenu.LEFT);
@@ -238,11 +243,18 @@ public class business_orders__screen extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        get_all_user_orders();
+        Log.i(TAG, " on restart .. ");
+        if (mode.equals("orders"))
+            get_all_user_orders();
+        else if (mode.equals("history"))
+            get_all_user_history();
+        else if (mode.equals("customers"))
+            get_all_user_customers();
     }
 
     @Override
     public void onBackPressed() {
+        Log.i(TAG, " on back pressed .. ");
         if (slidingMenu.isMenuShowing()) {
             slidingMenu.toggle();
         } else {
@@ -450,6 +462,8 @@ public class business_orders__screen extends AppCompatActivity {
         }
     }
 
+    /*
+
     public void information_order_clicked(View view){
         Intent i = new Intent(this, business_order_information.class);
         ViewGroup vp = (ViewGroup) view.getParent();
@@ -458,4 +472,5 @@ public class business_orders__screen extends AppCompatActivity {
         i.putExtra("orderKey", key);
         startActivity(i);
     }
+    */
 }

@@ -1,6 +1,7 @@
 package com.example.zakiva.tworder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.graphics.Color;
 import android.util.Log;
@@ -13,16 +14,23 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
+import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseRelation;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,14 +39,17 @@ import java.util.List;
 
 public class business_customers_adapter extends BaseExpandableListAdapter {
 
-
+    private static final String TAG = ">>>>debug";
     private LayoutInflater inflater;
     private ArrayList<business_customer_group> mParent;
     //private RatingBar urgentBar;
+    private Context context;
 
     public business_customers_adapter(Context context, ArrayList<business_customer_group> parent){
         mParent = parent;
         inflater = LayoutInflater.from(context);
+        this.context = context;
+
     }
 
 
@@ -117,11 +128,31 @@ public class business_customers_adapter extends BaseExpandableListAdapter {
         Button changeStatusButton = (Button) view.findViewById(R.id.statusButton);
         ((ViewGroup) changeStatusButton.getParent()).removeView(changeStatusButton);
         Button information_button = (Button) view.findViewById(R.id.information_button);
+
+        information_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String phone = mParent.get(groupPosition).getArrayChildren().get(0).substring(7);
+                String name = mParent.get(groupPosition).getTitle().substring(10);
+                String counter = mParent.get(groupPosition).getArrayChildren().get(1).substring(14);
+
+                Log.i(TAG, "phone = " + phone);
+                Log.i(TAG, "name = " + name);
+                Log.i(TAG, "counter = " + counter);
+
+                Intent intent = new Intent(context, single_customer_information.class);
+                intent.putExtra("name", name);
+                intent.putExtra("phone", phone);
+                intent.putExtra("counter", counter);
+                context.startActivity(intent);
+            }
+        });
+
         if(childPosition!=2) {
             ((ViewGroup) information_button.getParent()).removeView(information_button);
         }
         else
             information_button.setBackgroundResource(R.drawable.contact_info);
+
         view.setTag(holder);
 
         //return the entire view

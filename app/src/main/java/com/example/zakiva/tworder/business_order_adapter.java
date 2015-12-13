@@ -224,7 +224,7 @@ class businees_order_adapter extends BaseExpandableListAdapter {
         return view;
     }
 
-    public String get_past_time(Date date){
+    public static String get_past_time(Date date){
 
         Date cur_date = new Date();
         float interval = ((float) (cur_date.getTime() - date.getTime())) / (1000*60*60*24);

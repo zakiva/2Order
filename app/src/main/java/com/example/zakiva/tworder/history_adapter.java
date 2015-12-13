@@ -3,6 +3,7 @@ package com.example.zakiva.tworder;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.DataSetObserver;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,7 +31,10 @@ import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 class history_adapter extends BaseExpandableListAdapter {
@@ -38,13 +42,14 @@ class history_adapter extends BaseExpandableListAdapter {
 
     private LayoutInflater inflater;
     private ArrayList<business_list_group> mParent;
-
+    private Context context;
 
     public history_adapter(Context context, ArrayList<business_list_group> parent){
         mParent = parent;
         inflater = LayoutInflater.from(context);
-    }
+        this.context = context;
 
+    }
 
     @Override
     //counts the number of group/parent items so the list knows how many times calls getGroupView() method
@@ -124,6 +129,41 @@ class history_adapter extends BaseExpandableListAdapter {
         Button changeStatusButton = (Button) view.findViewById(R.id.statusButton);
         ((ViewGroup) changeStatusButton.getParent()).removeView(changeStatusButton);
         Button information_button = (Button) view.findViewById(R.id.information_button);
+
+
+        information_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                RelativeLayout r = (RelativeLayout) v.getParent();
+                TextView t = (TextView) r.findViewById(R.id.key);
+                final String itemId = t.getText().toString();
+                ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
+                query.getInBackground(itemId, new GetCallback<ParseObject>() {
+                    public void done(ParseObject object, ParseException e) {
+                        if (e == null) {
+                            Intent intent = new Intent(context, single_business_history.class);
+                            intent.putExtra("code", object.getString("code"));
+                            intent.putExtra("details", object.getString("details"));
+                            intent.putExtra("status", object.getString("status"));
+                            intent.putExtra("phone", object.getString("customer_phone"));
+                            intent.putExtra("name", object.getString("customer_name"));
+                            intent.putExtra("priority", object.getInt("prior"));
+                            intent.putExtra("order_id", itemId);
+
+                            DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+                            Date date = object.getCreatedAt();
+
+                            intent.putExtra("time_past", businees_order_adapter.get_past_time(date));
+                            intent.putExtra("time", df.format(date));
+
+                            context.startActivity(intent);
+                        } else {
+                            // something went wrong
+                        }
+                    }
+                });
+            }
+        });
+
         if(childPosition!=3) {
             ((ViewGroup) information_button.getParent()).removeView(information_button);
         }
@@ -132,10 +172,6 @@ class history_adapter extends BaseExpandableListAdapter {
         //return the entire view
         return view;
     }
-
-
-
-
 
     @Override
     public boolean isChildSelectable(int i, int i1) {
@@ -152,5 +188,4 @@ class history_adapter extends BaseExpandableListAdapter {
         protected int childPosition;
         protected int groupPosition;
     }
-
 }

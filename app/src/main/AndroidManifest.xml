@@ -86,6 +86,10 @@
         </activity>
         <activity android:name=".single_business_order" >
         </activity>
+        <activity android:name=".single_business_history" >
+        </activity>
+        <activity android:name=".single_customer_information" >
+        </activity>
     </application>
 
 </manifest>
