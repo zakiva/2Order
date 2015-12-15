@@ -39,6 +39,7 @@ import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 public class customer_orders extends AppCompatActivity {
 
@@ -53,13 +54,27 @@ public class customer_orders extends AppCompatActivity {
 
         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
         installation.put("notification_id", ParseUser.getCurrentUser().getString("phone"));
-        installation.saveInBackground();
-
-        ParseUser user = ParseUser.getCurrentUser();
-        user.put("is_signed_in", "yes");
-        user.saveInBackground();
-
-        get_all_user_orders();
+        installation.saveInBackground(new SaveCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    ParseUser user = ParseUser.getCurrentUser();
+                    user.put("is_signed_in", "yes");
+                    user.saveInBackground(new SaveCallback() {
+                        public void done(ParseException e2) {
+                            if (e2 == null) {
+                                get_all_user_orders();
+                            } else {
+                                Log.i(TAG, "e is not null");
+                                Log.i(TAG, String.format("%s", e2.toString()));
+                            }
+                        }
+                    });
+                } else {
+                    Log.i(TAG, "e is not null");
+                    Log.i(TAG, String.format("%s", e.toString()));
+                }
+            }
+        });
 
     }
 
@@ -93,32 +108,46 @@ public class customer_orders extends AppCompatActivity {
     public void OnLogOutClick(View view){
         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
         installation.put("notification_id", "user is logged out");
-        installation.saveInBackground();
+        installation.saveInBackground(new SaveCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    ParseUser user = ParseUser.getCurrentUser();
+                    user.put("is_signed_in", "no");
+                    user.saveInBackground(new SaveCallback() {
+                        public void done(ParseException e2) {
+                            if (e2 == null) {
+                                if (AccessToken.getCurrentAccessToken() == null) {
+                                    //return; // already logged out
+                                } else {
+                                    new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
+                                            .Callback() {
+                                        @Override
+                                        public void onCompleted(GraphResponse graphResponse) {
 
-        ParseUser user = ParseUser.getCurrentUser();
-        user.put("is_signed_in", "no");
-        user.saveInBackground();
+                                            LoginManager.getInstance().logOut();
 
-        //LoginManager.getInstance().logOut();
-        if (AccessToken.getCurrentAccessToken() == null) {
-            //return; // already logged out
-        }
-        else {
-            new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
-                    .Callback() {
-                @Override
-                public void onCompleted(GraphResponse graphResponse) {
-
-                    LoginManager.getInstance().logOut();
-
+                                        }
+                                    }).executeAsync();
+                                }
+                                log_out();
+                                Intent i = new Intent(getApplicationContext(), first_screen.class);
+                                startActivity(i);
+                            } else {
+                                Log.i(TAG, "e is not null");
+                                Log.i(TAG, String.format("%s", e2.toString()));
+                            }
+                        }
+                    });
+                } else {
+                    Log.i(TAG, "e is not null");
+                    Log.i(TAG, String.format("%s", e.toString()));
                 }
-            }).executeAsync();
-        }
+            }
+        });
 
 
-        log_out();
-        Intent i = new Intent(this, first_screen.class);
-        startActivity(i);
+
+
     }
 
     protected void get_all_user_orders() {

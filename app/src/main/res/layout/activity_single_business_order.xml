@@ -221,7 +221,8 @@
         android:id="@+id/button_call"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/SplitLine_hor2"
-        android:layout_marginTop="5dp"/>
+        android:layout_marginTop="5dp"
+        android:onClick="onButtonPhoneClicked" />
 
     <TextView
         android:layout_width="wrap_content"
