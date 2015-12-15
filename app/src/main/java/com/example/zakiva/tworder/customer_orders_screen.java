@@ -10,6 +10,12 @@ import android.widget.ListView;
 import android.view.View;
 import android.content.Intent;
 
+import com.facebook.AccessToken;
+import com.facebook.FacebookRequestError;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.login.LoginManager;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.Parse;
@@ -41,7 +47,7 @@ public class customer_orders_screen extends AppCompatActivity {
     void add_feedback(String business, String feedback_content, int stars)
     {
         ParseObject feedback = new ParseObject("Business_notifications");
-        feedback.put("from", ParseUser.getCurrentUser().getUsername());
+        feedback.put("from", ParseUser.getCurrentUser().getString("phone"));
         feedback.put("to", business);
         feedback.put("kind", "feedback");
         feedback.put("content", feedback_content);
@@ -54,7 +60,7 @@ public class customer_orders_screen extends AppCompatActivity {
     {
         //posibly: order.put("poked", "yes");
         ParseObject poke = new ParseObject("Business_notifications");
-        //poke.put("from", ParseUser.getCurrentUser().getUsername());
+        //poke.put("from", ParseUser.getCurrentUser().getString("phone"));
         //poke.put("to", order.getString("business_user"));
         poke.put("kind", "poke");
         poke.put("order", order);
@@ -77,7 +83,7 @@ public class customer_orders_screen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
-        installation.put("notification_id", ParseUser.getCurrentUser().getUsername());
+        installation.put("notification_id", ParseUser.getCurrentUser().getString("phone"));
         installation.saveInBackground();
 
         ParseUser user = ParseUser.getCurrentUser();
@@ -98,7 +104,7 @@ public class customer_orders_screen extends AppCompatActivity {
 
     protected void get_all_user_orders() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
-        query.whereEqualTo("customer_phone", ParseUser.getCurrentUser().getString("username"));
+        query.whereEqualTo("customer_phone", ParseUser.getCurrentUser().getString("phone"));
         query.addAscendingOrder("createdAt"); // old first
         query.findInBackground(new FindCallback<ParseObject>() {
 
@@ -133,6 +139,7 @@ public class customer_orders_screen extends AppCompatActivity {
     }
 
     public void OnLogOutClick(View view){
+
         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
         installation.put("notification_id", "user is logged out");
         installation.saveInBackground();
@@ -140,6 +147,22 @@ public class customer_orders_screen extends AppCompatActivity {
         ParseUser user = ParseUser.getCurrentUser();
         user.put("is_signed_in", "no");
         user.saveInBackground();
+
+        if (AccessToken.getCurrentAccessToken() == null) {
+            //return; // already logged out
+        }
+        else {
+            new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
+                    .Callback() {
+                @Override
+                public void onCompleted(GraphResponse graphResponse) {
+
+                    LoginManager.getInstance().logOut();
+
+                }
+            }).executeAsync();
+        }
+
         log_out();
         Intent i = new Intent(this, first_screen.class);
         startActivity(i);

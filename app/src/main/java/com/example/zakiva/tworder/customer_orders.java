@@ -22,10 +22,18 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.facebook.AccessToken;
+import com.facebook.FacebookRequestError;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.login.LoginManager;
 import com.parse.CountCallback;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
@@ -42,6 +50,14 @@ public class customer_orders extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_orders);
+
+        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+        installation.put("notification_id", ParseUser.getCurrentUser().getString("phone"));
+        installation.saveInBackground();
+
+        ParseUser user = ParseUser.getCurrentUser();
+        user.put("is_signed_in", "yes");
+        user.saveInBackground();
 
         get_all_user_orders();
 
@@ -75,6 +91,31 @@ public class customer_orders extends AppCompatActivity {
     }
 
     public void OnLogOutClick(View view){
+        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+        installation.put("notification_id", "user is logged out");
+        installation.saveInBackground();
+
+        ParseUser user = ParseUser.getCurrentUser();
+        user.put("is_signed_in", "no");
+        user.saveInBackground();
+
+        //LoginManager.getInstance().logOut();
+        if (AccessToken.getCurrentAccessToken() == null) {
+            //return; // already logged out
+        }
+        else {
+            new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
+                    .Callback() {
+                @Override
+                public void onCompleted(GraphResponse graphResponse) {
+
+                    LoginManager.getInstance().logOut();
+
+                }
+            }).executeAsync();
+        }
+
+
         log_out();
         Intent i = new Intent(this, first_screen.class);
         startActivity(i);
@@ -82,7 +123,7 @@ public class customer_orders extends AppCompatActivity {
 
     protected void get_all_user_orders() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
-        query.whereEqualTo("customer_phone", ParseUser.getCurrentUser().getString("username"));
+        query.whereEqualTo("customer_phone", ParseUser.getCurrentUser().getString("phone"));
         query.addAscendingOrder("createdAt"); // old first
         query.findInBackground(new FindCallback<ParseObject>() {
 

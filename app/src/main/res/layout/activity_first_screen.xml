@@ -58,4 +58,17 @@
         android:background="#00F"
         android:textColor="#FFF" />
 
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Facebook login"
+        android:id="@+id/button"
+        android:onClick="facebook_login"
+        android:layout_column="14"
+        android:layout_marginTop="54dp"
+        android:background="#00F"
+        android:textColor="#FFF"
+        android:layout_below="@+id/button4"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

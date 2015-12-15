@@ -251,13 +251,13 @@ class businees_order_adapter extends BaseExpandableListAdapter {
 
         //is_user_exist = 0;
         final ParseQuery<ParseUser> query = ParseUser.getQuery();
-        query.whereEqualTo("username", username);
+        query.whereEqualTo("phone", username);
         query.countInBackground(new CountCallback() {
             public void done(int count, ParseException e) {
                 if (e == null) {
                     if (count > 0) {//The user exists!!
                         ParseQuery<ParseUser> query = ParseUser.getQuery();
-                        query.whereEqualTo("username", username);
+                        query.whereEqualTo("phone", username);
                         query.getFirstInBackground(new GetCallback<ParseUser>() {
                             public void done(ParseUser user, ParseException e) {
                                 if (user == null) {
