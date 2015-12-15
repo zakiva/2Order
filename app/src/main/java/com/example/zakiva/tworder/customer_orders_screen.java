@@ -10,6 +10,12 @@ import android.widget.ListView;
 import android.view.View;
 import android.content.Intent;
 
+import com.facebook.AccessToken;
+import com.facebook.FacebookRequestError;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.login.LoginManager;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.Parse;
@@ -18,6 +24,7 @@ import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +48,7 @@ public class customer_orders_screen extends AppCompatActivity {
     void add_feedback(String business, String feedback_content, int stars)
     {
         ParseObject feedback = new ParseObject("Business_notifications");
-        feedback.put("from", ParseUser.getCurrentUser().getUsername());
+        feedback.put("from", ParseUser.getCurrentUser().getString("phone"));
         feedback.put("to", business);
         feedback.put("kind", "feedback");
         feedback.put("content", feedback_content);
@@ -54,7 +61,7 @@ public class customer_orders_screen extends AppCompatActivity {
     {
         //posibly: order.put("poked", "yes");
         ParseObject poke = new ParseObject("Business_notifications");
-        //poke.put("from", ParseUser.getCurrentUser().getUsername());
+        //poke.put("from", ParseUser.getCurrentUser().getString("phone"));
         //poke.put("to", order.getString("business_user"));
         poke.put("kind", "poke");
         poke.put("order", order);
@@ -76,18 +83,32 @@ public class customer_orders_screen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
-        installation.put("notification_id", ParseUser.getCurrentUser().getUsername());
-        installation.saveInBackground();
-
-        ParseUser user = ParseUser.getCurrentUser();
-        user.put("is_signed_in", "yes");
-        user.saveInBackground();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_orders_screen);
 
-        get_all_user_orders();
+        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+        installation.put("notification_id", ParseUser.getCurrentUser().getString("phone"));
+        installation.saveInBackground(new SaveCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    ParseUser user = ParseUser.getCurrentUser();
+                    user.put("is_signed_in", "yes");
+                    user.saveInBackground(new SaveCallback() {
+                        public void done(ParseException e) {
+                            if (e == null) {
+                                get_all_user_orders();
+                            } else {
+                                Log.i(TAG, "e is not null");
+                                Log.i(TAG, String.format("%s", e.toString()));
+                            }
+                        }
+                    });
+                } else {
+                    Log.i(TAG, "e is not null");
+                    Log.i(TAG, String.format("%s", e.toString()));
+                }
+            }
+        });
     }
 
     @Override
@@ -98,7 +119,7 @@ public class customer_orders_screen extends AppCompatActivity {
 
     protected void get_all_user_orders() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
-        query.whereEqualTo("customer_phone", ParseUser.getCurrentUser().getString("username"));
+        query.whereEqualTo("customer_phone", ParseUser.getCurrentUser().getString("phone"));
         query.addAscendingOrder("createdAt"); // old first
         query.findInBackground(new FindCallback<ParseObject>() {
 
@@ -133,15 +154,47 @@ public class customer_orders_screen extends AppCompatActivity {
     }
 
     public void OnLogOutClick(View view){
+
+
         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
         installation.put("notification_id", "user is logged out");
-        installation.saveInBackground();
+        installation.saveInBackground(new SaveCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    ParseUser user = ParseUser.getCurrentUser();
+                    user.put("is_signed_in", "no");
+                    user.saveInBackground(new SaveCallback() {
+                        public void done(ParseException e) {
+                            if (e == null) {
+                                if (AccessToken.getCurrentAccessToken() == null) {
+                                    //return; // already logged out
+                                } else {
+                                    new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
+                                            .Callback() {
+                                        @Override
+                                        public void onCompleted(GraphResponse graphResponse) {
 
-        ParseUser user = ParseUser.getCurrentUser();
-        user.put("is_signed_in", "no");
-        user.saveInBackground();
-        log_out();
-        Intent i = new Intent(this, first_screen.class);
-        startActivity(i);
+                                            LoginManager.getInstance().logOut();
+
+                                        }
+                                    }).executeAsync();
+                                }
+                                log_out();
+                                Intent i = new Intent(getApplicationContext(), first_screen.class);
+                                startActivity(i);
+                            } else {
+                                Log.i(TAG, "e is not null");
+                                Log.i(TAG, String.format("%s", e.toString()));
+                            }
+                        }
+                    });
+                } else {
+                    Log.i(TAG, "e is not null");
+                    Log.i(TAG, String.format("%s", e.toString()));
+                }
+            }
+        });
+
+
     }
 }

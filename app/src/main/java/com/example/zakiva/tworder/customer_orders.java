@@ -22,15 +22,24 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.facebook.AccessToken;
+import com.facebook.FacebookRequestError;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.login.LoginManager;
 import com.parse.CountCallback;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 public class customer_orders extends AppCompatActivity {
 
@@ -43,7 +52,29 @@ public class customer_orders extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_orders);
 
-        get_all_user_orders();
+        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+        installation.put("notification_id", ParseUser.getCurrentUser().getString("phone"));
+        installation.saveInBackground(new SaveCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    ParseUser user = ParseUser.getCurrentUser();
+                    user.put("is_signed_in", "yes");
+                    user.saveInBackground(new SaveCallback() {
+                        public void done(ParseException e2) {
+                            if (e2 == null) {
+                                get_all_user_orders();
+                            } else {
+                                Log.i(TAG, "e is not null");
+                                Log.i(TAG, String.format("%s", e2.toString()));
+                            }
+                        }
+                    });
+                } else {
+                    Log.i(TAG, "e is not null");
+                    Log.i(TAG, String.format("%s", e.toString()));
+                }
+            }
+        });
 
     }
 
@@ -75,14 +106,53 @@ public class customer_orders extends AppCompatActivity {
     }
 
     public void OnLogOutClick(View view){
-        log_out();
-        Intent i = new Intent(this, first_screen.class);
-        startActivity(i);
+        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+        installation.put("notification_id", "user is logged out");
+        installation.saveInBackground(new SaveCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    ParseUser user = ParseUser.getCurrentUser();
+                    user.put("is_signed_in", "no");
+                    user.saveInBackground(new SaveCallback() {
+                        public void done(ParseException e2) {
+                            if (e2 == null) {
+                                if (AccessToken.getCurrentAccessToken() == null) {
+                                    //return; // already logged out
+                                } else {
+                                    new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
+                                            .Callback() {
+                                        @Override
+                                        public void onCompleted(GraphResponse graphResponse) {
+
+                                            LoginManager.getInstance().logOut();
+
+                                        }
+                                    }).executeAsync();
+                                }
+                                log_out();
+                                Intent i = new Intent(getApplicationContext(), first_screen.class);
+                                startActivity(i);
+                            } else {
+                                Log.i(TAG, "e is not null");
+                                Log.i(TAG, String.format("%s", e2.toString()));
+                            }
+                        }
+                    });
+                } else {
+                    Log.i(TAG, "e is not null");
+                    Log.i(TAG, String.format("%s", e.toString()));
+                }
+            }
+        });
+
+
+
+
     }
 
     protected void get_all_user_orders() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
-        query.whereEqualTo("customer_phone", ParseUser.getCurrentUser().getString("username"));
+        query.whereEqualTo("customer_phone", ParseUser.getCurrentUser().getString("phone"));
         query.addAscendingOrder("createdAt"); // old first
         query.findInBackground(new FindCallback<ParseObject>() {
 

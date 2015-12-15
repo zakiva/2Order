@@ -55,20 +55,7 @@ public class business_orders__screen extends AppCompatActivity {
     private Button create_button;
     private TextView screen_title;
 
-    //this function get a phone number and makes a call to that number
-    void call(String number)
-    {
-        Intent callIntent = new Intent(Intent.ACTION_CALL);
-        callIntent.setData(Uri.parse("tel:" + number));
-        try
-        {
-            startActivity(callIntent);
-        }
-        catch (android.content.ActivityNotFoundException ex)
-        {
-            Log.d("problem:", "can't make phone call");
-        }
-    }
+
 
     //this function get a parse object and returns the number of days since it was created
     float time_since_order_created(ParseObject order)

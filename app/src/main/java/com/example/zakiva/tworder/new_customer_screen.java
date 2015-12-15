@@ -22,12 +22,13 @@ public class new_customer_screen extends AppCompatActivity {
         ParseUser user = new ParseUser();
         user.setUsername(username);
         user.setPassword(password);
+        user.put("phone", username);
         user.put("kind", "customer");
         user.put("wants_notification", "yes");
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null) {
-                    Intent intent = new Intent(getBaseContext(), customer_orders_screen.class);
+                    Intent intent = new Intent(getBaseContext(), customer_orders.class);
                     startActivity(intent);
                 } else {
                     alertToast("Sign-up failed");

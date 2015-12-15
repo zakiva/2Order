@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -43,6 +44,21 @@ import java.util.List;
 import javax.microedition.khronos.egl.EGLDisplay;
 
 public class single_business_order extends AppCompatActivity {
+
+    //this function get a phone number and makes a call to that number
+    void call(String number)
+    {
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:" + number));
+        try
+        {
+            startActivity(callIntent);
+        }
+        catch (android.content.ActivityNotFoundException ex)
+        {
+            Log.d("problem:", "can't make phone call");
+        }
+    }
 
 
     TextView order_number;
@@ -243,6 +259,11 @@ public class single_business_order extends AppCompatActivity {
         });
     }
 
+    public void onButtonPhoneClicked(View view)
+    {
+        Bundle extras = getIntent().getExtras();
+        call(extras.getString("phone"));
+    }
 
     public void deleteOrderClick(View view) {
         Context context = this;
