@@ -1,7 +1,11 @@
 package com.example.zakiva.tworder;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 public class single_customer_information extends AppCompatActivity {
@@ -11,7 +15,25 @@ public class single_customer_information extends AppCompatActivity {
     TextView counter;
     TextView time;
 
+    //this function get a phone number and makes a call to that number
+    void call(String number)
+    {
+        Intent callIntent = new Intent(Intent.ACTION_CALL);
+        callIntent.setData(Uri.parse("tel:" + number));
+        try
+        {
+            startActivity(callIntent);
+        }
+        catch (android.content.ActivityNotFoundException ex)
+        {
+            Log.d("problem:", "can't make phone call");
+        }
+    }
 
+    public void callClick(View view){
+        Bundle extras = getIntent().getExtras();
+        call(extras.getString("phone"));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
