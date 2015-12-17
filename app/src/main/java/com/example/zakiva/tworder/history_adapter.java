@@ -48,7 +48,6 @@ class history_adapter extends BaseExpandableListAdapter {
         mParent = parent;
         inflater = LayoutInflater.from(context);
         this.context = context;
-
     }
 
     @Override

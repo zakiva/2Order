@@ -126,14 +126,12 @@ public class single_business_order extends AppCompatActivity {
         Button end_edit = (Button) findViewById(R.id.button_end_edit);
         Button call = (Button) findViewById(R.id.button_call);
         Button info = (Button) findViewById(R.id.button_contact_info);
-        Button back = (Button) findViewById(R.id.button_back);
 
         edit.setVisibility(View.GONE);
         end_edit.setVisibility(View.VISIBLE);
         delete.setVisibility(View.VISIBLE);
         call.setVisibility(View.GONE);
         info.setVisibility(View.GONE);
-        back.setVisibility(View.GONE);
 
         make_switch();
         ratingBar.setIsIndicator(false);
@@ -183,7 +181,6 @@ public class single_business_order extends AppCompatActivity {
         Button delete = (Button) findViewById(R.id.button_delete);
         Button call = (Button) findViewById(R.id.button_call);
         Button info = (Button) findViewById(R.id.button_contact_info);
-        Button back = (Button) findViewById(R.id.button_back);
 
 
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -194,7 +191,6 @@ public class single_business_order extends AppCompatActivity {
         info.setVisibility(View.VISIBLE);
         end_edit.setVisibility(View.GONE);
         delete.setVisibility(View.GONE);
-        back.setVisibility(View.VISIBLE);
         ratingBar.setIsIndicator(true);
         Drawable progress = ratingBar.getProgressDrawable();
         DrawableCompat.setTint(progress, Color.GRAY);
@@ -362,5 +358,12 @@ public class single_business_order extends AppCompatActivity {
             }
         });
         popup.show();
+    }
+
+    public void button_contact_info_clicked(View view) {
+        Intent intent = new Intent(single_business_order.this, single_customer_information.class);
+        intent.putExtra("parse", "true");
+        intent.putExtra("phone", phone.getText().toString());
+        startActivity(intent);
     }
 }

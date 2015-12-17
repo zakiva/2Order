@@ -140,8 +140,10 @@ public class business_customers_adapter extends BaseExpandableListAdapter {
                 Log.i(TAG, "counter = " + counter);
 
                 Intent intent = new Intent(context, single_customer_information.class);
+                intent.putExtra("parse", "false");
                 intent.putExtra("name", name);
                 intent.putExtra("phone", phone);
+                intent.putExtra("date", mParent.get(groupPosition).getItemKey());
                 intent.putExtra("counter", counter);
                 context.startActivity(intent);
             }

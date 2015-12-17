@@ -172,4 +172,10 @@ public class single_business_history extends AppCompatActivity {
         startActivity(back_to_my_orders);
     }
 
+    public void button_contact_info_clicked(View view) {
+        Intent intent = new Intent(single_business_history.this, single_customer_information.class);
+        intent.putExtra("parse", "true");
+        intent.putExtra("phone", phone.getText().toString());
+        startActivity(intent);
+    }
 }

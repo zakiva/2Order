@@ -10,17 +10,16 @@
 
 
     <Button
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:id="@+id/createNewOrder"
         android:onClick="createNewOrderClick"
         android:textSize="40dp"
-        android:gravity="center|fill_vertical|center_horizontal"
-        android:text="+"
-        android:background="#1854d4"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/expandableList"
-        android:layout_alignEnd="@+id/expandableList" />
+        android:text=""
+        android:layout_marginRight="-5dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/add"
+        android:layout_alignParentTop="true" />
 
     <ExpandableListView
         android:layout_width="fill_parent"
@@ -39,8 +38,19 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:id="@+id/editText"
+        android:singleLine="true"
+        android:hint="search order"
         android:layout_below="@+id/screen_title"
         android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/screen_title"
+        android:background="@drawable/search_small"
+        android:layout_toLeftOf="@+id/editText"/>
 
     <Button
         android:layout_width="30dp"

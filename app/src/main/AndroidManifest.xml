@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.zakiva.tworder">
+    package="com.example.zakiva.tworder" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -28,31 +28,31 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:theme="@style/AppTheme" >
+        <activity android:name=".MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.facebook.FacebookActivity"
-            android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:label="@string/app_name" />
-        <activity android:name=".logIn_screen"></activity>
-        <activity android:name=".first_screen"></activity>
-        <activity android:name=".new_business_screen"></activity>
-        <activity android:name=".new_customer_screen"></activity>
-        <activity android:name=".business_orders__screen"></activity>
-        <activity android:name=".new_order_screen"></activity>
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name=".logIn_screen" />
+        <activity android:name=".first_screen" />
+        <activity android:name=".new_business_screen" />
+        <activity android:name=".new_customer_screen" />
+        <activity android:name=".business_orders__screen" />
+        <activity android:name=".new_order_screen" />
 
         <service android:name="com.parse.PushService" />
 
         <receiver
             android:name="com.parse.ParsePushBroadcastReceiver"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.parse.push.intent.RECEIVE" />
                 <action android:name="com.parse.push.intent.DELETE" />
@@ -61,7 +61,7 @@
         </receiver>
         <receiver
             android:name="com.parse.GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND">
+            android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
@@ -71,21 +71,23 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".customer_orders_screen"></activity>
-        <activity android:name=".business_orders_history"></activity>
-        <activity android:name=".business_customers"></activity>
-        <activity android:name=".customer_orders"></activity>
-        <activity android:name=".business_order_information"></activity>
-        <activity android:name=".customer_order_information"></activity>
-        <activity android:name=".single_business_order"></activity>
-        <activity android:name=".single_business_history"></activity>
-        <activity android:name=".single_customer_information"></activity>
+        <activity android:name=".customer_orders_screen" />
+        <activity android:name=".business_orders_history" />
+        <activity android:name=".business_customers" />
+        <activity android:name=".customer_orders" />
+        <activity android:name=".business_order_information" />
+        <activity android:name=".customer_order_information" />
+        <activity android:name=".single_business_order" />
+        <activity android:name=".single_business_history" />
+        <activity android:name=".single_customer_information" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".facebook_login"></activity>
+        <activity android:name=".facebook_login" />
+        <activity android:name=".customers_search" >
+        </activity>
     </application>
 
 </manifest>

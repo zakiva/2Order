@@ -30,6 +30,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -281,6 +283,9 @@ public class business_orders__screen extends AppCompatActivity {
     }
 
     protected void get_all_user_orders() {
+        EditText et = (EditText) findViewById(R.id.editText);
+        et.getText().clear();
+        et.setHint("search order");
         screen_title.setText("My Orders");
         create_button.setVisibility(View.VISIBLE);
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
@@ -305,6 +310,9 @@ public class business_orders__screen extends AppCompatActivity {
     }
 
     protected void get_all_user_history() {
+        EditText et = (EditText) findViewById(R.id.editText);
+        et.getText().clear();
+        et.setHint("search order");
         screen_title.setText("Orders History");
         create_button.setVisibility(View.GONE);
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
@@ -412,6 +420,9 @@ public class business_orders__screen extends AppCompatActivity {
 
     public void get_all_user_customers() {
         screen_title.setText("My Customers");
+        EditText et = (EditText) findViewById(R.id.editText);
+        et.getText().clear();
+        et.setHint("search customer");
         create_button.setVisibility(View.GONE);
         ParseRelation relation = ParseUser.getCurrentUser().getRelation("customers");
         ParseQuery query = relation.getQuery();
@@ -439,7 +450,9 @@ public class business_orders__screen extends AppCompatActivity {
         for (ParseObject customer : customers) {
             business_customer_group parent = new business_customer_group();
             parent.setTitle("Customer: " + customer.getString("name"));
-            parent.setItemKey(customer.getObjectId());
+            DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            Date date = customer.getCreatedAt();
+            parent.setItemKey(df.format(date));
             arrayChildren = new ArrayList<String>();
             arrayChildren.add("Phone: " + customer.getString("phone"));
             arrayChildren.add("Total orders: " + customer.getInt("orders_counter"));

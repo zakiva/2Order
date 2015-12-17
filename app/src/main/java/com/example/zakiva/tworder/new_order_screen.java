@@ -37,6 +37,18 @@ public class new_order_screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_order_screen);
 
+        Log.i(TAG, "on create in new order screen .. ");
+
+        Bundle extras = getIntent().getExtras();
+        EditText customerPhone = (EditText) findViewById(R.id.customerPhoneInput);
+        EditText customerName = (EditText) findViewById(R.id.customerNameInput);
+        Intent i = this.getIntent();
+        if(i.hasExtra("phone")){
+            customerPhone.setText(i.getStringExtra("phone"));
+            customerName.setText(i.getStringExtra("name"));
+        }
+
+
         ParseRelation relation = ParseUser.getCurrentUser().getRelation("customers");
         ParseQuery query2 = relation.getQuery();
         query2.findInBackground(new FindCallback<ParseObject>() {
@@ -50,6 +62,7 @@ public class new_order_screen extends AppCompatActivity {
                     }
                     final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(new_order_screen.this, android.R.layout.select_dialog_item, cust);
                     final Button button = (Button) findViewById(R.id.button_search_contact);
+                    /*
                     button.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
                             new AlertDialog.Builder(new_order_screen.this)
@@ -76,6 +89,7 @@ public class new_order_screen extends AppCompatActivity {
                                     }).create().show();
                         }
                     });
+                    */
 
                     EditText sv = (EditText) findViewById(R.id.customerPhoneInput);
                     sv.addTextChangedListener(new TextWatcher() {
@@ -218,4 +232,8 @@ public class new_order_screen extends AppCompatActivity {
             }
 
 
-        }
+    public void search_contact_clicked(View view) {
+        Intent intent = new Intent(new_order_screen.this, customers_search.class);
+        startActivity(intent);
+    }
+}
