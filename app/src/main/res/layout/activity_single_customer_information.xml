@@ -37,7 +37,8 @@
             android:layout_marginTop="15dp"
             android:layout_marginLeft="60dp"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/SplitLine_hor5" />
+            android:layout_below="@+id/SplitLine_hor5"
+            android:onClick="callClick" />
 
         <Button
             android:layout_width="50dp"

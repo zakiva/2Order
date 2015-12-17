@@ -133,8 +133,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView2"
         android:layout_marginLeft="10dp"
-        android:width="330dp"
-        />
+        android:width="330dp" />
 
     <Button
         android:layout_width="70dp"
