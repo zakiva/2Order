@@ -27,16 +27,26 @@
         android:layout_alignBottom="@+id/list_button"
         android:layout_centerHorizontal="true" />
 
-    <ExpandableListView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/expandableList"
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/customer_orders_list"
+        android:layout_marginTop="40dp"
         android:layout_below="@+id/screen_title"
-        android:layout_marginTop="25dp"
-        android:transcriptMode="disabled"
-        android:cacheColorHint="#00000000"
-        android:listSelector="@android:color/transparent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentBottom="true"   />
+
+    <View
+        android:id="@+id/SplitLine_hor0"
+        android:layout_width="match_parent"
+        android:layout_height= "2dp"
+        android:background="#c0c0c0"
+        android:layout_below="@+id/screen_title"
+        android:layout_marginTop="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        />
+
+
+
 
 </RelativeLayout>

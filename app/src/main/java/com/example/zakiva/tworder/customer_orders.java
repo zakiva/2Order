@@ -15,12 +15,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.facebook.AccessToken;
@@ -169,68 +174,25 @@ public class customer_orders extends AppCompatActivity {
         );
     }
 
-
-    protected void draw_orders(List<ParseObject> orders){
-        businessExpandableList = (ExpandableListView)findViewById(R.id.expandableList);
-        ArrayList<customer_list_group> arrayParents = new ArrayList<customer_list_group>();
-        ArrayList<String> arrayChildren;
-        businessExpandableList.setAdapter(new customer_adapter(customer_orders.this, arrayParents));
-
-        for (ParseObject order: orders){
-            customer_list_group parent = new customer_list_group();
-            parent.setTitle("Order Number " + order.getString("code"));
-            parent.setItemKey(order.getObjectId());
-            arrayChildren = new ArrayList<String>();
-            arrayChildren.add(order.getString("business_name"));
-            //arrayChildren.add("Address : " + order.getString("business_address"));
-            arrayChildren.add("Status: " + order.getString("status"));
-            //arrayChildren.add("Details : " + order.getString("details"));
-            parent.setArrayChildren(arrayChildren);
-            arrayParents.add(parent);
-
+    protected void draw_orders(List<ParseObject> orders) {
+        ArrayList<String[]> items = new ArrayList<String[]>();
+        for (ParseObject order : orders) {
+            String[] item = new String[7];
+            item[0] = order.getString("code");
+            item[1] = order.getString("business_name");
+            item[2] = order.getString("status");
+            item[3] = order.getString("business_address");
+            item[4] = order.getString("details");
+            DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            Date date = order.getCreatedAt();
+            item[5] = df.format(date);
+            item[6] = order.getObjectId().toString();
+            items.add(item);
         }
+        ListAdapter customerAdapter = new customer_list_orders_adapter(getBaseContext(), items);
+        ListView customerListView = (ListView) findViewById(R.id.customer_orders_list);
+        customerListView.setAdapter(customerAdapter);
     }
-
-    public void onDeleteClick(View view){
-        //ariel
-        Context context = this;
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                context);
-
-        // set title
-        alertDialogBuilder.setTitle("Are you sure you want to delete this order");
-
-        // set dialog message
-        alertDialogBuilder
-                .setMessage("Click yes to Delete!")
-                .setCancelable(false)
-                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        dialog.cancel();
-                    }
-                })
-                .setNegativeButton("No",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
-
-        // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.create();
-
-        // show it
-        alertDialog.show();
-    }
-
-    public void information_order_clicked(View view){
-        Intent i = new Intent(this, customer_order_information.class);
-        ViewGroup vp = (ViewGroup) view.getParent();
-        TextView k = (TextView) vp.findViewById(R.id.key);
-        String key = k.getText().toString();
-        i.putExtra("orderKey", key);
-        startActivity(i);
-    }
-
 
 }
 

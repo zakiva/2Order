@@ -88,6 +88,8 @@
         <activity android:name=".facebook_login" />
         <activity android:name=".customers_search" >
         </activity>
+        <activity android:name=".single_customer_order" >
+        </activity>
     </application>
 
 </manifest>
