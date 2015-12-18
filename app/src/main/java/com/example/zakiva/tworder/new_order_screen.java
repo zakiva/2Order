@@ -204,6 +204,7 @@ public class new_order_screen extends AppCompatActivity {
 
                 ParseQuery<ParseObject> query = ParseQuery.getQuery("Customer");
                 query.whereEqualTo("phone", phone);
+                query.whereEqualTo("business_id", ParseUser.getCurrentUser().getObjectId().toString());
                 query.findInBackground(new FindCallback<ParseObject>() {
                                            @Override
                                            public void done(List<ParseObject> customers,
@@ -213,6 +214,7 @@ public class new_order_screen extends AppCompatActivity {
                                                        final ParseObject customer = new ParseObject("Customer");
                                                        customer.put("phone", phone);
                                                        customer.put("name", name);
+                                                       customer.put("business_id", ParseUser.getCurrentUser().getObjectId().toString());
                                                        customer.put("orders_counter", 1);
                                                        Log.i(TAG, " customer.saveInBackground() .. ");
 
