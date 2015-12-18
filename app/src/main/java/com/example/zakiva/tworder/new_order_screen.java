@@ -10,6 +10,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -55,14 +56,20 @@ public class new_order_screen extends AppCompatActivity {
             @Override
             public void done(final List<ParseObject> customers, ParseException e) {
                 if (e == null) {
+
                     List<String> cust = new ArrayList<String>();
                     for (ParseObject po : customers) {
-                        String id = po.getString("name") + " " + po.getString("phone");
+                        String id = po.getString("name");
                         cust.add(id);
                     }
-                    final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(new_order_screen.this, android.R.layout.select_dialog_item, cust);
-                    final Button button = (Button) findViewById(R.id.button_search_contact);
+                    AutoCompleteTextView actv;
+                    actv = (AutoCompleteTextView) findViewById(R.id.customerNameInput);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<String>(new_order_screen.this, android.R.layout.simple_list_item_1, cust);
+                    actv.setAdapter(adapter);
                     /*
+                    final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(new_order_screen.this, android.R.layout.select_dialog_item, cust);
+
+                    final Button button = (Button) findViewById(R.id.button_search_contact);
                     button.setOnClickListener(new View.OnClickListener() {
                         public void onClick(View v) {
                             new AlertDialog.Builder(new_order_screen.this)
@@ -94,7 +101,7 @@ public class new_order_screen extends AppCompatActivity {
                     EditText sv = (EditText) findViewById(R.id.customerPhoneInput);
                     sv.addTextChangedListener(new TextWatcher() {
                         int is_delete = 0;
-
+                        String cur;
                         @Override
                         public void onTextChanged(CharSequence s, int start, int before, int count) {
                             int cnt = 0;
@@ -102,18 +109,21 @@ public class new_order_screen extends AppCompatActivity {
                                 if (po.getString("phone").equals(s.toString())) {
                                     EditText name = (EditText) findViewById(R.id.customerNameInput);
                                     name.setText(po.getString("name"));
-                                    name.setEnabled(false);
+                                    //name.setEnabled(false);
                                     //name.setFocusable(false);
                                     cnt = 1;
                                     is_delete = 1;
+                                    cur = po.getString("name");
                                 }
                             }
                             if (cnt == 0) {
                                 EditText name = (EditText) findViewById(R.id.customerNameInput);
-                                name.setEnabled(true);
+                                //name.setEnabled(true);
                                 //name.setFocusable(true);
                                 if (is_delete == 1) {
-                                    name.setText("");
+                                    if (name.getText().toString().equals(cur)) {
+                                        name.setText("");
+                                    }
                                     is_delete = 0;
                                 }
                             }
