@@ -125,7 +125,7 @@
         android:layout_marginLeft="10dp"
         />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/customerNameInput"
         android:imeOptions ="actionSend"
         android:singleLine="true"

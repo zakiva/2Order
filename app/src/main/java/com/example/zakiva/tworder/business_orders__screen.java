@@ -165,7 +165,7 @@ public class business_orders__screen extends AppCompatActivity {
                         } else if (mode.equals("history")) {
                             //Log.d("mode: ", mode);
                             query.whereEqualTo("business_user", ParseUser.getCurrentUser());
-                            query.whereEqualTo("status", "READY");
+                            query.whereEqualTo("history", "yes");
                             query.addDescendingOrder("createdAt"); // new first
                         }
                         query.findInBackground(new FindCallback<ParseObject>() {
@@ -349,6 +349,9 @@ public class business_orders__screen extends AppCompatActivity {
         for (ParseObject order : orders) {
             business_list_group parent = new business_list_group();
             parent.setTitle("Order " + order.getString("code"));
+            if ((time_since_order_created(order)) > 3){
+                parent.setTitle("Order " + order.getString("code") + " *LATE!*");
+            }
             parent.setUrgent(order.getInt("prior"));
             parent.setItemKey(order.getObjectId());
             arrayChildren = new ArrayList<String>();
