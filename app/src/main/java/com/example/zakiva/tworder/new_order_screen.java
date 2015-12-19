@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+import com.parse.SignUpCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +39,13 @@ public class new_order_screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_order_screen);
+        if (ParseUser.getCurrentUser().getString("Auto_orders_numbers").equals("yes")){
+            final EditText orderNumber = (EditText) findViewById(R.id.orderNumberInput);
+            int num = ParseUser.getCurrentUser().getInt("orders_counter");
+            String num2 = Integer.toString(num);
+            orderNumber.setText(num2);
+        }
+
 
         Log.i(TAG, "on create in new order screen .. ");
 
@@ -57,15 +66,58 @@ public class new_order_screen extends AppCompatActivity {
             public void done(final List<ParseObject> customers, ParseException e) {
                 if (e == null) {
 
+                    final AutoCompleteTextView actv;
+                    actv = (AutoCompleteTextView) findViewById(R.id.customerNameInput);
+
+                    final AutoCompleteTextView actv2;
+                    actv2 = (AutoCompleteTextView) findViewById(R.id.customerPhoneInput);
+
                     List<String> cust = new ArrayList<String>();
                     for (ParseObject po : customers) {
                         String id = po.getString("name");
                         cust.add(id);
                     }
-                    AutoCompleteTextView actv;
-                    actv = (AutoCompleteTextView) findViewById(R.id.customerNameInput);
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(new_order_screen.this, android.R.layout.simple_list_item_1, cust);
                     actv.setAdapter(adapter);
+
+                    actv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            String name = actv.getText().toString();
+                            for (ParseObject po : customers) {
+                                if (name.equals(po.getString("name"))) {
+                                    String phone = po.getString("phone");
+                                    actv2.setText(phone);
+                                }
+                            }
+
+                        }
+
+                    });
+
+                    List<String> cust2 = new ArrayList<String>();
+                    for (ParseObject po : customers) {
+                        String id = po.getString("phone");
+                        cust.add(id);
+                    }
+                    ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(new_order_screen.this, android.R.layout.simple_list_item_1, cust2);
+                    actv2.setAdapter(adapter);
+
+                    actv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            String phone = actv2.getText().toString();
+                            for (ParseObject po : customers) {
+                                if (phone.equals(po.getString("phone"))) {
+                                    String name = po.getString("name");
+                                    actv.setText(name);
+                                }
+                            }
+
+                        }
+
+                    });
+
                     /*
                     final ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(new_order_screen.this, android.R.layout.select_dialog_item, cust);
 
@@ -96,7 +148,7 @@ public class new_order_screen extends AppCompatActivity {
                                     }).create().show();
                         }
                     });
-                    */
+
 
                     EditText sv = (EditText) findViewById(R.id.customerPhoneInput);
                     sv.addTextChangedListener(new TextWatcher() {
@@ -141,7 +193,7 @@ public class new_order_screen extends AppCompatActivity {
                             // TODO Auto-generated method stub
                         }
                     });
-
+                */
 
                 } else {
                     Log.d("Post retrieval", "Error: " + e.getMessage());
@@ -152,101 +204,105 @@ public class new_order_screen extends AppCompatActivity {
 
 
 
-            public void onCreateNewOrder(View view) {
-                final EditText customerPhone = (EditText) findViewById(R.id.customerPhoneInput);
-                final EditText orderNumber = (EditText) findViewById(R.id.orderNumberInput);
-                final EditText orderDetails = (EditText) findViewById(R.id.orderDetailsInput);
-                final EditText customerName = (EditText) findViewById(R.id.customerNameInput);
-                final RatingBar orderUrgent = (RatingBar) findViewById(R.id.setUrgentBar);
+    public void onCreateNewOrder(View view) {
+        final EditText customerPhone = (EditText) findViewById(R.id.customerPhoneInput);
+        final EditText orderNumber = (EditText) findViewById(R.id.orderNumberInput);
+        final EditText orderDetails = (EditText) findViewById(R.id.orderDetailsInput);
+        final EditText customerName = (EditText) findViewById(R.id.customerNameInput);
+        final RatingBar orderUrgent = (RatingBar) findViewById(R.id.setUrgentBar);
 
-                int prior = (int) orderUrgent.getRating();
+        final int prior = (int) orderUrgent.getRating();
+        final String customer_phone = customerPhone.getText().toString();
+        final String order_number = orderNumber.getText().toString();
+        final String order_details = orderDetails.getText().toString();
+        final String customer_name = customerName.getText().toString();
 
-                String customer_phone = customerPhone.getText().toString();
-                String order_number = orderNumber.getText().toString();
-                String order_details = orderDetails.getText().toString();
-                String customer_name = customerName.getText().toString();
-
+        ParseUser user = ParseUser.getCurrentUser();
+        user.put("orders_counter", user.getInt("orders_counter") + 1);
+        user.saveInBackground(new SaveCallback() {
+            public void done(ParseException e) {
                 create_new_order(customer_phone, customer_name, order_number, order_details, prior);
             }
+        });
+    }
 
-            public void create_new_order(final String phone, final String customer_name, String code, String details, int prior) {
-                ParseObject order = new ParseObject("Order");
-                order.put("business_user", ParseUser.getCurrentUser());
-                order.put("business_id", ParseUser.getCurrentUser().getObjectId());
-                order.put("business_name", ParseUser.getCurrentUser().getString("name"));
-                order.put("business_address", ParseUser.getCurrentUser().getString("address"));
-                order.put("customer_phone", phone);
-                order.put("customer_name", customer_name);
-                order.put("customer_visible", "yes");
-                order.put("code", code);
-                order.put("details", details);
-                order.put("prior", prior);
-                order.put("status", "In Progress");
-                order.put("history", "no");
-                Log.i(TAG, "before save1");
-                Log.i(TAG, "before save2");
-                order.saveInBackground(new SaveCallback() {
-                    public void done(ParseException e) {
-                        if (e == null) {
-                            Log.i(TAG, "handle_customer(phone);");
-                            handle_customer(phone, customer_name);
-
-                            Intent i = new Intent(new_order_screen.this, business_orders__screen.class);
-                            startActivity(i);
-                        } else {
-                            Log.i(TAG, "e is not null");
-                            Log.i(TAG, String.format("%s", e.toString()));
-                        }
+    public void create_new_order(final String phone, final String customer_name, String code, String details, int prior) {
+                        ParseObject order = new ParseObject("Order");
+                        order.put("business_user", ParseUser.getCurrentUser());
+                        order.put("business_id", ParseUser.getCurrentUser().getObjectId());
+                        order.put("business_name", ParseUser.getCurrentUser().getString("name"));
+                        order.put("business_address", ParseUser.getCurrentUser().getString("address"));
+                        order.put("customer_phone", phone);
+                        order.put("customer_name", customer_name);
+                        order.put("customer_visible", "yes");
+                        order.put("code", code);
+                        order.put("details", details);
+                        order.put("prior", prior);
+                        order.put("status", "In Progress");
+                        order.put("history", "no");
+                        Log.i(TAG, "before save1");
+                        Log.i(TAG, "before save2");
+                        order.saveInBackground(new SaveCallback() {
+                            public void done(ParseException e) {
+                                if (e == null) {
+                                    Log.i(TAG, "handle_customer(phone);");
+                                    handle_customer(phone, customer_name);
+                                    Intent i = new Intent(new_order_screen.this, business_orders__screen.class);
+                                    startActivity(i);
+                                } else {
+                                    Log.i(TAG, "e is not null");
+                                    Log.i(TAG, String.format("%s", e.toString()));
+                                }
+                            }
+                        });
                     }
-                });
-            }
 
-            public static void handle_customer(final String phone, final String name) {
+    public static void handle_customer(final String phone, final String name) {
 
-                ParseQuery<ParseObject> query = ParseQuery.getQuery("Customer");
-                query.whereEqualTo("phone", phone);
-                query.whereEqualTo("business_id", ParseUser.getCurrentUser().getObjectId().toString());
-                query.findInBackground(new FindCallback<ParseObject>() {
-                                           @Override
-                                           public void done(List<ParseObject> customers,
-                                                            ParseException e) {
-                                               if (e == null) {
-                                                   if (customers.size() == 0) {//add new customer
-                                                       final ParseObject customer = new ParseObject("Customer");
-                                                       customer.put("phone", phone);
-                                                       customer.put("name", name);
-                                                       customer.put("business_id", ParseUser.getCurrentUser().getObjectId().toString());
-                                                       customer.put("orders_counter", 1);
-                                                       Log.i(TAG, " customer.saveInBackground() .. ");
+                        ParseQuery<ParseObject> query = ParseQuery.getQuery("Customer");
+                        query.whereEqualTo("phone", phone);
+                        query.whereEqualTo("business_id", ParseUser.getCurrentUser().getObjectId().toString());
+                        query.findInBackground(new FindCallback<ParseObject>() {
+                                                   @Override
+                                                   public void done(List<ParseObject> customers,
+                                                                    ParseException e) {
+                                                       if (e == null) {
+                                                           if (customers.size() == 0) {//add new customer
+                                                               final ParseObject customer = new ParseObject("Customer");
+                                                               customer.put("phone", phone);
+                                                               customer.put("name", name);
+                                                               customer.put("business_id", ParseUser.getCurrentUser().getObjectId().toString());
+                                                               customer.put("orders_counter", 1);
+                                                               Log.i(TAG, " customer.saveInBackground() .. ");
 
-                                                       customer.saveInBackground(new SaveCallback() {
-                                                           public void done(ParseException e) {
-                                                               if (e == null) {
-                                                                   ParseUser user = ParseUser.getCurrentUser();
-                                                                   ParseRelation<ParseObject> relation = user.getRelation("customers");
-                                                                   relation.add(customer);
-                                                                   user.saveInBackground();
-                                                               } else {
-                                                               }
+                                                               customer.saveInBackground(new SaveCallback() {
+                                                                   public void done(ParseException e) {
+                                                                       if (e == null) {
+                                                                           ParseUser user = ParseUser.getCurrentUser();
+                                                                           ParseRelation<ParseObject> relation = user.getRelation("customers");
+                                                                           relation.add(customer);
+                                                                           user.saveInBackground();
+                                                                       } else {
+                                                                       }
+                                                                   }
+                                                               });
+                                                           } else {//customer already exists
+                                                               ParseObject customer = customers.get(0);
+                                                               customer.put("orders_counter", customer.getInt("orders_counter") + 1);
+                                                               customer.put("name", name);
+                                                               customer.saveInBackground();
                                                            }
-                                                       });
-                                                   } else {//customer already exists
-                                                       ParseObject customer = customers.get(0);
-                                                       customer.put("orders_counter", customer.getInt("orders_counter") + 1);
-                                                       customer.put("name", name);
-                                                       customer.saveInBackground();
+                                                       } else {
+                                                           Log.d("Post retrieval", "Error: " + e.getMessage());
+                                                       }
                                                    }
-                                               } else {
-                                                   Log.d("Post retrieval", "Error: " + e.getMessage());
                                                }
-                                           }
-                                       }
-                );
-            }
+                        );
+                    }
 
 
     public void search_contact_clicked(View view) {
-        Intent intent = new Intent(new_order_screen.this, customers_search.class);
-        startActivity(intent);
-    }
-}
+                        Intent intent = new Intent(new_order_screen.this, customers_search.class);
+                        startActivity(intent);
+                    }
+                }

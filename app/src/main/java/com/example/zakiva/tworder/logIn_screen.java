@@ -3,6 +3,7 @@ package com.example.zakiva.tworder;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,14 +14,16 @@ import android.widget.Toast;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 public class logIn_screen extends AppCompatActivity {
 
     void sign_in(String username, String password)
     {
         ParseUser.logInInBackground(username, password, new LogInCallback() {
-            public void done(ParseUser user, ParseException e) {
+            public void done(final ParseUser user, ParseException e) {
                 if (user != null) {
                     String s = (String) ParseUser.getCurrentUser().get("kind");
                     if (s.equals("business")) {
@@ -29,8 +32,19 @@ public class logIn_screen extends AppCompatActivity {
                         startActivity(intent);
                     } else {
                         //what happens if sign in succeeded for customer user
-                        Intent intent = new Intent(getBaseContext(), customer_orders.class);
-                        startActivity(intent);
+                        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+                        installation.put("notification_id", ParseUser.getCurrentUser().getString("phone"));
+                        installation.saveInBackground(new SaveCallback() {
+                            public void done(ParseException e) {
+                                user.put("is_signed_in", "yes");
+                                user.saveInBackground(new SaveCallback() {
+                                    public void done(ParseException e) {
+                                        Intent intent = new Intent(getBaseContext(), customer_orders.class);
+                                        startActivity(intent);
+                                    }
+                                });
+                            }
+                        });
                     }
                 } else {
                     alertToast("Sign-in failed");

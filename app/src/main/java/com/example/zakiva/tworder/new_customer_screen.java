@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
 public class new_customer_screen extends AppCompatActivity {
@@ -25,11 +28,18 @@ public class new_customer_screen extends AppCompatActivity {
         user.put("phone", username);
         user.put("kind", "customer");
         user.put("wants_notification", "yes");
+        user.put("is_signed_in", "yes");
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null) {
-                    Intent intent = new Intent(getBaseContext(), customer_orders.class);
-                    startActivity(intent);
+                    ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+                    installation.put("notification_id", ParseUser.getCurrentUser().getString("phone"));
+                    installation.saveInBackground(new SaveCallback() {
+                        public void done(ParseException e) {
+                            Intent intent = new Intent(getBaseContext(), customer_orders.class);
+                            startActivity(intent);
+                        }
+                    });
                 } else {
                     alertToast("Sign-up failed");
                 }

@@ -292,6 +292,7 @@ public class business_orders__screen extends AppCompatActivity  implements Swipe
 
 
     public void OnLogOutClick() {
+        mode = "orders";
         log_out();
         Intent i = new Intent(this, first_screen.class);
         startActivity(i);
