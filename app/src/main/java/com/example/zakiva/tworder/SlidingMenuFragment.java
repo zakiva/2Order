@@ -56,15 +56,15 @@ public class SlidingMenuFragment extends Fragment implements ExpandableListView.
         List<Section> sectionList = new ArrayList<Section>();
 
         Section oDemoSection = new Section("My Business");
-        oDemoSection.addSectionItem(101, "Orders", "black");
-        oDemoSection.addSectionItem(102, "Orders History", "black");
-        oDemoSection.addSectionItem(103, "Customers", "black");
+        oDemoSection.addSectionItem(101, " Orders", "black");
+        oDemoSection.addSectionItem(102, " Orders History", "black");
+        oDemoSection.addSectionItem(103, " Customers", "black");
 
         Section oGeneralSection = new Section("General");
-        oGeneralSection.addSectionItem(201, "Settings", "black");
-        oGeneralSection.addSectionItem(202, "Rate App", "black");
-        oGeneralSection.addSectionItem(203, "Log Out", "black");
-        oGeneralSection.addSectionItem(204, "Quit", "black");
+        oGeneralSection.addSectionItem(201, " Settings", "black");
+        oGeneralSection.addSectionItem(202, " Rate App", "black");
+        oGeneralSection.addSectionItem(203, " Log Out", "black");
+        oGeneralSection.addSectionItem(204, " Quit", "black");
 
         sectionList.add(oDemoSection);
         sectionList.add(oGeneralSection);
@@ -94,8 +94,7 @@ public class SlidingMenuFragment extends Fragment implements ExpandableListView.
                 ((business_orders__screen)getActivity()).mode = "history";
                 ((business_orders__screen)getActivity()).slidingMenu.toggle();
 
-                //Intent i = new Intent(mActivity, business_orders_history.class);
-                //startActivity(i);
+
                 break;
             case 103:
                 ((business_orders__screen)getActivity()).get_all_user_customers();
@@ -103,6 +102,8 @@ public class SlidingMenuFragment extends Fragment implements ExpandableListView.
                 ((business_orders__screen)getActivity()).slidingMenu.toggle();
                 break;
             case 201:
+                Intent i = new Intent(v.getContext(), settings_business.class);
+                startActivity(i);
                 //TODO
                 break;
             case 202:

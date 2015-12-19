@@ -90,6 +90,10 @@
         </activity>
         <activity android:name=".single_customer_order" >
         </activity>
+        <activity android:name=".settings_customer" >
+        </activity>
+        <activity android:name=".settings_business" >
+        </activity>
     </application>
 
 </manifest>

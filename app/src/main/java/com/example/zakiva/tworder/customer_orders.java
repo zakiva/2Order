@@ -194,6 +194,10 @@ public class customer_orders extends AppCompatActivity {
         customerListView.setAdapter(customerAdapter);
     }
 
+    public void settings_clicked(View view) {
+        Intent i = new Intent(view.getContext(), settings_business.class);
+        startActivity(i);
+    }
 }
 
 
