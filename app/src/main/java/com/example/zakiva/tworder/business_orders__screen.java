@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.net.Uri;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.SmsManager;
@@ -48,7 +49,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
 
-public class business_orders__screen extends AppCompatActivity {
+public class business_orders__screen extends AppCompatActivity  implements SwipeRefreshLayout.OnRefreshListener{
 
     private static final String TAG = ">>>>debug";
     ExpandableListView businessExpandableList;
@@ -56,8 +57,7 @@ public class business_orders__screen extends AppCompatActivity {
     protected static String mode = "orders";
     private Button create_button;
     private TextView screen_title;
-
-
+    SwipeRefreshLayout swipeRefreshLayout;
 
     //this function get a parse object and returns the number of days since it was created
     float time_since_order_created(ParseObject order)
@@ -95,13 +95,17 @@ public class business_orders__screen extends AppCompatActivity {
         create_button = (Button)findViewById(R.id.createNewOrder);
         screen_title = (TextView)findViewById(R.id.screen_title);
 
-        if (mode.equals("orders"))
-            get_all_user_orders();
-        else if (mode.equals("history"))
-            get_all_user_history();
-        else if (mode.equals("customers"))
-            get_all_user_customers();
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        swipeRefreshLayout.setRefreshing(true);
+                                    }
+                                }
+        );
 
+        load_screen();
 
         EditText sv = (EditText) findViewById(R.id.editText);
         sv.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -226,6 +230,17 @@ public class business_orders__screen extends AppCompatActivity {
 
         // getActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+    }
+
+    private void load_screen() {
+
+        if (mode.equals("orders"))
+            get_all_user_orders();
+        else if (mode.equals("history"))
+            get_all_user_history();
+        else if (mode.equals("customers"))
+            get_all_user_customers();
 
     }
 
@@ -362,6 +377,7 @@ public class business_orders__screen extends AppCompatActivity {
             parent.setArrayChildren(arrayChildren);
             arrayParents.add(parent);
         }
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     protected void draw_history(List<ParseObject> orders) {
@@ -383,6 +399,7 @@ public class business_orders__screen extends AppCompatActivity {
             parent.setArrayChildren(arrayChildren);
             arrayParents.add(parent);
         }
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     public void onDeleteClick(View view) {
@@ -463,10 +480,16 @@ public class business_orders__screen extends AppCompatActivity {
             parent.setArrayChildren(arrayChildren);
             arrayParents.add(parent);
         }
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onRefresh() {
+        swipeRefreshLayout.setRefreshing(true);
+        load_screen();
     }
 
     /*
-
     public void information_order_clicked(View view){
         Intent i = new Intent(this, business_order_information.class);
         ViewGroup vp = (ViewGroup) view.getParent();

@@ -27,13 +27,31 @@
         android:layout_alignBottom="@+id/list_button"
         android:layout_centerHorizontal="true" />
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/customer_orders_list"
+
+
+
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
         android:layout_marginTop="40dp"
         android:layout_below="@+id/screen_title"
-        android:layout_alignParentBottom="true"   />
+        android:layout_height="wrap_content">
+
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/customer_orders_list"
+            android:layout_marginTop="40dp"
+            android:layout_below="@+id/screen_title"
+            android:layout_alignParentBottom="true"   />
+
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+
+
 
     <View
         android:id="@+id/SplitLine_hor0"

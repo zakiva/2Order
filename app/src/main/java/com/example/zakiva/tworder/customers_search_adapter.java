@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -36,10 +37,15 @@ public class customers_search_adapter extends ArrayAdapter<String[]> {
 
         rl.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), new_order_screen.class);
-                intent.putExtra("name", item[0]);
-                intent.putExtra("phone", item[1]);
-                v.getContext().startActivity(intent);
+                customer_chosen(v, item[0], item[1]);
+            }
+        });
+
+        Button choose = (Button) customView.findViewById(R.id.button_choose);
+
+        choose.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                customer_chosen(v, item[0], item[1]);
             }
         });
 
@@ -50,5 +56,12 @@ public class customers_search_adapter extends ArrayAdapter<String[]> {
         phone.setText(item[1]);
 
         return customView;
+    }
+
+    private void customer_chosen(View v, String name, String phone) {
+        Intent intent = new Intent(v.getContext(), new_order_screen.class);
+        intent.putExtra("name", name);
+        intent.putExtra("phone", phone);
+        v.getContext().startActivity(intent);
     }
 }

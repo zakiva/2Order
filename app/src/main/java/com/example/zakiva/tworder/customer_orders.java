@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -46,9 +48,10 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
-public class customer_orders extends AppCompatActivity {
+public class customer_orders extends AppCompatActivity  implements SwipeRefreshLayout.OnRefreshListener{
 
     private static final String TAG = ">>>>debug";
+    SwipeRefreshLayout swipeRefreshLayout;
     ExpandableListView businessExpandableList;
 
 
@@ -56,6 +59,16 @@ public class customer_orders extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_orders);
+
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        swipeRefreshLayout.setRefreshing(true);
+                                    }
+                                }
+        );
 
         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
         installation.put("notification_id", ParseUser.getCurrentUser().getString("phone"));
@@ -158,6 +171,7 @@ public class customer_orders extends AppCompatActivity {
     protected void get_all_user_orders() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
         query.whereEqualTo("customer_phone", ParseUser.getCurrentUser().getString("phone"));
+        query.whereEqualTo("customer_visible", "yes");
         query.addAscendingOrder("createdAt"); // old first
         query.findInBackground(new FindCallback<ParseObject>() {
 
@@ -187,16 +201,31 @@ public class customer_orders extends AppCompatActivity {
             Date date = order.getCreatedAt();
             item[5] = df.format(date);
             item[6] = order.getObjectId().toString();
-            items.add(item);
+            if (item[2].equals("READY"))
+                items.add(0, item);
+            else
+                items.add(item);
         }
         ListAdapter customerAdapter = new customer_list_orders_adapter(getBaseContext(), items);
         ListView customerListView = (ListView) findViewById(R.id.customer_orders_list);
         customerListView.setAdapter(customerAdapter);
+
+        swipeRefreshLayout.setRefreshing(false);
+
+
     }
 
     public void settings_clicked(View view) {
         Intent i = new Intent(view.getContext(), settings_business.class);
         startActivity(i);
+    }
+
+    static int x = 0;
+
+    @Override
+    public void onRefresh() {
+        swipeRefreshLayout.setRefreshing(true);
+        get_all_user_orders();
     }
 }
 

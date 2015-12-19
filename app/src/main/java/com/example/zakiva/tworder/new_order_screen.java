@@ -177,6 +177,7 @@ public class new_order_screen extends AppCompatActivity {
                 order.put("business_address", ParseUser.getCurrentUser().getString("address"));
                 order.put("customer_phone", phone);
                 order.put("customer_name", customer_name);
+                order.put("customer_visible", "yes");
                 order.put("code", code);
                 order.put("details", details);
                 order.put("prior", prior);

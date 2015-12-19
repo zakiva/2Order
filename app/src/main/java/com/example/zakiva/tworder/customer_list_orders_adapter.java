@@ -2,10 +2,12 @@ package com.example.zakiva.tworder;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -28,18 +30,16 @@ public class customer_list_orders_adapter extends ArrayAdapter<String[]> {
         final String[] item = getItem(position);
 
         RelativeLayout rl = (RelativeLayout) customView.findViewById(R.id.main_view_RelativeLayout);
-
         rl.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), single_customer_order.class);
-                intent.putExtra("code", item[0]);
-                intent.putExtra("business_name", item[1]);
-                intent.putExtra("status", item[2]);
-                intent.putExtra("business_address", item[3]);
-                intent.putExtra("details", item[4]);
-                intent.putExtra("date", item[5]);
-                intent.putExtra("order_id", item[6]);
-                v.getContext().startActivity(intent);
+                order_chosen(v, item);
+            }
+        });
+
+        Button choose = (Button) customView.findViewById(R.id.button_order_info);
+        choose.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                order_chosen(v, item);
             }
         });
 
@@ -50,6 +50,22 @@ public class customer_list_orders_adapter extends ArrayAdapter<String[]> {
         code.setText("Order: " + item[0]);
         business.setText("From: " + item[1]);
         status.setText("Status: " + item[2]);
+
+        if(item[2].equals("READY"))
+            customView.setBackgroundColor(Color.parseColor("#3904FD91"));
+
         return customView;
+    }
+
+    private void order_chosen(View v, String[] item) {
+        Intent intent = new Intent(v.getContext(), single_customer_order.class);
+        intent.putExtra("code", item[0]);
+        intent.putExtra("business_name", item[1]);
+        intent.putExtra("status", item[2]);
+        intent.putExtra("business_address", item[3]);
+        intent.putExtra("details", item[4]);
+        intent.putExtra("date", item[5]);
+        intent.putExtra("order_id", item[6]);
+        v.getContext().startActivity(intent);
     }
 }
