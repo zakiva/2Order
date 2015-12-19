@@ -9,6 +9,7 @@ class business_list_group  {
     private int rating;
     private String itemKey;
     private boolean editFlag;
+    private String date;
 
 
     public String getTitle() {
@@ -41,6 +42,14 @@ class business_list_group  {
 
     public void setArrayChildren(ArrayList<String> arrayChildren) {
         mArrayChildren = arrayChildren;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }
 

@@ -390,6 +390,9 @@ public class business_orders__screen extends AppCompatActivity  implements Swipe
             business_list_group parent = new business_list_group();
             parent.setTitle("Order " + order.getString("code"));
             parent.setUrgent(order.getInt("prior"));
+            DateFormat df = new SimpleDateFormat("MM/dd/yy");
+            Date date = order.getCreatedAt();
+            parent.setDate(df.format(date));
             parent.setItemKey(order.getObjectId());
             arrayChildren = new ArrayList<String>();
             arrayChildren.add("Phone: " + order.getString("customer_phone"));

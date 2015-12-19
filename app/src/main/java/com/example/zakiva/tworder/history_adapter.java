@@ -102,7 +102,14 @@ class history_adapter extends BaseExpandableListAdapter {
         TextView textView = (TextView) view.findViewById(R.id.list_item_text_view);
         textView.setText(getGroup(groupPosition).toString());
         final RatingBar urgentBar = (RatingBar) view.findViewById(R.id.urgentBar);
-        urgentBar.setRating(mParent.get(groupPosition).getUrgent());
+        urgentBar.setVisibility(View.GONE);
+
+        TextView date = (TextView) view.findViewById(R.id.date);
+        date.setVisibility(View.VISIBLE);
+        date.setText(mParent.get(groupPosition).getDate());
+
+
+
 
         view.setTag(holder);
 
