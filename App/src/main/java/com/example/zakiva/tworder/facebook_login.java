@@ -65,7 +65,7 @@ public class facebook_login extends AppCompatActivity {
         final String phone = phoneInput.getText().toString();
 
         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
-        installation.put("notification_id", ParseUser.getCurrentUser().getString("phone"));
+        installation.put("notification_id", phone);
         installation.saveInBackground(new SaveCallback() {
             public void done(ParseException e) {
                 ParseUser user = ParseUser.getCurrentUser();
