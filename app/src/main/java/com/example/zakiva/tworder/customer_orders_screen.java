@@ -39,12 +39,6 @@ public class customer_orders_screen extends AppCompatActivity {
         ParseUser.logOut();
     }
 
-    void notification_off(){
-        ParseUser user = ParseUser.getCurrentUser();
-        user.put("wants_notification", "no");
-        user.saveInBackground();
-    }
-
     void add_feedback(String business, String feedback_content, int stars)
     {
         ParseObject feedback = new ParseObject("Business_notifications");
@@ -69,13 +63,6 @@ public class customer_orders_screen extends AppCompatActivity {
         poke.saveInBackground();
     }
 
-
-    void notification_on(){
-        ParseUser user = ParseUser.getCurrentUser();
-        user.put("wants_notification", "yes");
-        user.saveInBackground();
-    }
-
     @Override
     public void onBackPressed(){
         //do nothing
@@ -86,29 +73,7 @@ public class customer_orders_screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_orders_screen);
 
-        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
-        installation.put("notification_id", ParseUser.getCurrentUser().getString("phone"));
-        installation.saveInBackground(new SaveCallback() {
-            public void done(ParseException e) {
-                if (e == null) {
-                    ParseUser user = ParseUser.getCurrentUser();
-                    user.put("is_signed_in", "yes");
-                    user.saveInBackground(new SaveCallback() {
-                        public void done(ParseException e) {
-                            if (e == null) {
-                                get_all_user_orders();
-                            } else {
-                                Log.i(TAG, "e is not null");
-                                Log.i(TAG, String.format("%s", e.toString()));
-                            }
-                        }
-                    });
-                } else {
-                    Log.i(TAG, "e is not null");
-                    Log.i(TAG, String.format("%s", e.toString()));
-                }
-            }
-        });
+        get_all_user_orders();
     }
 
     @Override
@@ -154,8 +119,6 @@ public class customer_orders_screen extends AppCompatActivity {
     }
 
     public void OnLogOutClick(View view){
-
-
         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
         installation.put("notification_id", "user is logged out");
         installation.saveInBackground(new SaveCallback() {

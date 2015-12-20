@@ -27,9 +27,9 @@
         android:layout_marginLeft="10dp"
         />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/customerPhoneInput"
-        android:imeOptions ="actionSend"
+        android:imeOptions ="actionNext"
         android:singleLine="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -127,7 +127,7 @@
 
     <AutoCompleteTextView
         android:id="@+id/customerNameInput"
-        android:imeOptions ="actionSend"
+        android:imeOptions ="actionNext"
         android:singleLine="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

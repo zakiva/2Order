@@ -60,6 +60,7 @@ public class customer_orders extends AppCompatActivity  implements SwipeRefreshL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_orders);
 
+
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.post(new Runnable() {
@@ -70,31 +71,10 @@ public class customer_orders extends AppCompatActivity  implements SwipeRefreshL
                                 }
         );
 
-        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
-        installation.put("notification_id", ParseUser.getCurrentUser().getString("phone"));
-        installation.saveInBackground(new SaveCallback() {
-            public void done(ParseException e) {
-                if (e == null) {
-                    ParseUser user = ParseUser.getCurrentUser();
-                    user.put("is_signed_in", "yes");
-                    user.saveInBackground(new SaveCallback() {
-                        public void done(ParseException e2) {
-                            if (e2 == null) {
-                                get_all_user_orders();
-                            } else {
-                                Log.i(TAG, "e is not null");
-                                Log.i(TAG, String.format("%s", e2.toString()));
-                            }
-                        }
-                    });
-                } else {
-                    Log.i(TAG, "e is not null");
-                    Log.i(TAG, String.format("%s", e.toString()));
-                }
-            }
-        });
+        get_all_user_orders();
 
     }
+
 
     @Override
     public void onBackPressed(){
@@ -216,7 +196,7 @@ public class customer_orders extends AppCompatActivity  implements SwipeRefreshL
     }
 
     public void settings_clicked(View view) {
-        Intent i = new Intent(view.getContext(), settings_business.class);
+        Intent i = new Intent(view.getContext(), settings_customer.class);
         startActivity(i);
     }
 
