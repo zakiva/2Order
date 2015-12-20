@@ -45,7 +45,7 @@
     <Button
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="@drawable/info_blue"
+        android:background="@drawable/info_vertical"
         android:text=""
         android:layout_centerVertical="true"
         android:id="@+id/button_order_info"
@@ -55,8 +55,8 @@
     <ImageView
         android:layout_width="18dp"
         android:layout_height="18dp"
+        android:layout_marginTop="14dp"
         android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
         android:id="@+id/person"
         android:background="@drawable/bullet" />
 

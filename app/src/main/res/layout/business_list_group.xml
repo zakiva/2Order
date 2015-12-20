@@ -43,16 +43,4 @@
         />
 
 
-    <Button
-        android:layout_width="60dp"
-        android:layout_height="35dp"
-        android:text="DELETE"
-        android:layout_marginLeft="20dp"
-        android:id="@+id/myDeleteButton"
-        android:layout_weight="1"
-        android:onClick="onDeleteClick"
-        android:background="@drawable/roundedbutton"
-        android:visibility="gone"
-        />
-
 </LinearLayout>

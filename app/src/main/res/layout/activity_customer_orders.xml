@@ -8,10 +8,11 @@
     tools:context="com.example.zakiva.tworder.customer_orders">
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="LOG OUT"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:text=""
         android:id="@+id/logOutCustomerButton"
+        android:background="@drawable/logout"
         android:onClick="OnLogOutClick"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
@@ -23,6 +24,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="My Orders"
+        android:textSize="30dp"
         android:id="@+id/screen_title"
         android:layout_alignBottom="@+id/list_button"
         android:layout_centerHorizontal="true" />
@@ -33,7 +35,7 @@
     <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/screen_title"
         android:layout_height="wrap_content">
 
@@ -42,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/customer_orders_list"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:layout_below="@+id/screen_title"
             android:layout_alignParentBottom="true"   />
 
@@ -59,16 +61,18 @@
         android:layout_height= "2dp"
         android:background="#c0c0c0"
         android:layout_below="@+id/screen_title"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Settings"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:text=""
+        android:background="@drawable/settings"
         android:onClick="settings_clicked"
+        android:layout_alignParentTop="true"
         android:id="@+id/button6"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
