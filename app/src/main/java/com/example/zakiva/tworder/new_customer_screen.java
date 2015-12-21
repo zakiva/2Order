@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -99,5 +100,30 @@ public class new_customer_screen extends AppCompatActivity {
     public void allReadyHaveAcountClick(View view){
         Intent i = new Intent(this, logIn_screen.class);
         startActivity(i);
+    }
+
+    public void new_account_clicked(View view) {
+        Button b = (Button) findViewById(R.id.button9);
+        b.setVisibility(View.GONE);
+        b = (Button) findViewById(R.id.button7);
+        b.setVisibility(View.GONE);
+        TextView t = (TextView) findViewById(R.id.textView15);
+        t.setVisibility(View.GONE);
+
+        b = (Button) findViewById(R.id.login1);
+        b.setVisibility(View.VISIBLE);
+        t = (TextView) findViewById(R.id.PhoneText);
+        t.setVisibility(View.VISIBLE);
+        t = (TextView) findViewById(R.id.repasswordText);
+        t.setVisibility(View.VISIBLE);
+        t = (TextView) findViewById(R.id.passwordText);
+        t.setVisibility(View.VISIBLE);
+        EditText e = (EditText) findViewById(R.id.phoneInput);
+        e.setVisibility(View.VISIBLE);
+        e = (EditText) findViewById(R.id.repasswordInput);
+        e.setVisibility(View.VISIBLE);
+        e = (EditText) findViewById(R.id.passwordInput);
+        e.setVisibility(View.VISIBLE);
+
     }
 }
