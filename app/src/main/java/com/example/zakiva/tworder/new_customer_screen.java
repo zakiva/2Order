@@ -90,4 +90,14 @@ public class new_customer_screen extends AppCompatActivity {
         toast2.setView(layout);
         toast2.show();
     }
+
+    public void facebook_login(View view){
+        Intent i = new Intent(this, facebook_login.class);
+        startActivity(i);
+    }
+
+    public void allReadyHaveAcountClick(View view){
+        Intent i = new Intent(this, logIn_screen.class);
+        startActivity(i);
+    }
 }
