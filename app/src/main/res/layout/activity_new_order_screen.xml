@@ -107,12 +107,12 @@
         android:id="@+id/createButton"
         android:text="Create"
         android:textColor="#FFF"
+        android:layout_below="@+id/setUrgentBar"
         android:background="#00F"
+        android:layout_marginTop="30dp"
         android:onClick="onCreateNewOrder"
-        android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/setUrgentBar"
-        android:layout_alignStart="@+id/setUrgentBar"
-        android:layout_marginBottom="40dp" />
+        android:layout_alignStart="@+id/setUrgentBar"/>
 
     <TextView
         android:id="@+id/textView2"
