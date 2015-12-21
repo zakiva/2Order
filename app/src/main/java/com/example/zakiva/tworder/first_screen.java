@@ -27,13 +27,4 @@ public class first_screen extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void allReadyHaveAcountClick(View view){
-        Intent i = new Intent(this, logIn_screen.class);
-        startActivity(i);
-    }
-
-    public void facebook_login(View view){
-        Intent i = new Intent(this, facebook_login.class);
-        startActivity(i);
-    }
 }

@@ -28,6 +28,7 @@ public class new_business_screen extends AppCompatActivity {
         user.setUsername(username);
         user.setPassword(password);
         user.put("kind", "business");
+        user.put("days_alert", 3);
         user.put("Auto_orders_numbers", "no");
         user.put("orders_counter", 1);
         user.put("name", name);
@@ -96,6 +97,11 @@ public class new_business_screen extends AppCompatActivity {
         toast2.setDuration(Toast.LENGTH_LONG);
         toast2.setView(layout);
         toast2.show();
+    }
+
+    public void allReadyHaveAcountClick(View view){
+        Intent i = new Intent(this, logIn_screen.class);
+        startActivity(i);
     }
 
 }

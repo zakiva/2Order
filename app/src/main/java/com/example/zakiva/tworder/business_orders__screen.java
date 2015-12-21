@@ -365,7 +365,7 @@ public class business_orders__screen extends AppCompatActivity  implements Swipe
         for (ParseObject order : orders) {
             business_list_group parent = new business_list_group();
             parent.setTitle("Order " + order.getString("code"));
-            if ((time_since_order_created(order)) > 3){
+            if ((time_since_order_created(order)) > ParseUser.getCurrentUser().getInt("days_alert")){
                 parent.setTitle("Order " + order.getString("code") + " *LATE!*");
             }
             parent.setUrgent(order.getInt("prior"));

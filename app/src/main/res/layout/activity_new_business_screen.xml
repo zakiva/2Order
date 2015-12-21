@@ -138,4 +138,19 @@
         android:onClick="onBusinessLogClick"
         />
 
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="already have acount"
+        android:id="@+id/button4"
+        android:onClick="allReadyHaveAcountClick"
+        android:layout_column="14"
+        android:background="#00000000"
+        android:textColor="#d22323"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_toEndOf="@+id/imageView" />
+
 </RelativeLayout>
