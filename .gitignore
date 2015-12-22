@@ -11,9 +11,9 @@
 app/.idea
 /app/app.iml
 app/app.iml
-libraries/slidingmenu
 /app/app.iml
+*.iml
+libraries/slidingmenu
 /libraries/slidingmenu
 libraries/slidingmenu/*
 /libraries/slidingmenu/*
-*.iml
