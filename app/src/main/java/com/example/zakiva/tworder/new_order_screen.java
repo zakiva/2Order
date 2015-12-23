@@ -98,10 +98,10 @@ public class new_order_screen extends AppCompatActivity {
                     List<String> cust2 = new ArrayList<String>();
                     for (ParseObject po : customers) {
                         String id = po.getString("phone");
-                        cust.add(id);
+                        cust2.add(id);
                     }
                     ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(new_order_screen.this, android.R.layout.simple_list_item_1, cust2);
-                    actv2.setAdapter(adapter);
+                    actv2.setAdapter(adapter2);
 
                     actv2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
