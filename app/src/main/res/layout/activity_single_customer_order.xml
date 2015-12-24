@@ -281,8 +281,8 @@
             android:textColor="#0a047c" />
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:id="@+id/imageView2"
             android:background="@drawable/clock"
             android:layout_below="@+id/SplitLine_hor4"
@@ -330,6 +330,79 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="10dp"/>
+
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="20dp"
+            android:textAllCaps="false"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/feedback_icon"
+            android:text=""
+            android:layout_toRightOf="@+id/give_feedback"
+            android:onClick="give_feedback_click"
+            android:id="@+id/button_give_feedback"
+            android:layout_below="@+id/SplitLine_hor7"/>
+
+
+        <Button
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:textAllCaps="false"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_toRightOf="@+id/poke_business"
+            android:text=""
+            android:background="@drawable/poke"
+            android:onClick="poke_clicked"
+            android:id="@+id/button_poke"
+            android:layout_below="@+id/SplitLine_hor8"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Give Feedback:"
+            android:id="@+id/give_feedback"
+            android:layout_below="@+id/SplitLine_hor7"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="25dp"/>
+
+        <View
+            android:id="@+id/SplitLine_hor8"
+            android:layout_width="match_parent"
+            android:layout_height= "2dp"
+            android:background="#c0c0c0"
+            android:layout_below="@+id/button_give_feedback"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Poke Business:"
+            android:id="@+id/poke_business"
+            android:layout_below="@+id/SplitLine_hor8"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="25dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Poked !"
+            android:textSize="30dp"
+            android:visibility="gone"
+            android:id="@+id/poked"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/SplitLine_hor8"
+            android:layout_marginTop="25dp"
+            android:textColor="#610c0c" />
+
 
 
     </RelativeLayout>

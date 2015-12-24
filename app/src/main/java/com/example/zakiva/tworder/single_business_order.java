@@ -136,7 +136,7 @@ public class single_business_order extends AppCompatActivity {
         make_switch();
         ratingBar.setIsIndicator(false);
         Drawable progress = ratingBar.getProgressDrawable();
-        DrawableCompat.setTint(progress, Color.BLUE);
+        DrawableCompat.setTint(progress, Color.parseColor("#FF1887D7"));
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
     }

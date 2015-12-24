@@ -16,10 +16,12 @@
         android:onClick="createNewOrderClick"
         android:textSize="40dp"
         android:text=""
+        android:layout_marginTop="17dp"
         android:layout_marginRight="-5dp"
+        android:layout_below="@+id/button_notifications"
         android:layout_alignParentRight="true"
         android:background="@drawable/add"
-        android:layout_alignParentTop="true" />
+        />
 
     <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipe_refresh_layout"
@@ -49,6 +51,7 @@
         android:id="@+id/editText"
         android:singleLine="true"
         android:hint="search order"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/screen_title"
         android:layout_centerHorizontal="true" />
 
@@ -56,7 +59,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginRight="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:layout_below="@+id/screen_title"
         android:background="@drawable/search_small"
         android:layout_toLeftOf="@+id/editText"/>
@@ -75,11 +78,24 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="My Orders"
+        android:textSize="32dp"
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textColor="#0a047c"
         android:id="@+id/screen_title"
-        android:layout_alignBottom="@+id/list_button"
         android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginRight="1dp"
+        android:text=""
+        android:background="@drawable/bell"
+        android:onClick="notifications_clicked"
+        android:id="@+id/button_notifications"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"/>
 
 
 </RelativeLayout>

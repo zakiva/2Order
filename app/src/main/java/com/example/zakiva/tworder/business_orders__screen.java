@@ -228,7 +228,40 @@ public class business_orders__screen extends AppCompatActivity  implements Swipe
         slidingMenu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
         slidingMenu.setMenu(R.layout.slidingmenu);
 
+
         // getActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+    }
+
+    private void check_notifications() {
+        final Button notifications_button = (Button) findViewById(R.id.button_notifications);
+        final String user_id = ParseUser.getCurrentUser().getObjectId().toString();
+
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Business");
+        query.whereEqualTo("user_id", user_id);
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects,
+                             ParseException e) {
+                if (e == null) {
+
+                    ParseObject business = objects.get(0);
+
+                    Log.i(TAG, " CHECKING ###  .. ");
+                    Log.i(TAG, String.format(" numebr = %d  .. ", business.getInt("new_notifications")));
+
+                    if (business.getInt("new_notifications") > 0)
+                        notifications_button.setBackgroundResource(R.drawable.red_bell);
+                    else
+                        notifications_button.setBackgroundResource(R.drawable.bell);
+
+                } else {
+                    // Something went wrong.
+                }
+            }
+        });
+
 
 
     }
@@ -254,6 +287,7 @@ public class business_orders__screen extends AppCompatActivity  implements Swipe
             get_all_user_history();
         else if (mode.equals("customers"))
             get_all_user_customers();
+
     }
 
     @Override
@@ -316,6 +350,7 @@ public class business_orders__screen extends AppCompatActivity  implements Swipe
                                    public void done(List<ParseObject> orders,
                                                     ParseException e) {
                                        if (e == null) {
+                                           check_notifications();
                                            draw_orders(orders);
                                        } else {
                                            Log.d("Post retrieval", "Error: " + e.getMessage());
@@ -491,6 +526,11 @@ public class business_orders__screen extends AppCompatActivity  implements Swipe
     public void onRefresh() {
         swipeRefreshLayout.setRefreshing(true);
         load_screen();
+    }
+
+    public void notifications_clicked(View view){
+        Intent i = new Intent(this, notifications.class);
+        startActivity(i);
     }
 
     /*

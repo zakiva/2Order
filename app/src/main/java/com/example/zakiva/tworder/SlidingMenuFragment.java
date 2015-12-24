@@ -62,7 +62,7 @@ public class SlidingMenuFragment extends Fragment implements ExpandableListView.
 
         Section oGeneralSection = new Section("General");
         oGeneralSection.addSectionItem(201, " Settings", "black");
-        oGeneralSection.addSectionItem(202, " Rate App", "black");
+        oGeneralSection.addSectionItem(202, " Notifications", "black");
         oGeneralSection.addSectionItem(203, " Log Out", "black");
         oGeneralSection.addSectionItem(204, " Quit", "black");
 
@@ -107,7 +107,8 @@ public class SlidingMenuFragment extends Fragment implements ExpandableListView.
                 //TODO
                 break;
             case 202:
-                //TODO
+                Intent in = new Intent(v.getContext(), notifications.class);
+                startActivity(in);
                 break;
             case 203:
             ((business_orders__screen)getActivity()).OnLogOutClick();

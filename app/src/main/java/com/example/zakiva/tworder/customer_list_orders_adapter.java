@@ -69,6 +69,8 @@ public class customer_list_orders_adapter extends ArrayAdapter<String[]> {
         intent.putExtra("details", item[4]);
         intent.putExtra("date", item[5]);
         intent.putExtra("order_id", item[6]);
+        intent.putExtra("business_id", item[7]);
+        intent.putExtra("customer_name", item[8]);
         v.getContext().startActivity(intent);
     }
 }

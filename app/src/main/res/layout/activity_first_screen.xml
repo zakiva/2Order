@@ -9,9 +9,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/logo"
+        android:layout_width="250dp"
+        android:layout_marginTop="15dp"
+        android:layout_height="70dp"
+        android:src="@drawable/app_logo"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
@@ -41,9 +42,9 @@
         android:layout_column="17"
         android:background="@drawable/business_t"
         android:textColor="#FFF"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="15dp"
         android:textSize="26dp"
-        android:layout_below="@+id/imageView"
+        android:layout_below="@+id/SplitLine_hor1"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="34dp"
@@ -80,7 +81,7 @@
         android:layout_below="@+id/imageView"
         android:layout_height= "2dp"
         android:background="#c0c0c0"
-        android:layout_marginTop="70dp"/>
+        android:layout_marginTop="40dp"/>
 
     <View
         android:id="@+id/SplitLine_hor2"

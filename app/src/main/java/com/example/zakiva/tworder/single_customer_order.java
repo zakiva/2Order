@@ -9,16 +9,22 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
+
+import java.util.List;
 
 public class single_customer_order extends AppCompatActivity {
 
@@ -105,5 +111,63 @@ public class single_customer_order extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void poke_clicked(View view) {
+
+        TextView poked = (TextView) findViewById(R.id.poked);
+        poked.setVisibility(View.VISIBLE);
+        TextView poke = (TextView) findViewById(R.id.poke_business);
+        poke.setVisibility(View.GONE);
+        Button poke_button = (Button) findViewById(R.id.button_poke);
+        poke_button.setVisibility(View.GONE);
+
+
+        final Bundle extras = getIntent().getExtras();
+        ParseObject notification = new ParseObject("Notification");
+        notification.put("customer_user", ParseUser.getCurrentUser());
+        notification.put("type", "order");
+        notification.put("order_id", extras.get("order_id"));
+        notification.put("text", "");
+        notification.put("order_code", extras.getString("code"));
+        notification.put("customer_name", extras.getString("customer_name"));
+        notification.put("stars", 0);
+        notification.put("business_id", extras.getString("business_id"));
+        notification.put("customer_phone", ParseUser.getCurrentUser().getString("phone"));
+
+        notification.saveInBackground(new SaveCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    ParseQuery<ParseObject> query = ParseQuery.getQuery("Business");
+                    query.whereEqualTo("user_id", extras.getString("business_id"));
+                    query.findInBackground(new FindCallback<ParseObject>() {
+                        @Override
+                        public void done(List<ParseObject> objects,
+                                         ParseException e) {
+                            if (e == null) {
+
+                                ParseObject business = objects.get(0);
+
+                                business.put("new_notifications", (business.getInt("new_notifications") + 1));
+                                business.saveInBackground();
+                            } else {
+                                // Something went wrong.
+                            }
+                        }
+                    });
+
+                } else {
+
+                }
+            }
+        });
+    }
+
+    public void give_feedback_click(View view) {
+        Bundle extras = getIntent().getExtras();
+        Intent i = new Intent(single_customer_order.this, give_feedback.class);
+        i.putExtra("business_id", extras.getString("business_id"));
+        i.putExtra("customer_name", extras.getString("customer_name"));
+        startActivity(i);
     }
 }

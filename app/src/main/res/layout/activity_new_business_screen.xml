@@ -8,8 +8,9 @@
     tools:context="com.example.zakiva.tworder.new_business_screen">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_marginTop="15dp"
+        android:layout_height="70dp"
         android:id="@+id/imageView"
         android:src="@drawable/logo"
         android:layout_alignParentTop="true"

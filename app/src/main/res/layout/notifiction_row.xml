@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Date"
+        android:textSize="14dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:id="@+id/date"
+        android:textColor="#FF5151D6" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:layout_below="@+id/date"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:id="@+id/text"
+        android:textColor="#FF5151D6" />
+
+
+    <Button
+        android:layout_width="110dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/text"
+        android:textAllCaps="false"
+        android:textSize="12dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:layout_centerHorizontal="true"
+        android:text="View Feedback"
+        android:textColor="#FFF"
+        android:background="#5151d6"
+        android:id="@+id/view_notification_context" />
+</RelativeLayout>

@@ -24,10 +24,10 @@
 
     <application
         android:name=".App"
-        android:largeHeap="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity android:name=".MainActivity" >
@@ -94,6 +94,12 @@
         <activity android:name=".settings_customer" >
         </activity>
         <activity android:name=".settings_business" >
+        </activity>
+        <activity android:name=".notifications" >
+        </activity>
+        <activity android:name=".feedback_screen" >
+        </activity>
+        <activity android:name=".give_feedback" >
         </activity>
     </application>
 

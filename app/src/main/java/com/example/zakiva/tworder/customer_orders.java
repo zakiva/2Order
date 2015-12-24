@@ -171,7 +171,7 @@ public class customer_orders extends AppCompatActivity  implements SwipeRefreshL
     protected void draw_orders(List<ParseObject> orders) {
         ArrayList<String[]> items = new ArrayList<String[]>();
         for (ParseObject order : orders) {
-            String[] item = new String[7];
+            String[] item = new String[9];
             item[0] = order.getString("code");
             item[1] = order.getString("business_name");
             item[2] = order.getString("status");
@@ -181,6 +181,8 @@ public class customer_orders extends AppCompatActivity  implements SwipeRefreshL
             Date date = order.getCreatedAt();
             item[5] = df.format(date);
             item[6] = order.getObjectId().toString();
+            item[7] = order.getString("business_id");
+            item[8] = order.getString("customer_name");
             if (item[2].equals("READY"))
                 items.add(0, item);
             else
