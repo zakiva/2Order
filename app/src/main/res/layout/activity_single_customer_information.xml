@@ -30,7 +30,8 @@
             android:layout_marginTop="15dp"
             android:layout_marginRight="60dp"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/SplitLine_hor6" />
+            android:layout_below="@+id/SplitLine_hor6"
+            android:onClick="smsclick" />
 
         <View
             android:id="@+id/SplitLine_hor1"

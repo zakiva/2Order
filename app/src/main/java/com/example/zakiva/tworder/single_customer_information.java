@@ -88,5 +88,12 @@ public class single_customer_information extends AppCompatActivity {
         call(extras.getString("phone"));
     }
 
+    public void smsclick(View view){
+        Bundle extras = getIntent().getExtras();
+        Intent i = new Intent(getBaseContext(), write_sms.class);
+        i.putExtra("phone", extras.getString("phone"));
+        startActivity(i);
+    }
+
 
 }
