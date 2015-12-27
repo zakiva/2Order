@@ -72,11 +72,56 @@
         android:textColor="#FFF"
         android:background="#00F"
         android:onClick="onLogInClick"
-        android:layout_marginTop="55dp"
         android:layout_below="@+id/passwordInput"
-        android:layout_alignLeft="@+id/passwordInput"
-        android:layout_alignStart="@+id/passwordInput"
+        android:layout_marginTop="35dp"
         android:layout_alignRight="@+id/passwordInput"
-        android:layout_alignEnd="@+id/passwordInput" />
+        android:layout_alignEnd="@+id/passwordInput"
+        android:layout_alignLeft="@+id/passwordInput"
+        android:layout_alignStart="@+id/passwordInput" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forgot password"
+        android:id="@+id/button12"
+        android:layout_below="@+id/logButton"
+        android:layout_centerHorizontal="true"
+        android:onClick="forgotClicked" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Email:"
+        android:id="@+id/textView22"
+        android:layout_below="@+id/button12"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:imeOptions="actionSend"
+        android:singleLine="true"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText5"
+        android:width="330dp"
+        android:inputType="textPassword"
+        android:layout_below="@+id/textView22"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/button12"
+        android:layout_alignEnd="@+id/button12" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Restore"
+        android:id="@+id/button13"
+        android:layout_alignBottom="@+id/editText5"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/usernameText"
+        android:layout_toEndOf="@+id/usernameText"
+        android:onClick="restoreClicked" />
 
 </RelativeLayout>

@@ -48,6 +48,7 @@ import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseRelation;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 public class business_orders__screen extends AppCompatActivity  implements SwipeRefreshLayout.OnRefreshListener{
 
@@ -347,12 +348,50 @@ public class business_orders__screen extends AppCompatActivity  implements Swipe
         query.findInBackground(new FindCallback<ParseObject>() {
 
                                    @Override
-                                   public void done(List<ParseObject> orders,
+                                   public void done(final List<ParseObject> orders,
                                                     ParseException e) {
                                        if (e == null) {
-                                           check_notifications();
-                                           draw_orders(orders);
-                                       } else {
+                                           final List late_orders = new ArrayList();
+                                           for (ParseObject order: orders){
+                                               if ( (time_since_order_created(order)) > ParseUser.getCurrentUser().getInt("days_alert")  &&  order.getString("marked_as_late").equals("no") ){
+                                                   order.put("marked_as_late", "yes");
+                                                   ParseObject notification = new ParseObject("Notification");
+                                                   notification.put("customer_user", ParseUser.getCurrentUser());
+                                                   notification.put("type", "order_late");
+                                                   notification.put("order_id", order.getObjectId());
+                                                   notification.put("text", "");
+                                                   notification.put("order_code", order.getString("code"));
+                                                   notification.put("customer_name", order.getString("customer_name"));
+                                                   notification.put("stars", 0);
+                                                   notification.put("business_id", order.getString("business_id"));
+                                                   notification.put("customer_phone", order.getString("customer_phone"));
+                                                   late_orders.add(notification);
+                                                   late_orders.add(order);
+                                                   ParseQuery<ParseObject> query = ParseQuery.getQuery("Business");
+                                                   query.whereEqualTo("user_id", order.getString("business_id"));
+                                                   query.findInBackground(new FindCallback<ParseObject>() {
+                                                       @Override
+                                                       public void done(List<ParseObject> objects,
+                                                                        ParseException e) {
+                                                           if (e == null) {
+                                                               ParseObject business = objects.get(0);
+                                                               business.put("new_notifications", (business.getInt("new_notifications") + 1));
+                                                               late_orders.add(business);
+                                                           } else {
+                                                               // Something went wrong.
+                                                           }
+                                                       }
+                                                   });
+                                               }
+                                           }
+                                           ParseObject.saveAllInBackground(late_orders, new SaveCallback() {
+                                               @Override
+                                               public void done(ParseException e) {
+                                                   check_notifications();
+                                                   draw_orders(orders);
+                                               }
+
+                                       });} else {
                                            Log.d("Post retrieval", "Error: " + e.getMessage());
                                        }
                                    }

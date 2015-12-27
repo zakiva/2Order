@@ -240,6 +240,7 @@ public class new_order_screen extends AppCompatActivity {
                         order.put("prior", prior);
                         order.put("status", "In Progress");
                         order.put("history", "no");
+                        order.put("marked_as_late", "no");
                         Log.i(TAG, "before save1");
                         Log.i(TAG, "before save2");
                         order.saveInBackground(new SaveCallback() {

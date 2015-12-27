@@ -95,6 +95,9 @@
         <activity android:name=".feedback_screen"></activity>
         <activity android:name=".give_feedback"></activity>
         <activity android:name=".write_sms"></activity>
+        <provider android:authorities="com.facebook.app.FacebookContentProvider903448256357242"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true"/>
     </application>
 
 </manifest>

@@ -29,4 +29,14 @@
         android:layout_alignRight="@+id/textView9"
         android:layout_alignEnd="@+id/textView9" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Share on facebook!!"
+        android:id="@+id/button14"
+        android:onClick="shareOnFacebookClicked"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="65dp" />
+
 </RelativeLayout>
