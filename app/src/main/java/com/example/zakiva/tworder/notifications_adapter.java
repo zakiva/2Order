@@ -63,6 +63,10 @@ public class notifications_adapter extends ArrayAdapter<String[]> {
             text.setText(item[6] + " Poke You On Order " + item[5]);
 
         }
+        else if (item[1].equals("order_late")){
+            choose.setText("View Order");
+            text.setText("Order " + item[5] + " is late");
+        }
         else
         {
             choose.setText("View Feedback");
@@ -75,7 +79,7 @@ public class notifications_adapter extends ArrayAdapter<String[]> {
                     final String itemId = item[0]; // need to put in item[0] the objectID
 
 
-                    if (item[1].equals("order")) { // if the notification is poke (regular or auto)
+                    if (item[1].equals("order") || item[1].equals("order_late")) { // if the notification is poke (regular or auto)
 
                         ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
                         query.getInBackground(itemId, new GetCallback<ParseObject>() {

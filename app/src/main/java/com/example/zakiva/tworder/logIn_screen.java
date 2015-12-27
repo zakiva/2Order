@@ -8,6 +8,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParseUser;
+import com.parse.RequestPasswordResetCallback;
 import com.parse.SaveCallback;
 
 public class logIn_screen extends AppCompatActivity {
@@ -57,6 +59,39 @@ public class logIn_screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in_screen);
+
+        EditText email_edit = (EditText) findViewById(R.id.editText5);
+        email_edit.setVisibility(View.INVISIBLE);
+        TextView email_text = (TextView) findViewById(R.id.textView22);
+        email_text.setVisibility(View.INVISIBLE);
+        Button button = (Button) findViewById(R.id.button13);
+        button.setVisibility(View.INVISIBLE);
+
+    }
+
+    public void forgotClicked(View view){
+        EditText email_edit = (EditText) findViewById(R.id.editText5);
+        email_edit.setVisibility(View.VISIBLE);
+        TextView email_text = (TextView) findViewById(R.id.textView22);
+        email_text.setVisibility(View.VISIBLE);
+        Button button = (Button) findViewById(R.id.button13);
+        button.setVisibility(View.VISIBLE);
+    }
+
+    public void restoreClicked(View view){
+        EditText email_edit = (EditText) findViewById(R.id.editText5);
+        String email = email_edit.getText().toString();
+
+        ParseUser.requestPasswordResetInBackground(email, new RequestPasswordResetCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    TextView email_text = (TextView) findViewById(R.id.textView22);
+                    email_text.setText("Password sent to:");
+                } else {
+                    // Something went wrong. Look at the ParseException to see what's up.
+                }
+            }
+        });
     }
 
     public void onLogInClick(View view){

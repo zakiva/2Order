@@ -287,7 +287,7 @@ class businees_order_adapter extends BaseExpandableListAdapter {
 
                     } else {
                         Log.d("send:", "sms- user does not exist");
-                        send_sms(username, message);
+                        send_sms(username, message + " You can download the 2Order app here: https://www.downloadapp.com");
                     }
                 } else {
                     // The request failed
