@@ -30,6 +30,7 @@ public class new_business_screen extends AppCompatActivity {
         ParseUser user = new ParseUser();
         user.setUsername(username);
         user.setPassword(password);
+        user.setEmail(username);
         user.put("kind", "business");
         user.put("days_alert", 3);
         user.put("Auto_orders_numbers", "no");

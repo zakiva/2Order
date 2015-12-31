@@ -48,7 +48,7 @@
         android:textSize="20dp"
         android:visibility="gone"
 
-        android:layout_below="@+id/phoneInput"
+        android:layout_below="@+id/emailInput"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         />
@@ -73,7 +73,6 @@
         android:text="Confirm Password"
         android:textSize="20dp"
         android:visibility="gone"
-
         android:id="@+id/repasswordText"
         android:layout_below="@+id/passwordInput"
         android:layout_marginTop="5dp"
@@ -87,12 +86,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-
         android:layout_below="@+id/repasswordText"
         android:layout_marginLeft="10dp"
         android:width="330dp"
         android:inputType="textPassword"
         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textSize="20dp"
+        android:visibility="gone"
+        android:id="@+id/emailText"
+        android:layout_below="@+id/phoneInput"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        />
+
+    <EditText
+        android:id="@+id/emailInput"
+        android:imeOptions ="actionSend"
+        android:singleLine="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@+id/emailText"
+        android:layout_marginLeft="10dp"
+        android:width="330dp"
+        />
+
 
     <Button
         android:layout_width="150dp"

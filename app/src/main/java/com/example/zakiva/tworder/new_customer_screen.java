@@ -22,10 +22,11 @@ import com.parse.SignUpCallback;
 
 public class new_customer_screen extends AppCompatActivity {
 
-    void sign_up(String username, String password) {
+    void sign_up(String username, String password, String email) {
         ParseUser user = new ParseUser();
         user.setUsername(username);
         user.setPassword(password);
+        user.setEmail(email);
         user.put("phone", username);
         user.put("kind", "customer");
         user.put("wants_notification", "yes");
@@ -60,17 +61,19 @@ public class new_customer_screen extends AppCompatActivity {
         final EditText phoneInput = (EditText) findViewById(R.id.phoneInput);
         final EditText passwordInput = (EditText) findViewById(R.id.passwordInput);
         final EditText rePasswordInput = (EditText) findViewById(R.id.repasswordInput);
+        final EditText emailInput = (EditText) findViewById(R.id.emailInput);
 
         String phone = phoneInput.getText().toString();
         String password = passwordInput.getText().toString();
         String rePassword = rePasswordInput.getText().toString();
+        String email = emailInput.getText().toString();
 
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.my_custom_alert,
                 (ViewGroup) findViewById(R.id.my_custom_layout_id));
         TextView text = (TextView) layout.findViewById(R.id.alertText);
         if (password.equals(rePassword)) {
-            sign_up(phone, password);
+            sign_up(phone, password, email);
         } else{
             passwordInput.setTextColor(Color.parseColor("RED"));
             rePasswordInput.setTextColor(Color.parseColor("RED"));
@@ -118,11 +121,15 @@ public class new_customer_screen extends AppCompatActivity {
         t.setVisibility(View.VISIBLE);
         t = (TextView) findViewById(R.id.passwordText);
         t.setVisibility(View.VISIBLE);
+        t = (TextView) findViewById(R.id.emailText);
+        t.setVisibility(View.VISIBLE);
         EditText e = (EditText) findViewById(R.id.phoneInput);
         e.setVisibility(View.VISIBLE);
         e = (EditText) findViewById(R.id.repasswordInput);
         e.setVisibility(View.VISIBLE);
         e = (EditText) findViewById(R.id.passwordInput);
+        e.setVisibility(View.VISIBLE);
+        e = (EditText) findViewById(R.id.emailInput);
         e.setVisibility(View.VISIBLE);
 
     }

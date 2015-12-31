@@ -153,7 +153,7 @@
             android:text="Created at:"
             android:id="@+id/textview_time_create"
             android:layout_below="@+id/SplitLine_hor5"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"/>
 
@@ -252,8 +252,9 @@
         <View
             android:id="@+id/SplitLine_hor4"
             android:layout_width="match_parent"
-            android:layout_height= "2dp"
+            android:layout_height= "5dp"
             android:background="#c0c0c0"
+            android:layout_marginTop="10dp"
             android:layout_below="@+id/switcher_name"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
@@ -280,24 +281,17 @@
             android:textStyle="bold"
             android:textColor="#0a047c" />
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/imageView2"
-            android:background="@drawable/clock"
-            android:layout_below="@+id/SplitLine_hor4"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="10dp"/>
+
 
         <View
             android:id="@+id/SplitLine_hor5"
             android:layout_width="match_parent"
-            android:layout_height= "2dp"
+            android:layout_height= "0dp"
             android:background="#c0c0c0"
-            android:layout_below="@+id/imageView2"
+            android:layout_below="@+id/SplitLine_hor4"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="0dp"/>
 
 
         <View
@@ -324,19 +318,29 @@
         <View
             android:id="@+id/SplitLine_hor7"
             android:layout_width="match_parent"
-            android:layout_height= "2dp"
+            android:layout_height= "5dp"
             android:background="#c0c0c0"
             android:layout_below="@+id/textview_status"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="10dp"/>
 
+        <View
+            android:id="@+id/SplitLine_hor75"
+            android:layout_width="match_parent"
+            android:layout_height= "0dp"
+            android:background="#c0c0c0"
+            android:layout_below="@+id/SplitLine_hor7"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"/>
+
         <Button
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_marginLeft="20dp"
             android:textAllCaps="false"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="25dp"
             android:background="@drawable/feedback_icon"
             android:text=""
             android:layout_toRightOf="@+id/give_feedback"
@@ -346,11 +350,11 @@
 
 
         <Button
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:textAllCaps="false"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/poke_business"
             android:text=""
             android:background="@drawable/poke"
@@ -367,7 +371,7 @@
             android:layout_below="@+id/SplitLine_hor7"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="25dp"/>
+            android:layout_marginTop="30dp"/>
 
         <View
             android:id="@+id/SplitLine_hor8"
@@ -377,7 +381,7 @@
             android:layout_below="@+id/button_give_feedback"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="6dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -388,7 +392,7 @@
             android:layout_below="@+id/SplitLine_hor8"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="25dp"/>
+            android:layout_marginTop="15dp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -400,8 +404,42 @@
             android:id="@+id/poked"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/SplitLine_hor8"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="10dp"
             android:textColor="#610c0c" />
+
+        <View
+            android:id="@+id/SplitLine_hor9"
+            android:layout_width="match_parent"
+            android:layout_height= "2dp"
+            android:background="#c0c0c0"
+            android:layout_below="@+id/SplitLine_hor8"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="60dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Recommend Business:"
+            android:id="@+id/tell_friend"
+            android:layout_below="@+id/SplitLine_hor9"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="15dp"/>
+
+        <Button
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:textAllCaps="false"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@+id/tell_friend"
+            android:text=""
+            android:background="@drawable/shre_on_facebook"
+            android:onClick="shareOnFacebookClicked"
+            android:id="@+id/button_share"
+            android:layout_below="@+id/SplitLine_hor9"/>
 
 
 

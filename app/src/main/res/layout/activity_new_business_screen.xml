@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView"
-        android:text="User Name"
+        android:text="Email"
         android:textSize="20dp"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
