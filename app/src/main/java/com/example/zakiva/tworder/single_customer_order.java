@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -161,6 +164,18 @@ public class single_customer_order extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void shareOnFacebookClicked(View view){
+        Bundle extras = getIntent().getExtras();
+        String business_name = extras.getString("business_name");
+        ShareLinkContent content = new ShareLinkContent.Builder()
+                .setContentUrl(Uri.parse("https://www.downloadapp.com"))
+                .setContentTitle("I would like to recommend " + business_name + ". They handled my order superbly!")
+                .build();
+        //ShareButton shareButton = (ShareButton)findViewById(R.id.button14);
+        //shareButton.setShareContent(content);
+        ShareDialog.show(this, content);
     }
 
     public void give_feedback_click(View view) {
