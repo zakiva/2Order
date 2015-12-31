@@ -343,7 +343,7 @@ public class single_business_order extends AppCompatActivity {
                                 object.put("status", "READY");
                                 object.put("history", "yes");
                                 String message = "Your order from " + object.getString("business_name") + " is ready!";
-                                businees_order_adapter.push_notification(object.getString("customer_phone"), message);
+                                businees_order_adapter.push_notification(object.getString("customer_phone"), message, itemId);
                             } else {
                                 object.put("status", item.getTitle());
                             }

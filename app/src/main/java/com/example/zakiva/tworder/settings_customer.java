@@ -28,7 +28,13 @@ public class settings_customer extends AppCompatActivity {
     }
 
     public void shareOnFacebookClicked(View view){
-        
+        ShareLinkContent content = new ShareLinkContent.Builder()
+                .setContentUrl(Uri.parse("https://www.downloadapp.com"))
+                .setContentTitle("I am using 2Order app, and I am loving it!")
+                .build();
+        //ShareButton shareButton = (ShareButton)findViewById(R.id.button14);
+        //shareButton.setShareContent(content);
+        ShareDialog.show(this, content);
     }
 
     @Override

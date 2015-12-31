@@ -187,7 +187,7 @@ class businees_order_adapter extends BaseExpandableListAdapter {
                                         object.put("status", "READY");
                                         object.put("history", "yes");
                                         String message = "Your order from " + object.getString("business_name") + " is ready!";
-                                        push_notification(object.getString("customer_phone"), message);
+                                        push_notification(object.getString("customer_phone"), message, itemId);
                                         mParent.get(groupPosition).getArrayChildren().set(childPosition, "Status: " + item.getTitle().toString());
                                     } else {
                                         mParent.get(groupPosition).getArrayChildren().set(childPosition, "Status: " + item.getTitle().toString());
@@ -240,81 +240,96 @@ class businees_order_adapter extends BaseExpandableListAdapter {
         return String.format("%d days %d hours ago", days, hours);
     }
 
-    static void send_sms(String number, String content) {
-        SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(number, null, content, null, null);
-    }
-
-
-    static void push_notification(final String username, final String message)
-    {
-
-        //is_user_exist = 0;
-        final ParseQuery<ParseUser> query = ParseUser.getQuery();
-        query.whereEqualTo("phone", username);
+    static void send_sms(final String number, final String content) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Baned");
+        query.whereEqualTo("phone_number", number);
         query.countInBackground(new CountCallback() {
             public void done(int count, ParseException e) {
-                if (e == null) {
-                    if (count > 0) {//The user exists!!
-                        ParseQuery<ParseUser> query = ParseUser.getQuery();
-                        query.whereEqualTo("phone", username);
-                        query.getFirstInBackground(new GetCallback<ParseUser>() {
-                            public void done(ParseUser user, ParseException e) {
-                                if (user == null) {
-                                    Log.d("problem: ", "can't push");
-
-                                } else {
-                                    if (user.getString("is_signed_in").equals("yes")) {
-                                        if (user.getString("wants_notification").equals("yes")) {
-                                            Log.d("send:", "push");
-                                            ParseQuery pushQuery = ParseInstallation.getQuery();
-                                            pushQuery.whereEqualTo("notification_id", username);
-                                            ParsePush push = new ParsePush();
-                                            push.setQuery(pushQuery);
-                                            push.setMessage(message);
-                                            push.sendInBackground();
-                                        } else{
-                                            Log.d("send:", "sms- user exist and signed but does not want notification");
-                                            send_sms(username, message);
-                                        }
-                                    } else {
-                                        Log.d("send:", "sms- user exist but not signed");
-                                        send_sms(username, message);
-                                    }
-                                }
-                            }
-                        });
-
-                    } else {
-                        Log.d("send:", "sms- user does not exist");
-                        send_sms(username, message + " You can download the 2Order app here: https://www.downloadapp.com");
-                    }
-                } else {
-                    // The request failed
-                    Log.d("fail: ", "bummer");
+                if (count == 0) {
+                    Log.d("banned: ", "not inside! sms should be sent");
+                    SmsManager smsManager = SmsManager.getDefault();
+                    smsManager.sendTextMessage(number, null, content, null, null);
+                }
+                else{
+                    Log.d("banned: ", "inside! no sms");
                 }
             }
         });
     }
 
-
-    @Override
-    public boolean isChildSelectable(int i, int i1) {
-        return true;
+    static void send_sms2(final String number, final String content){
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(number, null, content, null, null);
     }
 
-    @Override
-    public void registerDataSetObserver(DataSetObserver observer) {
+
+            static void push_notification(final String username, final String message, final String itemId) {
+
+                //is_user_exist = 0;
+                final ParseQuery<ParseUser> query = ParseUser.getQuery();
+                query.whereEqualTo("phone", username);
+                query.countInBackground(new CountCallback() {
+                    public void done(int count, ParseException e) {
+                        if (e == null) {
+                            if (count > 0) {//The user exists!!
+                                ParseQuery<ParseUser> query = ParseUser.getQuery();
+                                query.whereEqualTo("phone", username);
+                                query.getFirstInBackground(new GetCallback<ParseUser>() {
+                                    public void done(ParseUser user, ParseException e) {
+                                        if (user == null) {
+                                            Log.d("problem: ", "can't push");
+                                        } else {
+                                            if (user.getString("is_signed_in").equals("yes")) {
+                                                if (user.getString("wants_notification").equals("yes")) {
+                                                    Log.d("send:", "push");
+                                                    ParseQuery pushQuery = ParseInstallation.getQuery();
+                                                    pushQuery.whereEqualTo("notification_id", username);
+                                                    ParsePush push = new ParsePush();
+                                                    push.setQuery(pushQuery);
+                                                    push.setMessage(message);
+                                                    push.sendInBackground();
+                                                } else {
+                                                    Log.d("send:", "sms- user exist and signed but does not want notification");
+                                                    send_sms(username, message);
+                                                }
+                                            } else {
+                                                Log.d("send:", "sms- user exist but not signed");
+                                                send_sms(username, message + " watch your order info at Twoorderinformation.parseapp.com/?" + itemId);
+                                            }
+                                        }
+                                    }
+                                });
+
+                            } else {
+                                Log.d("send:", "sms- user does not exist");
+                                send_sms(username, message + " download 2Order: https://www.downloadapp.com" + " watch your order info at Twoorderinformation.parseapp.com/?" + itemId);
+                            }
+                        } else {
+                            // The request failed
+                            Log.d("fail: ", "bummer");
+                        }
+                    }
+                });
+            }
+
+
+            @Override
+            public boolean isChildSelectable(int i, int i1) {
+                return true;
+            }
+
+            @Override
+            public void registerDataSetObserver(DataSetObserver observer) {
         /* used to make the notifyDataSetChanged() method work */
-        super.registerDataSetObserver(observer);
-    }
+                super.registerDataSetObserver(observer);
+            }
 
-    protected class ViewHolder {
-        protected int childPosition;
-        protected int groupPosition;
-    }
+            protected class ViewHolder {
+                protected int childPosition;
+                protected int groupPosition;
+            }
 
-}
+        }
 
 
 
