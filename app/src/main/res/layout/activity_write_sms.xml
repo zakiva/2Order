@@ -26,7 +26,7 @@
         android:layout_height="70dp"
         android:text=""
         android:id="@+id/button11"
-        android:background="@drawable/send_sms"
+        android:background="@drawable/send_feedback"
         android:onClick="send_sms"
         android:layout_marginTop="1dp"
         android:layout_below="@+id/textView19"
