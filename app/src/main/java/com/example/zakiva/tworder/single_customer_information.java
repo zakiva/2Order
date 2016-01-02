@@ -23,6 +23,8 @@ import java.util.List;
 
 public class single_customer_information extends AppCompatActivity {
 
+    TextView name;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +32,7 @@ public class single_customer_information extends AppCompatActivity {
         setContentView(R.layout.activity_single_customer_information);
 
         final TextView phone = (TextView) findViewById(R.id.textview_phone);
-        final TextView name = (TextView) findViewById(R.id.textview_name);
+        name = (TextView) findViewById(R.id.textview_name);
         final TextView counter = (TextView) findViewById(R.id.total_orders_id);
         final TextView time = (TextView) findViewById(R.id.added_id);
 
@@ -92,6 +94,7 @@ public class single_customer_information extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         Intent i = new Intent(getBaseContext(), write_sms.class);
         i.putExtra("phone", extras.getString("phone"));
+        i.putExtra("name", name.getText().toString().substring(6));
         startActivity(i);
     }
 

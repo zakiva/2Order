@@ -16,7 +16,7 @@
         android:onClick="createNewOrderClick"
         android:textSize="40dp"
         android:text=""
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="12dp"
         android:layout_marginRight="-5dp"
         android:layout_below="@+id/button_notifications"
         android:layout_alignParentRight="true"
@@ -51,7 +51,7 @@
         android:id="@+id/editText"
         android:singleLine="true"
         android:hint="search order"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:layout_below="@+id/screen_title"
         android:layout_centerHorizontal="true" />
 
@@ -59,7 +59,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginRight="5dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="35dp"
         android:layout_below="@+id/screen_title"
         android:background="@drawable/search_small"
         android:layout_toLeftOf="@+id/editText"/>
@@ -80,7 +80,6 @@
         android:layout_height="wrap_content"
         android:text="My Orders"
         android:textSize="32dp"
-        android:layout_marginTop="10dp"
         android:textStyle="bold"
         android:textColor="#0a047c"
         android:id="@+id/screen_title"

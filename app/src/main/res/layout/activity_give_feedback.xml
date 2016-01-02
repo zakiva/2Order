@@ -12,9 +12,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Give Feedback"
-        android:textSize="30dp"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        android:textColor="#0a047c"
         android:id="@+id/textView16"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -37,12 +38,14 @@
         android:layout_below="@+id/textView18"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="10dp" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Send"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:text=""
+        android:layout_marginTop="20dp"
+        android:background="@drawable/send_feedback"
         android:id="@+id/button10"
         android:layout_alignParentRight="true"
         android:onClick="send_feedback_clicked"
@@ -51,10 +54,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your opinion:"
+        android:text="Your Opinion:"
         android:id="@+id/textView17"
-        android:textSize="25dp"
-        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:layout_marginTop="40dp"
         android:layout_below="@+id/ratingBar2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -62,9 +65,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="General:"
-        android:textSize="25dp"
-        android:layout_marginTop="30dp"
+        android:text="Rate Business:"
+        android:textSize="20dp"
+        android:layout_marginTop="50dp"
         android:id="@+id/textView18"
         android:layout_below="@+id/textView16"
         android:layout_alignParentLeft="true"

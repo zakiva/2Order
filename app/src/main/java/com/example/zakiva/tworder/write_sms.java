@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 public class write_sms extends AppCompatActivity {
 
@@ -15,6 +18,9 @@ public class write_sms extends AppCompatActivity {
         setContentView(R.layout.activity_write_sms);
 
         Bundle extras = getIntent().getExtras();
+
+        TextView name = (TextView) findViewById(R.id.to_customer_name);
+        name.setText("To: " + extras.getString("name"));
     }
 
     static void send_sms(String number, String content) {

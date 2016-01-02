@@ -21,8 +21,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="My Notifications"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        android:textColor="#0a047c"
         android:id="@+id/title"
-        android:textSize="25dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
         />

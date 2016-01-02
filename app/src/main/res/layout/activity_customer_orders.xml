@@ -22,9 +22,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="My Orders"
-        android:textSize="30dp"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        android:textColor="#0a047c"
         android:id="@+id/screen_title"
         android:layout_alignBottom="@+id/list_button"
         android:layout_centerHorizontal="true" />

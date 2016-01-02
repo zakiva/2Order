@@ -12,6 +12,9 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="More"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        android:textColor="#0a047c"
         android:id="@+id/textView9"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -23,7 +26,7 @@
         android:layout_height="wrap_content"
         android:text=""
         android:id="@+id/switch1"
-        android:layout_marginTop="146dp"
+        android:layout_marginTop="55dp"
         android:layout_toRightOf="@+id/enable_textview"
         android:layout_marginLeft="55dp"
         android:layout_below="@+id/textView9" />
@@ -31,7 +34,7 @@
     <Button
         android:layout_width="70dp"
         android:layout_height="30dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="55dp"
         android:text=""
         android:id="@+id/button14"
         android:background="@drawable/shre_on_facebook"
@@ -47,7 +50,7 @@
         android:textSize="16dp"
         android:text="Tell friends about 2Order:"
         android:id="@+id/facebook_textview"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:layout_below="@+id/switch1"/>
 
     <TextView
@@ -55,8 +58,32 @@
         android:layout_height="wrap_content"
         android:textSize="16dp"
         android:text="Enable notifications:"
-        android:layout_marginTop="146dp"
+        android:layout_marginTop="55dp"
         android:layout_below="@+id/textView9"
         android:id="@+id/enable_textview"      />
+
+    <View
+        android:id="@+id/SplitLine_hor1"
+        android:layout_width="match_parent"
+        android:layout_height= "2dp"
+        android:background="#c0c0c0"
+        android:layout_below="@+id/textView9"
+        android:layout_marginTop="20dp"/>
+
+    <View
+        android:id="@+id/SplitLine_hor2"
+        android:layout_width="match_parent"
+        android:layout_height= "2dp"
+        android:background="#c0c0c0"
+        android:layout_below="@+id/enable_textview"
+        android:layout_marginTop="25dp"/>
+
+    <View
+        android:id="@+id/SplitLine_hor3"
+        android:layout_width="match_parent"
+        android:layout_height= "2dp"
+        android:background="#c0c0c0"
+        android:layout_below="@+id/facebook_textview"
+        android:layout_marginTop="30dp"/>
 
 </RelativeLayout>

@@ -8,6 +8,17 @@
     android:focusable="true" android:focusableInTouchMode="true"
     tools:context="com.example.zakiva.tworder.customers_search">
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Customers"
+        android:textSize="32dp"
+        android:textStyle="bold"
+        android:textColor="#0a047c"
+        android:id="@+id/screen_title"
+        android:layout_centerHorizontal="true" />
+
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,7 +31,8 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginRight="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_below="@+id/screen_title"
+        android:layout_marginTop="20dp"
         android:background="@drawable/search_small"
         android:layout_toLeftOf="@+id/search_box"/>
 
@@ -28,9 +40,10 @@
         android:layout_width="200dp"
         android:hint="search customer"
         android:singleLine="true"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/screen_title"
         android:layout_height="wrap_content"
         android:id="@+id/search_box"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
   />
 </RelativeLayout>
