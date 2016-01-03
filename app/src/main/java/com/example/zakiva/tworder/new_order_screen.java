@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -19,6 +20,7 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.parse.CountCallback;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -202,6 +204,22 @@ public class new_order_screen extends AppCompatActivity {
         });
     }
 
+    static void send_sms(final String number, final String content) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Baned");
+        query.whereEqualTo("phone_number", number);
+        query.countInBackground(new CountCallback() {
+            public void done(int count, ParseException e) {
+                if (count == 0) {
+                    Log.d("banned: ", "not inside! sms should be sent");
+                    SmsManager smsManager = SmsManager.getDefault();
+                    smsManager.sendTextMessage(number, null, content, null, null);
+                } else {
+                    Log.d("banned: ", "inside! no sms");
+                }
+            }
+        });
+    }
+
 
 
     public void onCreateNewOrder(View view) {
@@ -227,7 +245,7 @@ public class new_order_screen extends AppCompatActivity {
     }
 
     public void create_new_order(final String phone, final String customer_name, String code, String details, int prior) {
-                        ParseObject order = new ParseObject("Order");
+                        final ParseObject order = new ParseObject("Order");
                         order.put("business_user", ParseUser.getCurrentUser());
                         order.put("business_id", ParseUser.getCurrentUser().getObjectId());
                         order.put("business_name", ParseUser.getCurrentUser().getString("name"));
@@ -246,17 +264,54 @@ public class new_order_screen extends AppCompatActivity {
                         order.saveInBackground(new SaveCallback() {
                             public void done(ParseException e) {
                                 if (e == null) {
-                                    Log.i(TAG, "handle_customer(phone);");
-                                    handle_customer(phone, customer_name);
-                                    Intent i = new Intent(new_order_screen.this, business_orders__screen.class);
-                                    startActivity(i);
-                                } else {
+                                    ParseQuery<ParseUser> query = ParseUser.getQuery();
+                                    query.whereEqualTo("phone", phone);
+                                    query.countInBackground(new CountCallback() {
+                                        public void done(int count, ParseException e) {
+                                            if (e == null) {
+                                                if (count == 0) {//The user does not exist!!
+                                                    //Log.d("kkk: ", order.getObjectId());
+                                                    final String content = "Your order was created! download 2Order: https://www.downloadapp.com" + " Watch your order info at Twoorderinformation.parseapp.com/?" + order.getObjectId();
+                                                    ParseQuery<ParseObject> query = ParseQuery.getQuery("Baned");
+                                                    query.whereEqualTo("phone_number", phone);
+                                                    query.countInBackground(new CountCallback() {
+                                                        public void done(int count, ParseException e) {
+                                                            if (count == 0) {
+                                                                Log.d("banned: ", "not inside! sms should be sent");
+                                                                SmsManager smsManager = SmsManager.getDefault();
+                                                                smsManager.sendTextMessage(phone, null, content, null, null);
+                                                                Log.i(TAG, "handle_customer(phone);");
+                                                                handle_customer(phone, customer_name);
+                                                                Intent i = new Intent(new_order_screen.this, business_orders__screen.class);
+                                                                startActivity(i);
+                                                            } else {
+                                                                Log.d("banned: ", "inside! no sms");
+                                                                Log.i(TAG, "handle_customer(phone);");
+                                                                handle_customer(phone, customer_name);
+                                                                Intent i = new Intent(new_order_screen.this, business_orders__screen.class);
+                                                                startActivity(i);
+                                                            }
+                                                        }
+                                                    });
+                                                }
+                                                else{
+                                                    Log.i(TAG, "handle_customer(phone);");
+                                                    handle_customer(phone, customer_name);
+                                                    Intent i = new Intent(new_order_screen.this, business_orders__screen.class);
+                                                    startActivity(i);
+                                                }
+                                            }
+                                        }
+                                    });
+                            } else {
                                     Log.i(TAG, "e is not null");
                                     Log.i(TAG, String.format("%s", e.toString()));
-                                }
                             }
-                        });
+                        }
                     }
+
+                    );
+                }
 
     public static void handle_customer(final String phone, final String name) {
 
