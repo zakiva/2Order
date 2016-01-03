@@ -59,7 +59,7 @@
             android:layout_centerHorizontal="true"
             android:textSize="28dp"
             android:textStyle="bold"
-            android:textColor="#0a047c" />
+            android:textColor="#FF1887D7" />
 
         <View
             android:id="@+id/SplitLine_hor2"

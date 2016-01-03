@@ -10,7 +10,6 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="250dp"
-        android:layout_marginTop="15dp"
         android:layout_height="70dp"
         android:src="@drawable/logo"
         android:layout_alignParentTop="true"
@@ -22,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView"
-        android:text="User Name / Phone Number"
+        android:text="User Name"
         android:textSize="20dp"
         android:layout_marginTop="25dp"
         android:layout_marginLeft="10dp"
@@ -69,8 +68,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/logButton"
         android:text="Log In"
+        android:textAllCaps="false"
         android:textColor="#FFF"
-        android:background="#00F"
+        android:background="#5151d6"
         android:onClick="onLogInClick"
         android:layout_below="@+id/passwordInput"
         android:layout_marginTop="35dp"
@@ -82,46 +82,50 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Forgot password"
+        android:text=" Forgot password? "
         android:id="@+id/button12"
+        android:textColor="#FFF"
+        android:textAllCaps="false"
+        android:background="#8b1887d7"
         android:layout_below="@+id/logButton"
+        android:layout_marginTop="40dp"
         android:layout_centerHorizontal="true"
         android:onClick="forgotClicked" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Email:"
+        android:textSize="20dp"
         android:id="@+id/textView22"
         android:layout_below="@+id/button12"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="280dp"
         android:imeOptions="actionSend"
         android:singleLine="true"
         android:layout_height="wrap_content"
         android:id="@+id/editText5"
-        android:width="330dp"
+        android:hint="Type here your Email"
         android:inputType="textPassword"
         android:layout_below="@+id/textView22"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/button12"
-        android:layout_alignEnd="@+id/button12" />
+        android:layout_alignParentStart="true"/>
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
         android:text="Restore"
+        android:textAllCaps="false"
         android:id="@+id/button13"
-        android:layout_alignBottom="@+id/editText5"
+        android:layout_below="@+id/textView22"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/usernameText"
-        android:layout_toEndOf="@+id/usernameText"
+        android:textSize="12dp"
+        android:background="#8b1887d7"
+        android:layout_toRightOf="@+id/editText5"
+        android:textColor="#FFF"
         android:onClick="restoreClicked" />
 
 </RelativeLayout>

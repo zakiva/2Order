@@ -15,7 +15,7 @@
         android:text="Give Feedback"
         android:textSize="32dp"
         android:textStyle="bold"
-        android:textColor="#0a047c"
+        android:textColor="#FF1887D7"
         android:id="@+id/textView16"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />

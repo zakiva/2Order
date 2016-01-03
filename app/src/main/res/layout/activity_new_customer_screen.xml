@@ -124,7 +124,8 @@
 
         android:layout_centerHorizontal="true"
         android:id="@+id/login1"
-        android:text="SIGN UP"
+        android:text="Sign Up"
+        android:textAllCaps="false"
         android:textColor="#FFF"
         android:background="#5151d6"
         android:layout_marginTop="10dp"

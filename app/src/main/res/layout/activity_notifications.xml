@@ -20,10 +20,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My Notifications"
+        android:text="Notifications"
         android:textSize="32dp"
         android:textStyle="bold"
-        android:textColor="#0a047c"
+        android:textColor="#FF1887D7"
         android:id="@+id/title"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"

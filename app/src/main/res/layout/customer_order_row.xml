@@ -58,6 +58,6 @@
         android:layout_marginTop="14dp"
         android:layout_alignParentLeft="true"
         android:id="@+id/person"
-        android:background="@drawable/bullet" />
+        android:background="@drawable/bullet_blue" />
 
 </RelativeLayout>
