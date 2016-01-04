@@ -271,7 +271,7 @@ public class new_order_screen extends AppCompatActivity {
                                             if (e == null) {
                                                 if (count == 0) {//The user does not exist!!
                                                     //Log.d("kkk: ", order.getObjectId());
-                                                    final String content = "Your order was created! download 2Order: https://www.downloadapp.com" + " Watch your order info at Twoorderinformation.parseapp.com/?" + order.getObjectId();
+                                                    final String content = "Your order was created! Download 2Order: https://www.downloadapp.com" + " Watch your order info at 2order.parseapp.com/?" + order.getObjectId();
                                                     ParseQuery<ParseObject> query = ParseQuery.getQuery("Baned");
                                                     query.whereEqualTo("phone_number", phone);
                                                     query.countInBackground(new CountCallback() {

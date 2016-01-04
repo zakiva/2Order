@@ -294,7 +294,7 @@ class businees_order_adapter extends BaseExpandableListAdapter {
                                                 }
                                             } else {
                                                 Log.d("send:", "sms- user exist but not signed");
-                                                send_sms(username, message + " watch your order info at Twoorderinformation.parseapp.com/?" + itemId);
+                                                send_sms(username, message + " Watch your order info at 2order.parseapp.com/?" + itemId);
                                             }
                                         }
                                     }
@@ -302,7 +302,7 @@ class businees_order_adapter extends BaseExpandableListAdapter {
 
                             } else {
                                 Log.d("send:", "sms- user does not exist");
-                                send_sms(username, message + " download 2Order: https://www.downloadapp.com" + " watch your order info at Twoorderinformation.parseapp.com/?" + itemId);
+                                send_sms(username, message + " Download 2Order: https://www.downloadapp.com" + " Watch your order info at 2order.parseapp.com/?" + itemId);
                             }
                         } else {
                             // The request failed
