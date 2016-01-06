@@ -99,8 +99,8 @@ public class single_business_order extends AppCompatActivity {
         order_details.setText(extras.getString("details"));
         phone.setText(extras.getString("phone"));
         name.setText(extras.getString("name"));
-        time_past.setText(String.format("                     %s", extras.getString("time_past")));
-        time_create.setText(String.format("Created at: %s", extras.getString("time")));
+        time_past.setText(String.format("                %s", extras.getString("time_past")));
+        time_create.setText(String.format("Created: %s", extras.getString("time")));
         status.setText(String.format("Status: %s", extras.getString("status")));
 
         edit_order_number = (EditText) findViewById(R.id.edittext_order_number);
@@ -339,8 +339,8 @@ public class single_business_order extends AppCompatActivity {
                 query.getInBackground(itemId, new GetCallback<ParseObject>() {
                     public void done(ParseObject object, ParseException e) {
                         if (e == null) {
-                            if (item.getTitle().equals("READY")) {
-                                object.put("status", "READY");
+                            if (item.getTitle().equals("Ready")) {
+                                object.put("status", "Ready");
                                 object.put("history", "yes");
                                 String message = "Your order from " + object.getString("business_name") + " is ready!";
                                 businees_order_adapter.push_notification(object.getString("customer_phone"), message, itemId);

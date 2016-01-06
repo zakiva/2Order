@@ -39,7 +39,7 @@ public class customer_order_adapter extends ArrayAdapter<String[]> {
         status.setText("   Status: " + item[3]);
         details.setText("Details: " + item[4]);
 
-        if(item[3].equals("READY")){
+        if(item[3].equals("Ready")){
             status.setTextColor(Color.parseColor("GREEN"));
         }
         return customView;

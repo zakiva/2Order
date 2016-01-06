@@ -183,7 +183,7 @@ public class customer_orders extends AppCompatActivity  implements SwipeRefreshL
             item[6] = order.getObjectId().toString();
             item[7] = order.getString("business_id");
             item[8] = order.getString("customer_name");
-            if (item[2].equals("READY"))
+            if (item[2].equals("Ready"))
                 items.add(0, item);
             else
                 items.add(item);
