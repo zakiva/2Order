@@ -54,7 +54,7 @@ public class customer_list_orders_adapter extends ArrayAdapter<String[]> {
    //     if(item[2].equals("READY"))
      //       customView.setBackgroundColor(Color.parseColor("#3904FD91"));
 
-        if(item[2].equals("READY"))
+        if(item[2].equals("Ready"))
             status.setTextColor(Color.parseColor("#FF06BA36"));
 
         return customView;
