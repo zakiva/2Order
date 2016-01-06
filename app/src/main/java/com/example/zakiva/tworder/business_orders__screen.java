@@ -164,7 +164,7 @@ public class business_orders__screen extends AppCompatActivity  implements Swipe
                         if (mode.equals("orders")) {
                             //Log.d("mode: ", mode);
                             query.whereEqualTo("business_user", ParseUser.getCurrentUser());
-                            query.whereNotEqualTo("status", "READY");
+                            query.whereNotEqualTo("status", "Ready");
                             query.orderByDescending("prior"); // true first
                             query.addAscendingOrder("createdAt"); // old first
                         } else if (mode.equals("history")) {
@@ -342,7 +342,7 @@ public class business_orders__screen extends AppCompatActivity  implements Swipe
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
         query.whereEqualTo("business_user", ParseUser.getCurrentUser());
         query.whereEqualTo("history", "no");
-        query.whereNotEqualTo("status", "READY"); // can be removed
+        query.whereNotEqualTo("status", "Ready"); // can be removed
         query.orderByDescending("prior"); // true first
         query.addAscendingOrder("createdAt"); // old first
         query.findInBackground(new FindCallback<ParseObject>() {

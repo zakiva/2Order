@@ -37,7 +37,7 @@ public class business_orders_history extends AppCompatActivity {
     protected void get_all_user_orders() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Order");
         query.whereEqualTo("business_user", ParseUser.getCurrentUser());
-        query.whereEqualTo("status", "READY");
+        query.whereEqualTo("status", "Ready");
         query.addDescendingOrder("createdAt"); // new first
         query.findInBackground(new FindCallback<ParseObject>() {
 

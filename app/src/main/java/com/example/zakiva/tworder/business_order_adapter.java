@@ -183,8 +183,8 @@ class businees_order_adapter extends BaseExpandableListAdapter {
                         query.getInBackground(itemId, new GetCallback<ParseObject>() {
                             public void done(ParseObject object, ParseException e) {
                                 if (e == null) {
-                                    if (item.getTitle().equals("READY")) {
-                                        object.put("status", "READY");
+                                    if (item.getTitle().equals("Ready")) {
+                                        object.put("status", "Ready");
                                         object.put("history", "yes");
                                         String message = "Your order from " + object.getString("business_name") + " is ready!";
                                         push_notification(object.getString("customer_phone"), message, itemId);
