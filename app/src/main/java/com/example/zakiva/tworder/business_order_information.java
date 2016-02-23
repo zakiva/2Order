@@ -55,7 +55,7 @@ public class business_order_information extends AppCompatActivity {
         //orderNumberText.setText("Order Number : 1");
         //ratingBar.setRating(2);
         //phoneText.setText("Phone Number : 052474567");
-        //statusText.setText("status : READY");
+        //statusText.setText("status : Ready");
         //orderDetailsText.setText("order Details : there is lots of details for this product  !!! ");
     }
 
