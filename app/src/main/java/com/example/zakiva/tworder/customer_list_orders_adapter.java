@@ -51,7 +51,7 @@ public class customer_list_orders_adapter extends ArrayAdapter<String[]> {
         business.setText("From: " + item[1]);
         status.setText("Status: " + item[2]);
 
-   //     if(item[2].equals("READY"))
+   //     if(item[2].equals("Ready))
      //       customView.setBackgroundColor(Color.parseColor("#3904FD91"));
 
         if(item[2].equals("Ready"))

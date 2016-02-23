@@ -99,8 +99,8 @@ public class single_business_order extends AppCompatActivity {
         order_details.setText(extras.getString("details"));
         phone.setText(extras.getString("phone"));
         name.setText(extras.getString("name"));
-        time_past.setText(String.format("                     %s", extras.getString("time_past")));
-        time_create.setText(String.format("Created at: %s", extras.getString("time")));
+        time_past.setText(String.format("                %s", extras.getString("time_past")));
+        time_create.setText(String.format("Created: %s", extras.getString("time")));
         status.setText(String.format("Status: %s", extras.getString("status")));
 
         edit_order_number = (EditText) findViewById(R.id.edittext_order_number);
