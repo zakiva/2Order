@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/editText2"
         android:width="330dp"
+        android:inputType="number"
         android:layout_below="@+id/textView6"
         android:layout_centerHorizontal="true" />
 
