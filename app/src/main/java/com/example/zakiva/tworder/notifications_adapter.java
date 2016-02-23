@@ -60,7 +60,7 @@ public class notifications_adapter extends ArrayAdapter<String[]> {
 
         if (item[1].equals("order")){ // ariel handle here your case too
             choose.setText("View Order");
-            text.setText(item[6] + " Poke You On Order " + item[5]);
+            text.setText(item[6] + " Poked You On Order " + item[5]);
 
         }
         else if (item[1].equals("order_late")){
