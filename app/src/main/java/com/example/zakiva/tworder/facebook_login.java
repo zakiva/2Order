@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class facebook_login extends AppCompatActivity {
+    //do nothing
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
