@@ -93,7 +93,11 @@ public class new_business_screen extends AppCompatActivity {
         String business_address = businessAddressInput.getText().toString();
 
         if (password.equals(rePassword)) {
-            sign_up(name, password, businessName, business_address);
+            if (!name.equals("") && !businessName.equals("") && !business_address.equals("")) {
+                sign_up(name, password, businessName, business_address);
+            } else{
+                alertToast("Please fill all fields");
+            }
         } else {
             alertToast("Please retype your password");
         }
