@@ -102,6 +102,7 @@ public class new_customer_screen extends AppCompatActivity {
 
     public void allReadyHaveAcountClick(View view){
         Intent i = new Intent(this, logIn_screen.class);
+        i.putExtra("from", "customer");
         startActivity(i);
     }
 

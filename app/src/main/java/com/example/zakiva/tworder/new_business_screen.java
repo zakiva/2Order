@@ -120,6 +120,8 @@ public class new_business_screen extends AppCompatActivity {
 
     public void allReadyHaveAcountClick(View view) {
         Intent i = new Intent(this, logIn_screen.class);
+        i.putExtra("from", "business");
+
         startActivity(i);
     }
 

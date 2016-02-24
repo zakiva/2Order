@@ -60,6 +60,18 @@ public class logIn_screen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in_screen);
 
+        final TextView head = (TextView) findViewById(R.id.usernameText);
+        Intent i = getIntent();
+        if (i != null) {
+            String s = i.getStringExtra("from");
+            if (s.equals("customer")) {
+                head.setText("Phone Number");
+            }
+            else{
+                head.setText("Email");
+            }
+        }
+
         EditText email_edit = (EditText) findViewById(R.id.editText5);
         email_edit.setVisibility(View.INVISIBLE);
         TextView email_text = (TextView) findViewById(R.id.textView22);
