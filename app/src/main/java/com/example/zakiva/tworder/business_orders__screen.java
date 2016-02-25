@@ -92,6 +92,11 @@ public class business_orders__screen extends AppCompatActivity  implements Swipe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i(TAG, " on create .. ");
+
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
+
         setContentView(R.layout.activity_business_orders__screen);
         create_button = (Button)findViewById(R.id.createNewOrder);
         screen_title = (TextView)findViewById(R.id.screen_title);
@@ -282,6 +287,11 @@ public class business_orders__screen extends AppCompatActivity  implements Swipe
     protected void onRestart() {
         super.onRestart();
         Log.i(TAG, " on restart .. ");
+
+        getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
+        );
+
         if (mode.equals("orders"))
             get_all_user_orders();
         else if (mode.equals("history"))
