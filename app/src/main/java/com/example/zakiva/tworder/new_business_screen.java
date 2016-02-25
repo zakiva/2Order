@@ -59,7 +59,7 @@ public class new_business_screen extends AppCompatActivity {
                     });
                 }
                 else {
-                    alertToast("Sign-up failed");
+                    alertToast("Invalid Email");
                 }
             }
         });
@@ -89,6 +89,7 @@ public class new_business_screen extends AppCompatActivity {
 
 
         String name = usernameInput.getText().toString();
+        name = name.replaceAll("\\s","");
         String password = passwordInput.getText().toString();
         String rePassword = repasswordInput.getText().toString();
         String businessName = businessNameInput.getText().toString();
