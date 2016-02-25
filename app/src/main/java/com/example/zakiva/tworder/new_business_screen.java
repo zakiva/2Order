@@ -40,7 +40,6 @@ public class new_business_screen extends AppCompatActivity {
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null) {
-
                     ParseObject business = new ParseObject("Business");
                     business.put("user_id", ParseUser.getCurrentUser().getObjectId().toString());
                     business.put("new_notifications", 0);
@@ -58,6 +57,9 @@ public class new_business_screen extends AppCompatActivity {
                             }
                         }
                     });
+                }
+                else {
+                    alertToast("Sign-up failed");
                 }
             }
         });
@@ -121,7 +123,6 @@ public class new_business_screen extends AppCompatActivity {
     public void allReadyHaveAcountClick(View view) {
         Intent i = new Intent(this, logIn_screen.class);
         i.putExtra("from", "business");
-
         startActivity(i);
     }
 
