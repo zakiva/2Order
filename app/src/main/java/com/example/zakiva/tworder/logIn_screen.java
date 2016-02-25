@@ -50,6 +50,8 @@ public class logIn_screen extends AppCompatActivity {
                         });
                     }
                 } else {
+                    final Button b = (Button) findViewById(R.id.logButton);
+                    b.setEnabled(true);
                     alertToast("Sign-in failed");
                 }
             }
@@ -60,6 +62,9 @@ public class logIn_screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in_screen);
+
+        final Button b = (Button) findViewById(R.id.logButton);
+        b.setEnabled(true);
 
         final TextView head = (TextView) findViewById(R.id.usernameText);
         final EditText phoneOrEmail = (EditText) findViewById(R.id.usernameInput);
@@ -111,6 +116,8 @@ public class logIn_screen extends AppCompatActivity {
     }
 
     public void onLogInClick(View view){
+        final Button b = (Button) findViewById(R.id.logButton);
+        b.setEnabled(false);
 
         final EditText usernameInput = (EditText) findViewById(R.id.usernameInput);
         final EditText passwordInput = (EditText) findViewById(R.id.passwordInput);

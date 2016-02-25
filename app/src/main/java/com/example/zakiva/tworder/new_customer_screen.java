@@ -44,6 +44,8 @@ public class new_customer_screen extends AppCompatActivity {
                     });
                 } else {
                     alertToast("Sign-up failed");
+                    final Button b = (Button) findViewById(R.id.login1);
+                    b.setEnabled(true);
                 }
 
             }
@@ -54,9 +56,14 @@ public class new_customer_screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_customer_screen);
+
+        final Button b = (Button) findViewById(R.id.login1);
+        b.setEnabled(true);
     }
 
     public void onCustomerLogClick(View view){
+        final Button b = (Button) findViewById(R.id.login1);
+        b.setEnabled(false);
 
         final EditText phoneInput = (EditText) findViewById(R.id.phoneInput);
         final EditText passwordInput = (EditText) findViewById(R.id.passwordInput);
@@ -75,6 +82,8 @@ public class new_customer_screen extends AppCompatActivity {
         if (password.equals(rePassword)) {
             sign_up(phone, password, email);
         } else{
+            //final Button b = (Button) findViewById(R.id.login1);
+            b.setEnabled(true);
             passwordInput.setTextColor(Color.parseColor("RED"));
             rePasswordInput.setTextColor(Color.parseColor("RED"));
             alertToast("Please retype your password");

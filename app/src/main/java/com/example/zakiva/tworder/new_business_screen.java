@@ -8,6 +8,7 @@ import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
 import android.widget.EditText;
 import android.view.ViewGroup;
 
@@ -49,8 +50,9 @@ public class new_business_screen extends AppCompatActivity {
                                 Intent intent = new Intent(getBaseContext(), business_orders__screen.class);
                                 startActivity(intent);
                             } else {
-                                // Ariel !!! what???
                                 alertToast("Sign-up failed");
+                                final Button b = (Button) findViewById(R.id.login1);
+                                b.setEnabled(true);
                                 //what happens if sign up failed
                                 //TextView textView3 = (TextView) findViewById(R.id.textView3);
                                 //textView3.setText("Failed!!!");
@@ -59,7 +61,9 @@ public class new_business_screen extends AppCompatActivity {
                     });
                 }
                 else {
-                    alertToast("Invalid Email");
+                    alertToast("Sign-up failed");
+                    final Button b = (Button) findViewById(R.id.login1);
+                    b.setEnabled(true);
                 }
             }
         });
@@ -69,9 +73,15 @@ public class new_business_screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_business_screen);
+
+        final Button b = (Button) findViewById(R.id.login1);
+        b.setEnabled(true);
     }
 
     public void onBusinessLogClick(View view) {
+        final Button b = (Button) findViewById(R.id.login1);
+        b.setEnabled(false);
+
         // GET ALL THE INPUTS FROM THE USER
         final EditText usernameInput = (EditText) findViewById(R.id.usernameInput);
         final EditText businessNameInput = (EditText) findViewById(R.id.businessNameInput);
@@ -100,9 +110,13 @@ public class new_business_screen extends AppCompatActivity {
                 sign_up(name, password, businessName, business_address);
             } else{
                 alertToast("Please fill all fields");
+                //final Button b = (Button) findViewById(R.id.login1);
+                b.setEnabled(true);
             }
         } else {
             alertToast("Please retype your password");
+            //final Button b = (Button) findViewById(R.id.login1);
+            b.setEnabled(true);
         }
 
     }
