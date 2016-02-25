@@ -41,6 +41,10 @@ public class new_order_screen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_order_screen);
+
+        final Button b = (Button) findViewById((R.id.createButton));
+        b.setEnabled(true);
+
         if (ParseUser.getCurrentUser().getString("Auto_orders_numbers").equals("yes")){
             final EditText orderNumber = (EditText) findViewById(R.id.orderNumberInput);
             int num = ParseUser.getCurrentUser().getInt("orders_counter");
@@ -223,6 +227,9 @@ public class new_order_screen extends AppCompatActivity {
 
 
     public void onCreateNewOrder(View view) {
+        final Button b = (Button) findViewById((R.id.createButton));
+        b.setEnabled(false);
+
         final EditText customerPhone = (EditText) findViewById(R.id.customerPhoneInput);
         final EditText orderNumber = (EditText) findViewById(R.id.orderNumberInput);
         final EditText orderDetails = (EditText) findViewById(R.id.orderDetailsInput);
