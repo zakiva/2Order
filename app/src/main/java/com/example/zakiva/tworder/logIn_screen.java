@@ -3,6 +3,7 @@ package com.example.zakiva.tworder;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -61,11 +62,14 @@ public class logIn_screen extends AppCompatActivity {
         setContentView(R.layout.activity_log_in_screen);
 
         final TextView head = (TextView) findViewById(R.id.usernameText);
+        final EditText phoneOrEmail = (EditText) findViewById(R.id.usernameInput);
+
         Intent i = getIntent();
         if (i != null) {
             String s = i.getStringExtra("from");
             if (s.equals("customer")) {
                 head.setText("Phone Number");
+                phoneOrEmail.setInputType(InputType.TYPE_CLASS_NUMBER);
             }
             else{
                 head.setText("Email");
