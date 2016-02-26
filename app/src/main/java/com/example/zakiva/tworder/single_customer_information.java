@@ -49,6 +49,7 @@ public class single_customer_information extends AppCompatActivity {
 
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Customer");
             query.whereEqualTo("phone", extras.getString("phone"));
+            query.whereEqualTo("business_id", ParseUser.getCurrentUser().getObjectId().toString());
             query.findInBackground(new FindCallback<ParseObject>() {
                                        @Override
                                        public void done(List<ParseObject> customers,
