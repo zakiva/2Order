@@ -9,7 +9,10 @@ import android.telephony.SmsManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -19,6 +22,7 @@ import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.CountCallback;
 import com.parse.FindCallback;
@@ -208,6 +212,20 @@ public class new_order_screen extends AppCompatActivity {
         });
     }
 
+    public void alertToast(String alert){
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.my_custom_alert,
+                (ViewGroup) findViewById(R.id.my_custom_layout_id));
+        TextView text = (TextView) layout.findViewById(R.id.alertText);
+
+        text.setText(alert);
+        Toast toast2 = new Toast(getApplicationContext());
+        toast2.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
+        toast2.setDuration(Toast.LENGTH_LONG);
+        toast2.setView(layout);
+        toast2.show();
+    }
+
     static void send_sms(final String number, final String content) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Baned");
         query.whereEqualTo("phone_number", number);
@@ -242,13 +260,19 @@ public class new_order_screen extends AppCompatActivity {
         final String order_details = orderDetails.getText().toString();
         final String customer_name = customerName.getText().toString();
 
-        ParseUser user = ParseUser.getCurrentUser();
-        user.put("orders_counter", user.getInt("orders_counter") + 1);
-        user.saveInBackground(new SaveCallback() {
-            public void done(ParseException e) {
-                create_new_order(customer_phone, customer_name, order_number, order_details, prior);
-            }
-        });
+        if (customer_phone.equals("")){
+            alertToast("Please insert customer's phone number");
+            //final Button b = (Button) findViewById((R.id.createButton));
+            b.setEnabled(true);
+        } else {
+            ParseUser user = ParseUser.getCurrentUser();
+            user.put("orders_counter", user.getInt("orders_counter") + 1);
+            user.saveInBackground(new SaveCallback() {
+                public void done(ParseException e) {
+                    create_new_order(customer_phone, customer_name, order_number, order_details, prior);
+                }
+            });
+        }
     }
 
     public void create_new_order(final String phone, final String customer_name, String code, String details, int prior) {

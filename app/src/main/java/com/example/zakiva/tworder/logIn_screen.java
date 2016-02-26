@@ -122,6 +122,7 @@ public class logIn_screen extends AppCompatActivity {
         final EditText usernameInput = (EditText) findViewById(R.id.usernameInput);
         final EditText passwordInput = (EditText) findViewById(R.id.passwordInput);
         String username = usernameInput.getText().toString();
+        username = username.replaceAll("\\s","");
         String password = passwordInput.getText().toString();
         sign_in(username, password);
     }
