@@ -310,7 +310,7 @@ public class new_order_screen extends AppCompatActivity {
                                                             if (count == 0) {
                                                                 Log.d("banned: ", "not inside! sms should be sent");
                                                                 SmsManager smsManager = SmsManager.getDefault();
-                                                                //smsManager.sendTextMessage(phone, null, content, null, null);
+                                                                smsManager.sendTextMessage(phone, null, content, null, null);
                                                                 Log.i(TAG, "handle_customer(phone);");
                                                                 handle_customer(phone, customer_name);
                                                                 Intent i = new Intent(new_order_screen.this, business_orders__screen.class);
