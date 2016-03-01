@@ -52,7 +52,7 @@ public class logIn_screen extends AppCompatActivity {
                 } else {
                     final Button b = (Button) findViewById(R.id.logButton);
                     b.setEnabled(true);
-                    alertToast("Sign-in failed");
+                    alertToast(e.getMessage());
                 }
             }
         });

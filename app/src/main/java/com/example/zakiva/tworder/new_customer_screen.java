@@ -43,9 +43,12 @@ public class new_customer_screen extends AppCompatActivity {
                         }
                     });
                 } else {
-                    alertToast("Sign-up failed");
                     final Button b = (Button) findViewById(R.id.login1);
                     b.setEnabled(true);
+                    alertToast(e.getMessage());
+                    //Log.d("aaaa:", e.toString());
+                    //alertToast("Sign-up failed");
+
                 }
 
             }
@@ -80,7 +83,12 @@ public class new_customer_screen extends AppCompatActivity {
                 (ViewGroup) findViewById(R.id.my_custom_layout_id));
         TextView text = (TextView) layout.findViewById(R.id.alertText);
         if (password.equals(rePassword)) {
-            sign_up(phone, password, email);
+            if (!phone.equals("") && !email.equals("")) {
+                sign_up(phone, password, email);
+            } else{
+                b.setEnabled(true);
+                alertToast("Please fill all fields");
+            }
         } else{
             //final Button b = (Button) findViewById(R.id.login1);
             b.setEnabled(true);

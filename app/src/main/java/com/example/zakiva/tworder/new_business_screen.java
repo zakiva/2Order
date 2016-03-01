@@ -61,9 +61,9 @@ public class new_business_screen extends AppCompatActivity {
                     });
                 }
                 else {
-                    alertToast("Sign-up failed");
                     final Button b = (Button) findViewById(R.id.login1);
                     b.setEnabled(true);
+                    alertToast(e.getMessage());
                 }
             }
         });
