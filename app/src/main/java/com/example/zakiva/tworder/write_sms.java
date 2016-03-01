@@ -24,8 +24,13 @@ public class write_sms extends AppCompatActivity {
     }
 
     static void send_sms(String number, String content) {
-        SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(number, null, content, null, null);
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(number, null, content, null, null);
+        }
+        catch (Exception e1){
+
+        }
     }
 
     public void send_sms(View view){

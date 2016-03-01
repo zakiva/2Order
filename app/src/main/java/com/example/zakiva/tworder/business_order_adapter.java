@@ -247,8 +247,13 @@ class businees_order_adapter extends BaseExpandableListAdapter {
             public void done(int count, ParseException e) {
                 if (count == 0) {
                     Log.d("banned: ", "not inside! sms should be sent");
-                    SmsManager smsManager = SmsManager.getDefault();
-                    smsManager.sendTextMessage(number, null, content, null, null);
+                    try {
+                        SmsManager smsManager = SmsManager.getDefault();
+                        smsManager.sendTextMessage(number, null, content, null, null);
+                    }
+                    catch (Exception e1){
+
+                    }
                 }
                 else{
                     Log.d("banned: ", "inside! no sms");
@@ -258,8 +263,13 @@ class businees_order_adapter extends BaseExpandableListAdapter {
     }
 
     static void send_sms2(final String number, final String content){
-        SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(number, null, content, null, null);
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(number, null, content, null, null);
+        }
+        catch (Exception e1){
+
+        }
     }
 
 
