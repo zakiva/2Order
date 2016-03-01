@@ -30,7 +30,9 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,13 +43,20 @@
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".logIn_screen" />
-        <activity android:name=".first_screen" />
-        <activity android:name=".new_business_screen" />
-        <activity android:name=".new_customer_screen" />
-        <activity android:name=".business_orders__screen" />
-        <activity android:name=".new_order_screen" />
+        <activity android:name=".logIn_screen"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".first_screen"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".new_business_screen"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".new_customer_screen"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".business_orders__screen"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".new_order_screen"
+            android:screenOrientation="portrait"/>
 
         <service android:name="com.parse.PushService" />
 
@@ -72,29 +81,48 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".customer_orders_screen" />
-        <activity android:name=".business_orders_history" />
-        <activity android:name=".business_customers" />
-        <activity android:name=".customer_orders" />
-        <activity android:name=".business_order_information" />
-        <activity android:name=".customer_order_information" />
-        <activity android:name=".single_business_order" />
-        <activity android:name=".single_business_history" />
-        <activity android:name=".single_customer_information" />
+        <activity android:name=".customer_orders_screen"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".business_orders_history"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".business_customers"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".customer_orders"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".business_order_information"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".customer_order_information"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".single_business_order"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".single_business_history"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".single_customer_information"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".facebook_login" />
-        <activity android:name=".customers_search"></activity>
-        <activity android:name=".single_customer_order"></activity>
-        <activity android:name=".settings_customer"></activity>
-        <activity android:name=".settings_business"></activity>
-        <activity android:name=".notifications"></activity>
-        <activity android:name=".feedback_screen"></activity>
-        <activity android:name=".give_feedback"></activity>
-        <activity android:name=".write_sms"></activity>
+        <activity android:name=".facebook_login"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".customers_search"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".single_customer_order"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".settings_customer"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".settings_business"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".notifications"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".feedback_screen"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".give_feedback"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".write_sms"
+            android:screenOrientation="portrait"></activity>
+
         <provider android:authorities="com.facebook.app.FacebookContentProvider903448256357242"
             android:name="com.facebook.FacebookContentProvider"
             android:exported="true"/>
