@@ -52,6 +52,37 @@ public class settings_business extends AppCompatActivity {
 
             }
         });
+
+
+
+        Switch mySwitch2 = (Switch) findViewById(R.id.switch3);
+        if (ParseUser.getCurrentUser().getString("Send_sms").equals("yes")){
+            mySwitch2.setChecked(true);
+        }else{
+            mySwitch2.setChecked(false);
+        }
+
+        mySwitch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked) {
+                    ParseUser user = ParseUser.getCurrentUser();
+                    user.put("Send_sms", "yes");
+                    user.saveInBackground();
+                } else {
+                    ParseUser user = ParseUser.getCurrentUser();
+                    user.put("Send_sms", "no");
+                    user.saveInBackground();
+                }
+
+            }
+        });
+
+
+
+
         ParseUser user = ParseUser.getCurrentUser();
         int days = user.getInt("days_alert");
         EditText e = (EditText) findViewById(R.id.editText3);

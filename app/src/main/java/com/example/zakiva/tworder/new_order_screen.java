@@ -313,12 +313,16 @@ public class new_order_screen extends AppCompatActivity {
                                                         public void done(int count, ParseException e) {
                                                             if (count == 0) {
                                                                 Log.d("banned: ", "not inside! sms should be sent");
-                                                                try {
-                                                                    SmsManager smsManager = SmsManager.getDefault();
-                                                                    smsManager.sendTextMessage(phone, null, content, null, null);
-                                                                } catch (Exception e1){
+                                                                ParseUser user = ParseUser.getCurrentUser();
+                                                                if (user.getString("Send_sms").equals("yes")) {
+                                                                    //Log.d("ccc: ", "yes");
+                                                                    try {
+                                                                        SmsManager smsManager = SmsManager.getDefault();
+                                                                        smsManager.sendTextMessage(phone, null, content, null, null);
+                                                                    } catch (Exception e1) {
 
-                                                                }
+                                                                    }
+                                                                } 
                                                                 Log.i(TAG, "handle_customer(phone);");
                                                                 handle_customer(phone, customer_name);
                                                                 Intent i = new Intent(new_order_screen.this, business_orders__screen.class);

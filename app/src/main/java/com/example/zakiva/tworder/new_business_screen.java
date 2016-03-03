@@ -35,6 +35,7 @@ public class new_business_screen extends AppCompatActivity {
         user.put("kind", "business");
         user.put("days_alert", 3);
         user.put("Auto_orders_numbers", "no");
+        user.put("Send_sms", "yes");
         user.put("orders_counter", 1);
         user.put("name", name);
         user.put("address", address);
