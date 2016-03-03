@@ -363,7 +363,7 @@ public class business_orders__screen extends AppCompatActivity  implements Swipe
                                        if (e == null) {
                                            final List late_orders = new ArrayList();
                                            for (ParseObject order: orders){
-                                               if ( (time_since_order_created(order)) > ParseUser.getCurrentUser().getInt("days_alert")  &&  order.getString("marked_as_late").equals("no") ){
+                                               if ( (time_since_order_created(order)) > order.getInt("time_late")  &&  order.getString("marked_as_late").equals("no") ){
                                                    order.put("marked_as_late", "yes");
                                                    ParseObject notification = new ParseObject("Notification");
                                                    notification.put("customer_user", ParseUser.getCurrentUser());
@@ -449,7 +449,7 @@ public class business_orders__screen extends AppCompatActivity  implements Swipe
         for (ParseObject order : orders) {
             business_list_group parent = new business_list_group();
             parent.setTitle("Order " + order.getString("code"));
-            if ((time_since_order_created(order)) > ParseUser.getCurrentUser().getInt("days_alert")){
+            if ((time_since_order_created(order)) > order.getInt("time_late")){
                 parent.setTitle("Order " + order.getString("code") + " *LATE!*");
             }
             parent.setUrgent(order.getInt("prior"));
