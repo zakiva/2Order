@@ -79,9 +79,12 @@ public class single_customer_information extends AppCompatActivity {
     void call(String number) {
         Intent callIntent = new Intent(Intent.ACTION_CALL);
         callIntent.setData(Uri.parse("tel:" + number));
-        try {
+        try
+        {
             startActivity(callIntent);
-        } catch (android.content.ActivityNotFoundException ex) {
+        }
+        catch (Exception e)
+        {
             Log.d("problem:", "can't make phone call");
         }
     }

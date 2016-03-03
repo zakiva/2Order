@@ -44,7 +44,7 @@ public class single_business_history extends AppCompatActivity {
         {
             startActivity(callIntent);
         }
-        catch (android.content.ActivityNotFoundException ex)
+        catch (Exception e)
         {
             Log.d("problem:", "can't make phone call");
         }

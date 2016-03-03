@@ -54,7 +54,7 @@ public class single_business_order extends AppCompatActivity {
         {
             startActivity(callIntent);
         }
-        catch (android.content.ActivityNotFoundException ex)
+        catch (Exception e)
         {
             Log.d("problem:", "can't make phone call");
         }
