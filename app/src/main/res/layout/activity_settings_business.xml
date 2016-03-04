@@ -126,10 +126,20 @@
         android:switchMinWidth="50dp"
         android:textSize="18dp"
         android:layout_height="wrap_content"
-        android:text="Sms To New Customers On Order Creation"
+        android:text="Send SMS Invitation On Order Creation"
         android:id="@+id/switch3"
+        android:layout_below="@+id/SplitLine_hor3"
+        android:layout_marginTop="30dp"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <View
+        android:id="@+id/SplitLine_hor4"
+        android:layout_width="match_parent"
+        android:layout_height= "2dp"
+        android:background="#c0c0c0"
+        android:layout_below="@+id/switch3"
+        android:layout_marginTop="20dp"/>
 
 </RelativeLayout>
