@@ -55,7 +55,7 @@
         android:id="@+id/editText3"
         android:layout_marginLeft="1dp"
         android:text="33"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:enabled="false"
         android:gravity="center"
         android:layout_toRightOf="@+id/textView10"
