@@ -145,6 +145,7 @@ class businees_order_adapter extends BaseExpandableListAdapter {
                             intent.putExtra("details", object.getString("details"));
                             intent.putExtra("status", object.getString("status"));
                             intent.putExtra("phone", object.getString("customer_phone"));
+                            intent.putExtra("history", object.getString("history"));
                             intent.putExtra("name", object.getString("customer_name"));
                             intent.putExtra("priority", object.getInt("prior"));
                             intent.putExtra("order_id", itemId);
@@ -334,7 +335,7 @@ class businees_order_adapter extends BaseExpandableListAdapter {
         protected int groupPosition;
     }
 
-    public String deadline(float deadline, Date created){
+    public static String deadline(float deadline, Date created){
 
         Calendar c = Calendar.getInstance();
         c.setTime(created);
@@ -346,7 +347,7 @@ class businees_order_adapter extends BaseExpandableListAdapter {
         Date date = new Date();
         long diff = deadline_date.getTime() - date.getTime();
         if (diff<0)
-                return "Deadline has passed";
+                return "Deadline has been passed";
         long diffDays = diff / (24 * 60 * 60 * 1000);
         long diffHours = diff / (60 * 60 * 1000) % 24;
         return diffDays + " days " +  diffHours + " hours";

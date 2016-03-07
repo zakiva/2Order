@@ -91,11 +91,14 @@ public class notifications_adapter extends ArrayAdapter<String[]> {
                                             intent.putExtra("status", object.getString("status"));
                                             intent.putExtra("phone", object.getString("customer_phone"));
                                             intent.putExtra("name", object.getString("customer_name"));
+                                            intent.putExtra("history", object.getString("history"));
                                             intent.putExtra("priority", object.getInt("prior"));
                                             intent.putExtra("order_id", itemId);
 
                                             DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                                             Date date = object.getCreatedAt();
+                                            intent.putExtra("time_late", businees_order_adapter.deadline(object.getNumber("time_late").floatValue(), object.getCreatedAt()));
+
 
                                             intent.putExtra("time_past", businees_order_adapter.get_past_time(date));
                                             intent.putExtra("time", df.format(date));

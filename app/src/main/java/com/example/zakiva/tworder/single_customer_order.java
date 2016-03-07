@@ -125,8 +125,15 @@ public class single_customer_order extends AppCompatActivity {
         Button poke_button = (Button) findViewById(R.id.button_poke);
         poke_button.setVisibility(View.GONE);
 
-
         final Bundle extras = getIntent().getExtras();
+
+        if (extras.getString("status").equals("Ready")) {
+            poked.setText("Order is Ready");
+        }
+        else
+        {
+
+
         ParseObject notification = new ParseObject("Notification");
         notification.put("customer_user", ParseUser.getCurrentUser());
         notification.put("type", "order");
@@ -165,6 +172,8 @@ public class single_customer_order extends AppCompatActivity {
             }
         });
     }
+
+}
 
     public void shareOnFacebookClicked(View view){
         Bundle extras = getIntent().getExtras();

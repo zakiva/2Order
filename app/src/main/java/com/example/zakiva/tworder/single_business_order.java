@@ -121,6 +121,13 @@ public class single_business_order extends AppCompatActivity {
         ratingBar.setRating(extras.getInt("priority"));
         Drawable progress = ratingBar.getProgressDrawable();
         DrawableCompat.setTint(progress, Color.GRAY);
+
+        Button status = (Button) findViewById(R.id.button_update_status);
+        Button edit = (Button) findViewById(R.id.button_edit);
+        if (!(extras.getString("history").equals("no"))){
+            status.setVisibility(View.GONE);
+            edit.setVisibility(View.GONE);
+        }
     }
 
     public void edit_clicked(View view) {
