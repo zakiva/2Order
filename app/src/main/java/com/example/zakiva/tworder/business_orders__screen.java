@@ -475,7 +475,7 @@ public class business_orders__screen extends AppCompatActivity  implements Swipe
             business_list_group parent = new business_list_group();
             parent.setTitle("Order " + order.getString("code"));
             parent.setUrgent(order.getInt("prior"));
-            DateFormat df = new SimpleDateFormat("MM/dd/yy");
+            DateFormat df = new SimpleDateFormat("dd/MM/yy");
             Date date = order.getCreatedAt();
             parent.setDate(df.format(date));
             parent.setItemKey(order.getObjectId());
@@ -558,7 +558,7 @@ public class business_orders__screen extends AppCompatActivity  implements Swipe
         for (ParseObject customer : customers) {
             business_customer_group parent = new business_customer_group();
             parent.setTitle("Customer: " + customer.getString("name"));
-            DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
             Date date = customer.getCreatedAt();
             parent.setItemKey(df.format(date));
             arrayChildren = new ArrayList<String>();

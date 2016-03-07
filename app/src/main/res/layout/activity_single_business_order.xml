@@ -324,24 +324,49 @@
         android:textStyle="bold"
         android:textColor="#FF1887D7" />
 
-    <ImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:id="@+id/imageView2"
-        android:background="@drawable/clock"
-        android:layout_below="@+id/SplitLine_hor45"
-        android:layout_centerInParent="true"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Remaining time before deadline:"
+        android:id="@+id/deadline_view"
+        android:layout_below="@+id/SplitLine_hor7"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="days hours"
+        android:id="@+id/deadline"
+        android:layout_below="@+id/deadline_view"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <View
+        android:id="@+id/SplitLine_hor8"
+        android:layout_width="match_parent"
+        android:layout_height= "2dp"
+        android:background="#c0c0c0"
+        android:layout_below="@+id/deadline"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="10dp"/>
+
 
     <View
         android:id="@+id/SplitLine_hor5"
         android:layout_width="match_parent"
         android:layout_height= "2dp"
         android:background="#c0c0c0"
-        android:layout_below="@+id/imageView2"
+        android:layout_below="@+id/SplitLine_hor45"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="0dp"/>
 
     <View
         android:id="@+id/SplitLine_hor45"

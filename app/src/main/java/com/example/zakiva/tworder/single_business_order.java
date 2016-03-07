@@ -68,6 +68,7 @@ public class single_business_order extends AppCompatActivity {
     TextView time_past;
     TextView time_create;
     TextView status;
+    TextView deadline;
 
     EditText edit_order_number;
     EditText edit_order_details;
@@ -94,7 +95,9 @@ public class single_business_order extends AppCompatActivity {
         time_past = (TextView) findViewById(R.id.textview_time_past);
         time_create = (TextView) findViewById(R.id.textview_time_create);
         status = (TextView) findViewById(R.id.textview_status);
+        deadline = (TextView) findViewById(R.id.deadline);
 
+        deadline.setText(extras.getString("time_late"));
         order_number.setText(extras.getString("code"));
         order_details.setText(extras.getString("details"));
         phone.setText(extras.getString("phone"));

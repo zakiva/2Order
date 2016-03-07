@@ -60,7 +60,7 @@ public class single_customer_information extends AppCompatActivity {
                                                phone.setText("Phone: " + extras.getString("phone"));
                                                name.setText("Name: " + customer.getString("name"));
 
-                                               DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+                                               DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                                                Date date = customer.getCreatedAt();
                                                time.setText("Added on: " + df.format(date));
                                                counter.setText("Total orders: " + Integer.toString(customer.getInt("orders_counter")));

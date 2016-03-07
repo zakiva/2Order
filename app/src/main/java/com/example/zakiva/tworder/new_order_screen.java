@@ -216,6 +216,7 @@ public class new_order_screen extends AppCompatActivity {
                 }
             }
         });
+        deadline.setSelection(deadline.getText().length());
     }
 
     public void alertToast(String alert){

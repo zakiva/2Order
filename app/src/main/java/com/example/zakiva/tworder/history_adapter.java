@@ -155,7 +155,7 @@ class history_adapter extends BaseExpandableListAdapter {
                             intent.putExtra("priority", object.getInt("prior"));
                             intent.putExtra("order_id", itemId);
 
-                            DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+                            DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                             Date date = object.getCreatedAt();
 
                             intent.putExtra("time_past", businees_order_adapter.get_past_time(date));

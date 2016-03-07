@@ -177,7 +177,7 @@ public class customer_orders extends AppCompatActivity  implements SwipeRefreshL
             item[2] = order.getString("status");
             item[3] = order.getString("business_address");
             item[4] = order.getString("details");
-            DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
             Date date = order.getCreatedAt();
             item[5] = df.format(date);
             item[6] = order.getObjectId().toString();

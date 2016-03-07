@@ -36,6 +36,7 @@ import com.parse.ParseUser;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -45,7 +46,7 @@ class businees_order_adapter extends BaseExpandableListAdapter {
     private LayoutInflater inflater;
     private ArrayList<business_list_group> mParent;
 
-    public businees_order_adapter(Context context, ArrayList<business_list_group> parent){
+    public businees_order_adapter(Context context, ArrayList<business_list_group> parent) {
         mParent = parent;
         inflater = LayoutInflater.from(context);
         this.context = context;
@@ -99,7 +100,7 @@ class businees_order_adapter extends BaseExpandableListAdapter {
         holder.groupPosition = groupPosition;
 
         if (view == null) {
-            view = inflater.inflate(R.layout.business_list_group, viewGroup,false);
+            view = inflater.inflate(R.layout.business_list_group, viewGroup, false);
         }
         TextView textView = (TextView) view.findViewById(R.id.list_item_text_view);
         textView.setText(getGroup(groupPosition).toString());
@@ -120,7 +121,7 @@ class businees_order_adapter extends BaseExpandableListAdapter {
         holder.childPosition = childPosition;
         holder.groupPosition = groupPosition;
 
-        view = inflater.inflate(R.layout.business_list_item, viewGroup,false);
+        view = inflater.inflate(R.layout.business_list_item, viewGroup, false);
 
         TextView textView = (TextView) view.findViewById(R.id.list_item_text_child);
 
@@ -148,12 +149,12 @@ class businees_order_adapter extends BaseExpandableListAdapter {
                             intent.putExtra("priority", object.getInt("prior"));
                             intent.putExtra("order_id", itemId);
 
-                            DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+                            DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                             Date date = object.getCreatedAt();
 
                             intent.putExtra("time_past", get_past_time(date));
                             intent.putExtra("time", df.format(date));
-
+                            intent.putExtra("time_late", deadline(object.getNumber("time_late").floatValue(), object.getCreatedAt()));
                             context.startActivity(intent);
                         } else {
                             // something went wrong
@@ -162,8 +163,6 @@ class businees_order_adapter extends BaseExpandableListAdapter {
                 });
             }
         });
-
-
 
 
         changeStatusButton.setOnClickListener(new View.OnClickListener() {
@@ -209,13 +208,12 @@ class businees_order_adapter extends BaseExpandableListAdapter {
         });
 
 
-        if(childPosition!=2) {
+        if (childPosition != 2) {
             ((ViewGroup) changeStatusButton.getParent()).removeView(changeStatusButton);
         }
-        if(childPosition!=3) {
+        if (childPosition != 3) {
             ((ViewGroup) information_button.getParent()).removeView(information_button);
         }
-
 
 
         view.setTag(holder);
@@ -224,16 +222,16 @@ class businees_order_adapter extends BaseExpandableListAdapter {
         return view;
     }
 
-    public static String get_past_time(Date date){
+    public static String get_past_time(Date date) {
 
         Date cur_date = new Date();
-        float interval = ((float) (cur_date.getTime() - date.getTime())) / (1000*60*60*24);
+        float interval = ((float) (cur_date.getTime() - date.getTime())) / (1000 * 60 * 60 * 24);
         int days = (int) interval;
-        int hours = (int) ((interval-days)*24);
+        int hours = (int) ((interval - days) * 24);
 
-        if (days==0){
-            if (hours==0)
-                return "Less than an hour";
+        if (days == 0) {
+            if (hours == 0)
+                return "Less than an hour ago";
             else
                 return String.format("%d hours ago", hours);
         }
@@ -250,97 +248,111 @@ class businees_order_adapter extends BaseExpandableListAdapter {
                     try {
                         SmsManager smsManager = SmsManager.getDefault();
                         smsManager.sendTextMessage(number, null, content, null, null);
-                    }
-                    catch (Exception e1){
+                    } catch (Exception e1) {
 
                     }
-                }
-                else{
+                } else {
                     Log.d("banned: ", "inside! no sms");
                 }
             }
         });
     }
 
-    static void send_sms2(final String number, final String content){
+    static void send_sms2(final String number, final String content) {
         try {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(number, null, content, null, null);
-        }
-        catch (Exception e1){
+        } catch (Exception e1) {
 
         }
     }
 
 
-            static void push_notification(final String username, final String message, final String itemId) {
+    static void push_notification(final String username, final String message, final String itemId) {
 
-                //is_user_exist = 0;
-                final ParseQuery<ParseUser> query = ParseUser.getQuery();
-                query.whereEqualTo("phone", username);
-                query.countInBackground(new CountCallback() {
-                    public void done(int count, ParseException e) {
-                        if (e == null) {
-                            if (count > 0) {//The user exists!!
-                                ParseQuery<ParseUser> query = ParseUser.getQuery();
-                                query.whereEqualTo("phone", username);
-                                query.getFirstInBackground(new GetCallback<ParseUser>() {
-                                    public void done(ParseUser user, ParseException e) {
-                                        if (user == null) {
-                                            Log.d("problem: ", "can't push");
+        //is_user_exist = 0;
+        final ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereEqualTo("phone", username);
+        query.countInBackground(new CountCallback() {
+            public void done(int count, ParseException e) {
+                if (e == null) {
+                    if (count > 0) {//The user exists!!
+                        ParseQuery<ParseUser> query = ParseUser.getQuery();
+                        query.whereEqualTo("phone", username);
+                        query.getFirstInBackground(new GetCallback<ParseUser>() {
+                            public void done(ParseUser user, ParseException e) {
+                                if (user == null) {
+                                    Log.d("problem: ", "can't push");
+                                } else {
+                                    if (user.getString("is_signed_in").equals("yes")) {
+                                        if (user.getString("wants_notification").equals("yes")) {
+                                            Log.d("send:", "push");
+                                            ParseQuery pushQuery = ParseInstallation.getQuery();
+                                            pushQuery.whereEqualTo("notification_id", username);
+                                            ParsePush push = new ParsePush();
+                                            push.setQuery(pushQuery);
+                                            push.setMessage(message);
+                                            push.sendInBackground();
                                         } else {
-                                            if (user.getString("is_signed_in").equals("yes")) {
-                                                if (user.getString("wants_notification").equals("yes")) {
-                                                    Log.d("send:", "push");
-                                                    ParseQuery pushQuery = ParseInstallation.getQuery();
-                                                    pushQuery.whereEqualTo("notification_id", username);
-                                                    ParsePush push = new ParsePush();
-                                                    push.setQuery(pushQuery);
-                                                    push.setMessage(message);
-                                                    push.sendInBackground();
-                                                } else {
-                                                    Log.d("send:", "sms- user exist and signed but does not want notification");
-                                                    send_sms(username, message);
-                                                }
-                                            } else {
-                                                Log.d("send:", "sms- user exist but not signed");
-                                                send_sms(username, message + " Watch your order info at 2order.parseapp.com/?" + itemId);
-                                            }
+                                            Log.d("send:", "sms- user exist and signed but does not want notification");
+                                            send_sms(username, message);
                                         }
+                                    } else {
+                                        Log.d("send:", "sms- user exist but not signed");
+                                        send_sms(username, message + " Watch your order info at 2order.parseapp.com/?" + itemId);
                                     }
-                                });
-
-                            } else {
-                                Log.d("send:", "sms- user does not exist");
-                                send_sms(username, message + " Download 2Order: https://www.downloadapp.com" + " Watch your order info at 2order.parseapp.com/?" + itemId);
+                                }
                             }
-                        } else {
-                            // The request failed
-                            Log.d("fail: ", "bummer");
-                        }
+                        });
+
+                    } else {
+                        Log.d("send:", "sms- user does not exist");
+                        send_sms(username, message + " Download 2Order: https://www.downloadapp.com" + " Watch your order info at 2order.parseapp.com/?" + itemId);
                     }
-                });
+                } else {
+                    // The request failed
+                    Log.d("fail: ", "bummer");
+                }
             }
+        });
+    }
 
 
-            @Override
-            public boolean isChildSelectable(int i, int i1) {
-                return true;
-            }
+    @Override
+    public boolean isChildSelectable(int i, int i1) {
+        return true;
+    }
 
-            @Override
-            public void registerDataSetObserver(DataSetObserver observer) {
+    @Override
+    public void registerDataSetObserver(DataSetObserver observer) {
         /* used to make the notifyDataSetChanged() method work */
-                super.registerDataSetObserver(observer);
-            }
+        super.registerDataSetObserver(observer);
+    }
 
-            protected class ViewHolder {
-                protected int childPosition;
-                protected int groupPosition;
-            }
+    protected class ViewHolder {
+        protected int childPosition;
+        protected int groupPosition;
+    }
 
-        }
+    public String deadline(float deadline, Date created){
 
+        Calendar c = Calendar.getInstance();
+        c.setTime(created);
+        int days = (int) deadline;
+        int hours = (int) ((deadline - days) * 24);
+        c.add(Calendar.HOUR_OF_DAY, hours);
+        c.add(Calendar.DATE, days);
+        Date deadline_date = c.getTime();
+        Date date = new Date();
+        long diff = deadline_date.getTime() - date.getTime();
+        if (diff<0)
+                return "Deadline has passed";
+        long diffDays = diff / (24 * 60 * 60 * 1000);
+        long diffHours = diff / (60 * 60 * 1000) % 24;
+        return diffDays + " days " +  diffHours + " hours";
+    }
+
+}
 
 
 

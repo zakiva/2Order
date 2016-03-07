@@ -61,7 +61,7 @@ public class notifications extends AppCompatActivity {
             item[4] = notification.getString("customer_phone");
             item[5] = notification.getString("order_code");
             item[6] = notification.getString("customer_name");
-            DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
             Date date = notification.getCreatedAt();
             item[7] = df.format(date);
             items.add(item);

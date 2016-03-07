@@ -95,6 +95,7 @@ public class settings_business extends AppCompatActivity {
         double days = user.getDouble("days_alert");
         EditText e = (EditText) findViewById(R.id.editText3);
         e.setText(Double.toString(days));
+        e.setSelection(e.getText().length());
     }
 
     public void changeClick(View view)
