@@ -49,6 +49,11 @@ public class new_order_screen extends AppCompatActivity {
         final Button b = (Button) findViewById((R.id.createButton));
         b.setEnabled(true);
 
+        final EditText deadline = (EditText) findViewById(R.id.deadline_input);
+        double num33 = ParseUser.getCurrentUser().getDouble("days_alert");
+        String num44 = Double.toString(num33);
+        deadline.setText(num44);
+
         if (ParseUser.getCurrentUser().getString("Auto_orders_numbers").equals("yes")){
             final EditText orderNumber = (EditText) findViewById(R.id.orderNumberInput);
             int num = ParseUser.getCurrentUser().getInt("orders_counter");
@@ -269,13 +274,24 @@ public class new_order_screen extends AppCompatActivity {
             //final Button b = (Button) findViewById((R.id.createButton));
             b.setEnabled(true);
         } else {
-            ParseUser user = ParseUser.getCurrentUser();
-            user.put("orders_counter", user.getInt("orders_counter") + 1);
-            user.saveInBackground(new SaveCallback() {
-                public void done(ParseException e) {
-                    create_new_order(customer_phone, customer_name, order_number, order_details, prior);
-                }
-            });
+            final EditText deadline2 = (EditText) findViewById(R.id.deadline_input);
+            String str = deadline2.getText().toString();
+            try
+            {
+                Double.parseDouble(str);
+                ParseUser user = ParseUser.getCurrentUser();
+                user.put("orders_counter", user.getInt("orders_counter") + 1);
+                user.saveInBackground(new SaveCallback() {
+                    public void done(ParseException e) {
+                        create_new_order(customer_phone, customer_name, order_number, order_details, prior);
+                    }
+                });
+            }
+            catch(NumberFormatException e)
+            {
+                alertToast("Please insert valid days number");
+                b.setEnabled(true);
+            }
         }
     }
 
@@ -288,13 +304,15 @@ public class new_order_screen extends AppCompatActivity {
                         order.put("customer_phone", phone);
                         order.put("customer_name", customer_name);
                         order.put("customer_visible", "yes");
-                        order.put("code", code);
+                        order.put("code", code) ;
                         order.put("details", details);
                         order.put("prior", prior);
                         order.put("status", "In Progress");
                         order.put("history", "no");
                         order.put("marked_as_late", "no");
-                        order.put("time_late", ParseUser.getCurrentUser().getDouble("days_alert"));
+                        final EditText deadline2 = (EditText) findViewById(R.id.deadline_input);
+                        String str = deadline2.getText().toString();
+                        order.put("time_late", Double.parseDouble(str));
                         Log.i(TAG, "before save1");
                         Log.i(TAG, "before save2");
                         order.saveInBackground(new SaveCallback() {
