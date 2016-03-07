@@ -97,6 +97,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/edittext_phone"
             android:singleLine="true"
+            android:inputType="number"
             android:layout_below="@+id/textview_phone"
             android:layout_alignRight="@+id/switcher_name"
             android:layout_alignEnd="@+id/switcher_name" />
