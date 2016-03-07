@@ -1,5 +1,7 @@
 package com.example.zakiva.tworder;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +11,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -99,17 +103,22 @@ public class logIn_screen extends AppCompatActivity {
         button.setVisibility(View.VISIBLE);
     }
 
-    public void restoreClicked(View view){
+    public void restoreClicked(final View view){
         EditText email_edit = (EditText) findViewById(R.id.editText5);
         String email = email_edit.getText().toString();
+        final Button restore = (Button) findViewById(R.id.button13);
 
         ParseUser.requestPasswordResetInBackground(email, new RequestPasswordResetCallback() {
             public void done(ParseException e) {
                 if (e == null) {
                     TextView email_text = (TextView) findViewById(R.id.textView22);
-                    //email_text.setText("Password sent to:");
+                    restore.setEnabled(false);
+                    restore.setBackgroundResource(R.drawable.done);
+                    restore.setText("");
+                    ((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    email_text.setText("Password was sent successfully to:");
                 } else {
-                    alertToast("Invalid email address");
+                    alertToast("Invalid Email address");
                 }
             }
         });

@@ -89,7 +89,7 @@
         android:textAllCaps="false"
         android:background="#8b1887d7"
         android:layout_below="@+id/logButton"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:onClick="forgotClicked" />
 
@@ -97,6 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Email:"
+        android:layout_marginTop="10dp"
         android:textSize="20dp"
         android:id="@+id/textView22"
         android:layout_below="@+id/button12"
@@ -104,7 +105,7 @@
         android:layout_alignParentStart="true" />
 
     <EditText
-        android:layout_width="280dp"
+        android:layout_width="250dp"
         android:imeOptions="actionSend"
         android:singleLine="true"
         android:layout_height="wrap_content"
@@ -116,7 +117,7 @@
         android:layout_alignParentStart="true"/>
 
     <Button
-        android:layout_width="40dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:text="Restore"
         android:textAllCaps="false"
