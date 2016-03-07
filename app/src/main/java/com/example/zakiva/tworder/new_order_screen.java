@@ -294,7 +294,7 @@ public class new_order_screen extends AppCompatActivity {
                         order.put("status", "In Progress");
                         order.put("history", "no");
                         order.put("marked_as_late", "no");
-                        order.put("time_late", ParseUser.getCurrentUser().getInt("days_alert"));
+                        order.put("time_late", ParseUser.getCurrentUser().getDouble("days_alert"));
                         Log.i(TAG, "before save1");
                         Log.i(TAG, "before save2");
                         order.saveInBackground(new SaveCallback() {

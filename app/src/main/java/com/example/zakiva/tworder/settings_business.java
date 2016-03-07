@@ -3,7 +3,11 @@ package com.example.zakiva.tworder;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -11,7 +15,9 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -25,8 +31,10 @@ public class settings_business extends AppCompatActivity {
         setContentView(R.layout.activity_settings_business);
 
         TextView tv = (TextView) findViewById(R.id.textView11);
-        int num = ParseUser.getCurrentUser().getInt("days_alert");
-        tv.setText(Integer.toString(num) + " days");
+        double num = ParseUser.getCurrentUser().getDouble("days_alert");
+        //Log.d("aaa:", Double.toString(num));
+        //Float num2 = num.floatValue();
+        tv.setText(Double.toString(num) + " days");
 
         Switch mySwitch = (Switch) findViewById(R.id.switch2);
         if (ParseUser.getCurrentUser().getString("Auto_orders_numbers").equals("yes")){
@@ -84,9 +92,9 @@ public class settings_business extends AppCompatActivity {
 
 
         ParseUser user = ParseUser.getCurrentUser();
-        int days = user.getInt("days_alert");
+        double days = user.getDouble("days_alert");
         EditText e = (EditText) findViewById(R.id.editText3);
-        e.setText(String.format("%d", days));
+        e.setText(Double.toString(days));
     }
 
     public void changeClick(View view)
@@ -108,19 +116,37 @@ public class settings_business extends AppCompatActivity {
         }
     }
 
+    public void alertToast(String alert) {
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.my_custom_alert,
+                (ViewGroup) findViewById(R.id.my_custom_layout_id));
+        TextView text = (TextView) layout.findViewById(R.id.alertText);
+
+        text.setText(alert);
+        Toast toast2 = new Toast(getApplicationContext());
+        toast2.setGravity(Gravity.CENTER_HORIZONTAL, 0, 0);
+        toast2.setDuration(Toast.LENGTH_LONG);
+        toast2.setView(layout);
+        toast2.show();
+    }
+
     public void edit_done(){
         try {
             EditText new_num = (EditText) findViewById(R.id.editText3);
-            String num = new_num.getText().toString();
+            final String num = new_num.getText().toString();
             ParseUser user = ParseUser.getCurrentUser();
-            user.put("days_alert", Integer.parseInt(num));
-            user.saveInBackground();
-            TextView tv = (TextView) findViewById(R.id.textView11);
-            tv.setText(num + " days");
+            user.put("days_alert", Double.parseDouble(num));
+            user.saveInBackground(new SaveCallback() {
+                public void done(ParseException e) {
+                    TextView tv = (TextView) findViewById(R.id.textView11);
+                    tv.setText(num + " days");
+                }
+            });
         }
-        catch (NumberFormatException n) {
-            // ... Do nothing.
-        }
+            catch(NumberFormatException n)
+                {
+                    alertToast("Please enter a valid days number");
+                }
 
-    }
-}
+            }
+        }

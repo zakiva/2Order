@@ -33,7 +33,7 @@ public class new_business_screen extends AppCompatActivity {
         user.setPassword(password);
         user.setEmail(username);
         user.put("kind", "business");
-        user.put("days_alert", 3);
+        user.put("days_alert", Double.parseDouble("3"));
         user.put("Auto_orders_numbers", "no");
         user.put("Send_sms", "yes");
         user.put("orders_counter", 1);
