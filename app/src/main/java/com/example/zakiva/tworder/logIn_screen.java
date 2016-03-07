@@ -107,9 +107,9 @@ public class logIn_screen extends AppCompatActivity {
             public void done(ParseException e) {
                 if (e == null) {
                     TextView email_text = (TextView) findViewById(R.id.textView22);
-                    email_text.setText("Password sent to:");
+                    //email_text.setText("Password sent to:");
                 } else {
-                    // Something went wrong. Look at the ParseException to see what's up.
+                    alertToast("Invalid email address");
                 }
             }
         });
