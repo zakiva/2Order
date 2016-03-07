@@ -32,7 +32,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Order Late After:"
+        android:text="Default Deadline:"
         android:textSize="18dp"
         android:id="@+id/textView10"
         android:layout_below="@+id/switch2"
@@ -55,6 +55,7 @@
         android:id="@+id/editText3"
         android:layout_marginLeft="1dp"
         android:text="33"
+        android:inputType="number"
         android:enabled="false"
         android:gravity="center"
         android:layout_toRightOf="@+id/textView10"

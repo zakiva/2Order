@@ -265,7 +265,7 @@ public class new_order_screen extends AppCompatActivity {
         final String customer_name = customerName.getText().toString();
 
         if (customer_phone.equals("")){
-            alertToast("Please insert customer's phone number");
+            alertToast("Please insert customer phone");
             //final Button b = (Button) findViewById((R.id.createButton));
             b.setEnabled(true);
         } else {

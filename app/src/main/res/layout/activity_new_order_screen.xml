@@ -25,8 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/screen_title"
         android:text="Customer Phone"
-        android:textSize="20dp"
-        android:layout_marginTop="20dp"
+        android:textSize="16dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         />
 
@@ -46,8 +46,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/customerNameInput"
-        android:text="Order Number"
-        android:textSize="20dp"
+        android:text="Order Code"
+        android:textSize="16dp"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
         />
@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Order Details"
-        android:textSize="20dp"
+        android:textSize="16dp"
         android:layout_below="@+id/orderNumberInput"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
@@ -86,12 +86,35 @@
         />
 
     <TextView
+        android:id="@+id/deadline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Deadline (days)"
+        android:textSize="16dp"
+        android:layout_below="@+id/orderDetailsInput"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        />
+
+    <EditText
+        android:id="@+id/deadline_input"
+        android:imeOptions ="actionSend"
+        android:singleLine="true"
+        android:inputType="number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/deadline"
+        android:layout_marginLeft="10dp"
+        android:width="330dp"
+        />
+
+    <TextView
         android:id="@+id/urgentText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Order Priority"
-        android:textSize="20dp"
-        android:layout_below="@+id/orderDetailsInput"
+        android:textSize="16dp"
+        android:layout_below="@+id/deadline_input"
         android:layout_alignLeft="@+id/customerNameInput"
         android:layout_alignStart="@+id/customerNameInput" />
 `
@@ -101,6 +124,7 @@
         android:layout_height="wrap_content"
         android:numStars="3"
         android:stepSize="1"
+        style="?android:attr/ratingBarStyle"
         android:layout_below="@+id/urgentText"
         android:layout_alignLeft="@+id/orderDetailsInput"
         android:layout_alignStart="@+id/orderDetailsInput" />
@@ -113,7 +137,7 @@
         android:textColor="#FFF"
         android:layout_below="@+id/setUrgentBar"
         android:background="#FF1887D7"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:onClick="onCreateNewOrder"
         android:layout_alignLeft="@+id/setUrgentBar"
         android:layout_alignStart="@+id/setUrgentBar"/>
@@ -123,7 +147,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Customer name"
-        android:textSize="20dp"
+        android:textSize="16dp"
         android:layout_below="@+id/customerPhoneInput"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
@@ -140,14 +164,14 @@
         android:width="330dp" />
 
     <Button
-        android:layout_width="60dp"
-        android:layout_height="50dp"
+        android:layout_width="44dp"
+        android:layout_height="40dp"
         android:text=""
         android:background="@drawable/search_contact"
         android:id="@+id/button_search_contact"
-        android:layout_toRightOf="@+id/customerPhoneText"
+        android:layout_alignParentRight="true"
         android:layout_above="@+id/customerPhoneInput"
-        android:layout_marginLeft="120dp"
+        android:layout_marginRight="5dp"
         android:layout_marginBottom="-30dp"
         android:onClick="search_contact_clicked"/>
 
