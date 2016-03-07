@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.database.DataSetObserver;
 import android.telephony.SmsManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +23,7 @@ import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.RatingBar;
+import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import com.parse.CountCallback;
@@ -239,6 +241,7 @@ class businees_order_adapter extends BaseExpandableListAdapter {
         return String.format("%d days %d hours ago", days, hours);
     }
 
+
     static void send_sms(final String number, final String content) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Baned");
         query.whereEqualTo("phone_number", number);
@@ -254,6 +257,7 @@ class businees_order_adapter extends BaseExpandableListAdapter {
                     }
                 } else {
                     Log.d("banned: ", "inside! no sms");
+
                 }
             }
         });
@@ -352,7 +356,6 @@ class businees_order_adapter extends BaseExpandableListAdapter {
         long diffHours = diff / (60 * 60 * 1000) % 24;
         return diffDays + " days " +  diffHours + " hours";
     }
-
 }
 
 

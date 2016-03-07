@@ -233,7 +233,7 @@ public class new_order_screen extends AppCompatActivity {
         toast2.show();
     }
 
-    static void send_sms(final String number, final String content) {
+    public void send_sms(final String number, final String content) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Baned");
         query.whereEqualTo("phone_number", number);
         query.countInBackground(new CountCallback() {
@@ -243,17 +243,16 @@ public class new_order_screen extends AppCompatActivity {
                     try {
                         SmsManager smsManager = SmsManager.getDefault();
                         smsManager.sendTextMessage(number, null, content, null, null);
-                    } catch (Exception e1){
+                    } catch (Exception e1) {
 
                     }
                 } else {
                     Log.d("banned: ", "inside! no sms");
+                    //alertToast("Sms was not sent, since the phone number owner does not want to get sms messages");
                 }
             }
         });
     }
-
-
 
     public void onCreateNewOrder(View view) {
         final Button b = (Button) findViewById((R.id.createButton));
@@ -419,7 +418,6 @@ public class new_order_screen extends AppCompatActivity {
                                                }
                         );
                     }
-
 
     public void search_contact_clicked(View view) {
                         Intent intent = new Intent(new_order_screen.this, customers_search.class);
