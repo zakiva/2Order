@@ -45,7 +45,7 @@ public class new_customer_screen extends AppCompatActivity {
                 } else {
                     final Button b = (Button) findViewById(R.id.login1);
                     b.setEnabled(true);
-                    alertToast(e.getMessage());
+                    alertToast(e.getMessage().replace("username", "phone number"));
                     //Log.d("aaaa:", e.toString());
                     //alertToast("Sign-up failed");
 
@@ -83,7 +83,7 @@ public class new_customer_screen extends AppCompatActivity {
                 (ViewGroup) findViewById(R.id.my_custom_layout_id));
         TextView text = (TextView) layout.findViewById(R.id.alertText);
         if (password.equals(rePassword)) {
-            if (!phone.equals("") && !email.equals("")) {
+            if (!phone.equals("") && !email.equals("") && !password.equals("") && !rePassword.equals("")) {
                 sign_up(phone, password, email);
             } else{
                 b.setEnabled(true);

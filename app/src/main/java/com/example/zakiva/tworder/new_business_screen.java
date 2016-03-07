@@ -64,7 +64,7 @@ public class new_business_screen extends AppCompatActivity {
                 else {
                     final Button b = (Button) findViewById(R.id.login1);
                     b.setEnabled(true);
-                    alertToast(e.getMessage());
+                    alertToast(e.getMessage().replace("username", "email address"));
                 }
             }
         });
@@ -107,7 +107,7 @@ public class new_business_screen extends AppCompatActivity {
         String business_address = businessAddressInput.getText().toString();
 
         if (password.equals(rePassword)) {
-            if (!name.equals("") && !businessName.equals("") && !business_address.equals("")) {
+            if (!name.equals("") && !businessName.equals("") && !business_address.equals("") && !password.equals("") && !rePassword.equals("")) {
                 sign_up(name, password, businessName, business_address);
             } else{
                 alertToast("Please fill all fields");
