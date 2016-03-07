@@ -49,6 +49,7 @@ public class new_order_screen extends AppCompatActivity {
         final Button b = (Button) findViewById((R.id.createButton));
         b.setEnabled(true);
 
+        //Deadline
         final EditText deadline = (EditText) findViewById(R.id.deadline_input);
         double num33 = ParseUser.getCurrentUser().getDouble("days_alert");
         String num44 = Double.toString(num33);
