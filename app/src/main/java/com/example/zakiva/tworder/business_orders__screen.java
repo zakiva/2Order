@@ -136,7 +136,7 @@ public class business_orders__screen extends AppCompatActivity  implements Swipe
                                                                         //Log.d("a: ", s.toString());
                                                                         List<ParseObject> list2 = new ArrayList<ParseObject>();
                                                                         for (ParseObject po : customers) {
-                                                                            if (po.getString("name").contains(s.toString()) || po.getString("phone").contains(s.toString()) || Integer.toString(po.getInt("orders_counter")).contains(s.toString())) {
+                                                                            if (po.getString("name").toLowerCase().contains(s.toString().toLowerCase()) || po.getString("phone").toLowerCase().contains(s.toString().toLowerCase()) || Integer.toString(po.getInt("orders_counter")).toLowerCase().contains(s.toString().toLowerCase())) {
                                                                                 list2.add(po);
                                                                             }
                                                                         }
@@ -191,7 +191,7 @@ public class business_orders__screen extends AppCompatActivity  implements Swipe
                                                 //Log.d("a: ", s.toString());
                                                 List<ParseObject> list2 = new ArrayList<ParseObject>();
                                                 for (ParseObject po : objects) {
-                                                    if (po.getString("code").contains(s.toString()) || po.getString("details").contains(s.toString()) || po.getString("customer_phone").contains(s.toString())) {
+                                                    if (po.getString("code").toLowerCase().contains(s.toString().toLowerCase()) || po.getString("details").toLowerCase().contains(s.toString().toLowerCase()) || po.getString("customer_phone").toLowerCase().contains(s.toString().toLowerCase())) {
                                                         list2.add(po);
                                                     }
                                                 }

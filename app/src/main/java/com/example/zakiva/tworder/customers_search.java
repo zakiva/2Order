@@ -75,7 +75,7 @@ public class customers_search extends AppCompatActivity {
                                                                         //Log.d("a: ", s.toString());
                                                                         List<ParseObject> list2 = new ArrayList<ParseObject>();
                                                                         for (ParseObject po : customers) {
-                                                                            if (po.getString("name").contains(s.toString()) || po.getString("phone").contains(s.toString())) {
+                                                                            if (po.getString("name").toLowerCase().contains(s.toString().toLowerCase()) || po.getString("phone").toLowerCase().contains(s.toString().toLowerCase())) {
                                                                                 list2.add(po);
                                                                             }
                                                                         }
