@@ -241,8 +241,8 @@ class businees_order_adapter extends BaseExpandableListAdapter {
         return String.format("%d days %d hours ago", days, hours);
     }
 
-
     static void send_sms(final String number, final String content) {
+
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Baned");
         query.whereEqualTo("phone_number", number);
         query.countInBackground(new CountCallback() {

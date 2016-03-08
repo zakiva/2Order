@@ -17,9 +17,15 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.RefreshCallback;
 import com.parse.SaveCallback;
+
+import java.util.List;
 
 public class settings_business extends AppCompatActivity {
 
@@ -29,6 +35,7 @@ public class settings_business extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_business);
+
 
         TextView tv = (TextView) findViewById(R.id.textView11);
         double num = ParseUser.getCurrentUser().getDouble("days_alert");
@@ -43,26 +50,6 @@ public class settings_business extends AppCompatActivity {
             mySwitch.setChecked(false);
         }
 
-        mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-                if (isChecked) {
-                    ParseUser user = ParseUser.getCurrentUser();
-                    user.put("Auto_orders_numbers", "yes");
-                    user.saveInBackground();
-                } else {
-                    ParseUser user = ParseUser.getCurrentUser();
-                    user.put("Auto_orders_numbers", "no");
-                    user.saveInBackground();
-                }
-
-            }
-        });
-
-
-
         Switch mySwitch2 = (Switch) findViewById(R.id.switch3);
         if (ParseUser.getCurrentUser().getString("Send_sms").equals("yes")){
             mySwitch2.setChecked(true);
@@ -70,32 +57,81 @@ public class settings_business extends AppCompatActivity {
             mySwitch2.setChecked(false);
         }
 
-        mySwitch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        double days = ParseUser.getCurrentUser().getDouble("days_alert");
+        EditText e2 = (EditText) findViewById(R.id.editText3);
+        e2.setText(Double.toString(days));
+        e2.setSelection(e2.getText().length());
 
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("_User");
+        query.whereEqualTo("username", ParseUser.getCurrentUser().getString("username"));
+        query.findInBackground(new FindCallback<ParseObject>() {
+            public void done(final List<ParseObject> objects, ParseException e) {
+                if (e == null) {
+                    Log.d("aaa:", objects.get(0).getString("Auto_orders_numbers"));
+                    TextView tv = (TextView) findViewById(R.id.textView11);
+                    double num = objects.get(0).getDouble("days_alert");
+                    //Log.d("aaa:", Double.toString(num));
+                    //Float num2 = num.floatValue();
+                    tv.setText(Double.toString(num) + " days");
 
-                if (isChecked) {
-                    ParseUser user = ParseUser.getCurrentUser();
-                    user.put("Send_sms", "yes");
-                    user.saveInBackground();
-                } else {
-                    ParseUser user = ParseUser.getCurrentUser();
-                    user.put("Send_sms", "no");
-                    user.saveInBackground();
-                }
+                    Switch mySwitch = (Switch) findViewById(R.id.switch2);
+                    if (objects.get(0).getString("Auto_orders_numbers").equals("yes")){
+                        mySwitch.setChecked(true);
+                    }else{
+                        mySwitch.setChecked(false);
+                    }
 
-            }
-        });
+                    mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+                        @Override
+                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                            if (isChecked) {
+                                ParseUser user = ParseUser.getCurrentUser();
+                                user.put("Auto_orders_numbers", "yes");
+                                user.saveInBackground();
+                            } else {
+                                ParseUser user = ParseUser.getCurrentUser();
+                                user.put("Auto_orders_numbers", "no");
+                                user.saveInBackground();
+                            }
+
+                        }
+                    });
+
+                    Switch mySwitch2 = (Switch) findViewById(R.id.switch3);
+                    if (objects.get(0).getString("Send_sms").equals("yes")){
+                        mySwitch2.setChecked(true);
+                    }else{
+                        mySwitch2.setChecked(false);
+                    }
+
+                    mySwitch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+                        @Override
+                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                            if (isChecked) {
+                                ParseUser user = ParseUser.getCurrentUser();
+                                user.put("Send_sms", "yes");
+                                user.saveInBackground();
+                            } else {
+                                ParseUser user = ParseUser.getCurrentUser();
+                                user.put("Send_sms", "no");
+                                user.saveInBackground();
+                            }
+
+                        }
+                    });
+
+                    double days = objects.get(0).getDouble("days_alert");
+                    EditText e2 = (EditText) findViewById(R.id.editText3);
+                    e2.setText(Double.toString(days));
+                    e2.setSelection(e2.getText().length());
 
 
+                }}});
 
-
-        ParseUser user = ParseUser.getCurrentUser();
-        double days = user.getDouble("days_alert");
-        EditText e = (EditText) findViewById(R.id.editText3);
-        e.setText(Double.toString(days));
-        e.setSelection(e.getText().length());
     }
 
     public void changeClick(View view)
