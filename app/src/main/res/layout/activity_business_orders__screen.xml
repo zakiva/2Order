@@ -97,4 +97,18 @@
         android:layout_alignParentRight="true"/>
 
 
+    <TextView
+        android:id="@+id/no_data_to_show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="No orders to show \n  \nPress the + button \n  \n to add new order"
+        android:textSize="16dp"
+        android:visibility="gone"
+        android:layout_below="@+id/editText"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp"
+        />
+
+
 </RelativeLayout>

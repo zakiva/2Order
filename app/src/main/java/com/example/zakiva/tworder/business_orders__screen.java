@@ -463,6 +463,18 @@ public class business_orders__screen extends AppCompatActivity  implements Swipe
             arrayParents.add(parent);
         }
         swipeRefreshLayout.setRefreshing(false);
+
+        TextView empty = (TextView) findViewById(R.id.no_data_to_show);
+        if (orders.size()>0) {
+            empty.setVisibility(View.GONE);
+        }
+        else{
+            empty.setVisibility(View.VISIBLE);
+            empty.setText("No orders to show \n" +                                                               "  \n" +
+                    "Press the + button \n" +
+                    "  \n" +
+                    " to add new order");
+        }
     }
 
     protected void draw_history(List<ParseObject> orders) {
@@ -488,6 +500,18 @@ public class business_orders__screen extends AppCompatActivity  implements Swipe
             arrayParents.add(parent);
         }
         swipeRefreshLayout.setRefreshing(false);
+
+        TextView empty = (TextView) findViewById(R.id.no_data_to_show);
+        if (orders.size()>0) {
+            empty.setVisibility(View.GONE);
+        }
+        else{
+            empty.setVisibility(View.VISIBLE);
+            empty.setText("  No orders to show yet \n" +                                                               "  \n" +
+                    "Ready and deleted orders \n" +
+                    "  \n" +
+                    "     will be shown here");
+        }
     }
 
     public void onDeleteClick(View view) {
@@ -569,6 +593,15 @@ public class business_orders__screen extends AppCompatActivity  implements Swipe
             arrayParents.add(parent);
         }
         swipeRefreshLayout.setRefreshing(false);
+
+        TextView empty = (TextView) findViewById(R.id.no_data_to_show);
+        if (customers.size()>0) {
+            empty.setVisibility(View.GONE);
+        }
+        else{
+            empty.setVisibility(View.VISIBLE);
+            empty.setText("No customers to show yet");
+        }
     }
 
     @Override
