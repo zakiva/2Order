@@ -64,7 +64,6 @@ public class SlidingMenuFragment extends Fragment implements ExpandableListView.
         oGeneralSection.addSectionItem(201, " Settings", "black");
         oGeneralSection.addSectionItem(202, " Notifications", "black");
         oGeneralSection.addSectionItem(203, " Log Out", "black");
-        oGeneralSection.addSectionItem(204, " Quit Menu", "black");
 
         sectionList.add(oDemoSection);
         sectionList.add(oGeneralSection);

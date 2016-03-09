@@ -1,6 +1,7 @@
 package com.example.zakiva.tworder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -140,7 +142,9 @@ public class settings_business extends AppCompatActivity {
         EditText e = (EditText) findViewById(R.id.editText3);
 
         if (edit == 0) {
-            b.setBackgroundResource(R.drawable.done);
+            b.setBackgroundResource(R.drawable.blank_pink);
+            b.setText("save");
+        //    b.setLayoutParams(new LinearLayout.LayoutParams(30, 50));
             ((InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE)).toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
             edit = 1;
             e.setEnabled(true);
@@ -149,6 +153,8 @@ public class settings_business extends AppCompatActivity {
             e.setEnabled(false);
             ((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(view.getWindowToken(), 0);
             b.setBackgroundResource(R.drawable.edit);
+            b.setText("");
+         //   b.setLayoutParams(new LinearLayout.LayoutParams(30, 30));
             edit = 0;
         }
     }
@@ -186,4 +192,9 @@ public class settings_business extends AppCompatActivity {
                 }
 
             }
-        }
+
+    public void back_from_settings(View view) {
+        Intent i = new Intent(this, business_orders__screen.class);
+        startActivity(i);
+    }
+}

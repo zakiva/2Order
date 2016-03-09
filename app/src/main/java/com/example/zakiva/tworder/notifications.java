@@ -1,8 +1,10 @@
 package com.example.zakiva.tworder;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -93,4 +95,8 @@ public class notifications extends AppCompatActivity {
         });
     }
 
+    public void back_from_notifications(View view) {
+        Intent i = new Intent(this, business_orders__screen.class);
+        startActivity(i);
+    }
 }

@@ -77,16 +77,19 @@
 
     <Button
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:text=""
+        android:textAllCaps="false"
+        android:textSize="14dp"
         android:background="@drawable/edit"
         android:id="@+id/button8"
         android:layout_below="@+id/switch2"
         android:layout_marginTop="45dp"
         android:layout_marginRight="10dp"
         android:layout_alignParentRight="true"
-        android:onClick="changeClick" />
+        android:onClick="changeClick"
+        android:textColor="#ffffff" />
 
     <View
         android:id="@+id/SplitLine_hor1"
@@ -142,5 +145,15 @@
         android:background="#c0c0c0"
         android:layout_below="@+id/switch3"
         android:layout_marginTop="20dp"/>
+
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text=""
+        android:background="@drawable/new_back_arrow"
+        android:id="@+id/back"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:onClick="back_from_settings" />
 
 </RelativeLayout>

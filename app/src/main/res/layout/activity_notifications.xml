@@ -40,4 +40,14 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         />
+
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text=""
+        android:background="@drawable/new_back_arrow"
+        android:id="@+id/back"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:onClick="back_from_notifications" />
 </RelativeLayout>

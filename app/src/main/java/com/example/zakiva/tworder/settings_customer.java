@@ -1,5 +1,6 @@
 package com.example.zakiva.tworder;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -64,5 +65,10 @@ public class settings_customer extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void back_from_more(View view) {
+        Intent i = new Intent(this, customer_orders.class);
+        startActivity(i);
     }
 }
