@@ -194,6 +194,14 @@ public class customer_orders extends AppCompatActivity  implements SwipeRefreshL
 
         swipeRefreshLayout.setRefreshing(false);
 
+        TextView empty = (TextView) findViewById(R.id.no_data_to_show);
+        if (orders.size()>0) {
+            empty.setVisibility(View.GONE);
+        }
+        else{
+            empty.setVisibility(View.VISIBLE);
+            empty.setText("No orders to show yet");
+        }
 
     }
 

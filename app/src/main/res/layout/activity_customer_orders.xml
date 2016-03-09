@@ -79,5 +79,18 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <TextView
+        android:id="@+id/no_data_to_show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="No orders to show yet"
+        android:textSize="16dp"
+        android:visibility="gone"
+        android:layout_below="@+id/screen_title"
+        android:layout_marginTop="80dp"
+        android:layout_marginLeft="10dp"
+        />
+
 
 </RelativeLayout>
