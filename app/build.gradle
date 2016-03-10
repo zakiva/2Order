@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "com.example.zakiva.tworder"
         minSdkVersion 15
-        targetSdkVersion 22
+        targetSdkVersion 20
         versionCode 1
         versionName "1.0"
     }
