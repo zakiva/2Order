@@ -187,7 +187,9 @@ class businees_order_adapter extends BaseExpandableListAdapter {
                                 if (e == null) {
                                     if (item.getTitle().equals("Ready")) {
                                         object.put("status", "Ready");
-                                        object.put("history", "yes");
+                                        if (!(object.getString("history").equals("deleted"))) {
+                                            object.put("history", "yes");
+                                        }
                                         String message = "Your order from " + object.getString("business_name") + " is ready!";
                                         push_notification(object.getString("customer_phone"), message, itemId);
                                         mParent.get(groupPosition).getArrayChildren().set(childPosition, "Status: " + item.getTitle().toString());

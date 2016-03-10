@@ -306,7 +306,9 @@ public class single_business_order extends AppCompatActivity {
         query.getInBackground(order_id, new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
-                    object.put("history", "yes");
+                    if (!(object.getString("history").equals("deleted"))) {
+                        object.put("history", "yes");
+                    }
                     object.saveInBackground(new SaveCallback() {
                         public void done(ParseException e) {
                             if (e == null) {
@@ -351,7 +353,9 @@ public class single_business_order extends AppCompatActivity {
                         if (e == null) {
                             if (item.getTitle().equals("Ready")) {
                                 object.put("status", "Ready");
-                                object.put("history", "yes");
+                                if (!(object.getString("history").equals("deleted"))) {
+                                    object.put("history", "yes");
+                                }
                                 String message = "Your order from " + object.getString("business_name") + " is ready!";
                                 businees_order_adapter.push_notification(object.getString("customer_phone"), message, itemId);
                             } else {

@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="name"
+        android:textSize="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginLeft="12dp"
         android:layout_toRightOf="@+id/person"
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="phone"
+        android:textSize="16dp"
         android:layout_marginLeft="12dp"
         android:layout_toRightOf="@id/person"
         android:layout_marginTop="6dp"
@@ -30,8 +32,8 @@
         android:layout_gravity="center_horizontal" />
 
     <Button
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:background="@drawable/choose"
         android:text=""
         android:layout_centerVertical="true"
