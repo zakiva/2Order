@@ -179,7 +179,7 @@ public class single_customer_order extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         String business_name = extras.getString("business_name");
         ShareLinkContent content = new ShareLinkContent.Builder()
-                .setContentUrl(Uri.parse("https://www.downloadapp.com"))
+                .setContentUrl(Uri.parse("https://www.dropbox.com/s/2nw5w56ugsindo3/2Order.apk?dl=0"))
                 .setContentTitle("I would like to recommend " + business_name + ". They handled my order superbly!")
                 .build();
         //ShareButton shareButton = (ShareButton)findViewById(R.id.button14);

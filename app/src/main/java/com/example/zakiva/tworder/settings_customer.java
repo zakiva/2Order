@@ -30,7 +30,7 @@ public class settings_customer extends AppCompatActivity {
 
     public void shareOnFacebookClicked(View view){
         ShareLinkContent content = new ShareLinkContent.Builder()
-                .setContentUrl(Uri.parse("https://www.downloadapp.com"))
+                .setContentUrl(Uri.parse("https://www.dropbox.com/s/2nw5w56ugsindo3/2Order.apk?dl=0"))
                 .setContentTitle("I am using 2Order app, and I am loving it!")
                 .build();
         //ShareButton shareButton = (ShareButton)findViewById(R.id.button14);
