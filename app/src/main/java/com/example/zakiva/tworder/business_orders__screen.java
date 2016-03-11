@@ -470,10 +470,10 @@ public class business_orders__screen extends AppCompatActivity  implements Swipe
         }
         else{
             empty.setVisibility(View.VISIBLE);
-            empty.setText("No orders to show \n" +                                                               "  \n" +
-                    "Press the + button \n" +
+            empty.setText("    No orders to show \n" + "  \n" +
+                    "Press the button above \n" +
                     "  \n" +
-                    " to add new order");
+                    "     to add new order");
         }
     }
 
