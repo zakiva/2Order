@@ -24,7 +24,7 @@
         android:switchMinWidth="50dp"
         android:textSize="18dp"
         android:layout_height="wrap_content"
-        android:text="Auto Generate Orders Numbers:"
+        android:text="Auto Generate Order Code:"
         android:id="@+id/switch2"
         android:layout_marginTop="50dp"
         android:layout_below="@+id/textView8"       />
@@ -130,7 +130,7 @@
         android:switchMinWidth="50dp"
         android:textSize="18dp"
         android:layout_height="wrap_content"
-        android:text="Send SMS Invitation On Order Creation"
+        android:text="Send SMS Invitation On Order Creation:"
         android:id="@+id/switch3"
         android:layout_below="@+id/SplitLine_hor3"
         android:layout_marginTop="30dp"

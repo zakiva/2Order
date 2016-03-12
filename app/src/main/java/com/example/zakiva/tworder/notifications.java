@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -67,6 +68,14 @@ public class notifications extends AppCompatActivity {
             Date date = notification.getCreatedAt();
             item[7] = df.format(date);
             items.add(item);
+        }
+
+        TextView empty = (TextView) findViewById(R.id.no_notifications);
+        if (notifications.size()>0) {
+            empty.setVisibility(View.GONE);
+        }
+        else{
+            empty.setVisibility(View.VISIBLE);
         }
 
 
