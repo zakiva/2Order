@@ -19,6 +19,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -297,6 +298,9 @@ public class new_order_screen extends AppCompatActivity {
     }
 
     public void create_new_order(final String phone, final String customer_name, String code, String details, int prior) {
+
+
+
                         final ParseObject order = new ParseObject("Order");
                         order.put("business_user", ParseUser.getCurrentUser());
                         order.put("business_id", ParseUser.getCurrentUser().getObjectId());
@@ -319,6 +323,12 @@ public class new_order_screen extends AppCompatActivity {
                         order.saveInBackground(new SaveCallback() {
                             public void done(ParseException e) {
                                 if (e == null) {
+
+                                    final Button b = (Button) findViewById((R.id.createButton));
+                                    b.setVisibility(View.GONE);
+                                    ProgressBar p = (ProgressBar) findViewById(R.id.progressBar);
+                                    p.setVisibility(View.VISIBLE);
+
                                     ParseQuery<ParseUser> query = ParseUser.getQuery();
                                     query.whereEqualTo("phone", phone);
                                     query.countInBackground(new CountCallback() {
