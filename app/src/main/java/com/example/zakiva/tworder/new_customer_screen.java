@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,16 @@ public class new_customer_screen extends AppCompatActivity {
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null) {
+                    
+                    Button b = (Button) findViewById((R.id.login1));
+                    b.setVisibility(View.GONE);
+                    b =  (Button) findViewById((R.id.button));
+                    b.setVisibility(View.GONE);
+                    TextView t = (TextView) findViewById(R.id.textView14);
+                    t.setVisibility(View.GONE);
+                    ProgressBar p = (ProgressBar) findViewById(R.id.progressBar);
+                    p.setVisibility(View.VISIBLE);
+
                     ParseInstallation installation = ParseInstallation.getCurrentInstallation();
                     installation.put("notification_id", ParseUser.getCurrentUser().getString("phone"));
                     installation.saveInBackground(new SaveCallback() {

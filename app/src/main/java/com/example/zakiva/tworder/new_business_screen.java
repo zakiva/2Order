@@ -19,6 +19,7 @@ import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
 import android.view.LayoutInflater;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.Gravity;
@@ -42,6 +43,17 @@ public class new_business_screen extends AppCompatActivity {
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
                 if (e == null) {
+
+                    Button b = (Button) findViewById((R.id.login1));
+                    b.setVisibility(View.GONE);
+                    b =  (Button) findViewById((R.id.button));
+                    b.setVisibility(View.GONE);
+                    TextView t = (TextView) findViewById(R.id.textView14);
+                    t.setVisibility(View.GONE);
+                    ProgressBar p = (ProgressBar) findViewById(R.id.progressBar);
+                    p.setVisibility(View.VISIBLE);
+
+
                     ParseObject business = new ParseObject("Business");
                     business.put("user_id", ParseUser.getCurrentUser().getObjectId().toString());
                     business.put("new_notifications", 0);
