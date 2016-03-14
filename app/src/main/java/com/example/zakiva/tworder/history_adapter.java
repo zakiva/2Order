@@ -134,11 +134,12 @@ class history_adapter extends BaseExpandableListAdapter {
         key.setText(mParent.get(groupPosition).getItemKey());
         Button changeStatusButton = (Button) view.findViewById(R.id.statusButton);
         ((ViewGroup) changeStatusButton.getParent()).removeView(changeStatusButton);
-        Button information_button = (Button) view.findViewById(R.id.information_button);
+        final Button information_button = (Button) view.findViewById(R.id.information_button);
 
 
         information_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                information_button.setEnabled(false);
                 RelativeLayout r = (RelativeLayout) v.getParent();
                 TextView t = (TextView) r.findViewById(R.id.key);
                 final String itemId = t.getText().toString();
