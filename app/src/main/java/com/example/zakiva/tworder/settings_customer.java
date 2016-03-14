@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
@@ -29,6 +30,16 @@ public class settings_customer extends AppCompatActivity {
     }
 
     public void shareOnFacebookClicked(View view){
+        final Button b = (Button) findViewById(R.id.button14);
+        b.setEnabled(false);
+
+        b.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                b.setEnabled(true);
+            }
+        }, 1000);
+
         ShareLinkContent content = new ShareLinkContent.Builder()
                 .setContentUrl(Uri.parse("https://www.dropbox.com/s/2nw5w56ugsindo3/2Order.apk?dl=0"))
                 .setContentTitle("I am using 2Order app, and I am loving it!")

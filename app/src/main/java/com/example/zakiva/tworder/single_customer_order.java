@@ -176,6 +176,16 @@ public class single_customer_order extends AppCompatActivity {
 }
 
     public void shareOnFacebookClicked(View view){
+        final Button b = (Button) findViewById(R.id.button_share);
+        b.setEnabled(false);
+
+        b.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                b.setEnabled(true);
+            }
+        }, 1000);
+
         Bundle extras = getIntent().getExtras();
         String business_name = extras.getString("business_name");
         ShareLinkContent content = new ShareLinkContent.Builder()
