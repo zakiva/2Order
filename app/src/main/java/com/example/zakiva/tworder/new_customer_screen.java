@@ -57,7 +57,7 @@ public class new_customer_screen extends AppCompatActivity {
                     final Button b = (Button) findViewById(R.id.login1);
                     b.setEnabled(true);
                     if (e.getMessage().startsWith("the email address")){
-                        alertToast("That email address has already been taken");
+                        alertToast("Email address has already been taken");
                     } else {
                         alertToast(e.getMessage().replace("username", "phone number"));
                     }
