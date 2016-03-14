@@ -4,6 +4,7 @@ package com.example.zakiva.tworder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -119,6 +120,9 @@ public class customer_orders_screen extends AppCompatActivity {
     }
 
     public void OnLogOutClick(View view){
+        final Button b = (Button) findViewById(R.id.logOutCustomerButton);
+        b.setEnabled(false);
+
         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
         installation.put("notification_id", "user is logged out");
         installation.saveInBackground(new SaveCallback() {

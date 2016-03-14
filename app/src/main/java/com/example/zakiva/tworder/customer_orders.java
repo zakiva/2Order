@@ -104,6 +104,9 @@ public class customer_orders extends AppCompatActivity  implements SwipeRefreshL
     }
 
     public void OnLogOutClick(View view){
+        final Button b = (Button) findViewById(R.id.logOutCustomerButton);
+        b.setEnabled(false);
+
         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
         installation.put("notification_id", "user is logged out");
         installation.saveInBackground(new SaveCallback() {
