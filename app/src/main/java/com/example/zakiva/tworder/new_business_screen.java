@@ -76,7 +76,11 @@ public class new_business_screen extends AppCompatActivity {
                 else {
                     final Button b = (Button) findViewById(R.id.login1);
                     b.setEnabled(true);
-                    alertToast(e.getMessage().replace("username", "email address"));
+                    if (e.getMessage().startsWith("the email address") || e.getMessage().startsWith("username")){
+                        alertToast("That email address has already been taken");
+                    } else {
+                        alertToast(e.getMessage().replace("username", "email address"));
+                    }
                 }
             }
         });

@@ -56,7 +56,11 @@ public class new_customer_screen extends AppCompatActivity {
                 } else {
                     final Button b = (Button) findViewById(R.id.login1);
                     b.setEnabled(true);
-                    alertToast(e.getMessage().replace("username", "phone number"));
+                    if (e.getMessage().startsWith("the email address")){
+                        alertToast("That email address has already been taken");
+                    } else {
+                        alertToast(e.getMessage().replace("username", "phone number"));
+                    }
                     //Log.d("aaaa:", e.toString());
                     //alertToast("Sign-up failed");
 
