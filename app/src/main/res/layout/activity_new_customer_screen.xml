@@ -30,7 +30,7 @@
 
     <EditText
         android:id="@+id/phoneInput"
-        android:imeOptions ="actionSend"
+        android:imeOptions ="actionNext"
         android:visibility="gone"
         android:inputType="number"
         android:singleLine="true"
@@ -55,7 +55,7 @@
 
     <EditText
         android:id="@+id/passwordInput"
-        android:imeOptions ="actionSend"
+        android:imeOptions ="actionNext"
         android:singleLine="true"
         android:visibility="gone"
 
@@ -106,7 +106,7 @@
 
     <EditText
         android:id="@+id/emailInput"
-        android:imeOptions ="actionSend"
+        android:imeOptions ="actionNext"
         android:singleLine="true"
         android:inputType="textEmailAddress"
         android:layout_width="wrap_content"

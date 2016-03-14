@@ -53,7 +53,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Business"
+        android:text="Business              "
         android:clickable="true"
         android:onClick="newBusinessClick"
         android:id="@+id/textView12"
@@ -65,7 +65,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Customer"
+        android:text="Customer             "
         android:clickable="true"
         android:onClick="newCustomerClick"
         android:layout_marginLeft="25dp"
